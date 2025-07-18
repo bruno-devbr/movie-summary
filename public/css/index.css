@@ -2,9 +2,16 @@
 
 :root {
     --header-bgColor: #222;
-    --body-bgColor: #f5f5f5;
     --title-spanColor: #ffb400;
+    --descriptionText-color: #ccc;
+    --btnColor: #fff;
     --hoverBtn: #333;
+
+    /* light */
+    --body-bgColor-light: #f5f5f5;
+
+    /* dark */
+    --body-bgColor-darrk: #1a1a1a;
 }
 
 * {
@@ -62,7 +69,7 @@ header .head .title #span-h1 {
 
 header .head .title #description {
     font-size: 1.1rem;
-    color: #ccc;
+    color: var(--descriptionText-color);
     margin-top: 4px;
     font-weight: 400;
 }
@@ -76,7 +83,7 @@ header .head .toggle {
 header .head .toggle .btn {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--btnColor);
     font-size: 1.6rem;
     cursor: pointer;
     padding: 8px;
