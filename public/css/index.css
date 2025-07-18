@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+    --header-bgColor: #222;
+    --body-bgColor: #f5f5f5;
+    --title-spanColor: #ffb400;
+    --hoverBtn: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    margin: 0;
+    background: var(--body-bgColor);
+}
+
+header {
+    background: var(--header-bgColor);
+    color: #fff;
+    padding: 32px 0 16px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+header .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+header .head .title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+header .head .title h1 {
+    font-size: 2.2rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+header .head .title h1 a {
+    text-decoration: none;
+}
+
+header .head .title h1 a:visited {
+    color: inherit;
+}
+
+header .head .title #span-h1 {
+    color: var(--title-spanColor);
+}
+
+header .head .title #description {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+header .head .toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+header .head .toggle .btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: var(--hoverBtn);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .head {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .toggle {
+        justify-content: flex-end;
+    }
+    .title {
+        align-items: flex-start;
+    }
+}
