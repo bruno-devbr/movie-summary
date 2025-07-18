@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
-const publicDir = path.join(__dirname, "public");
+const publicDir = path.join(__dirname, "..", "public");
 
 app.use(express.static(publicDir));
 
