@@ -1,0 +1,23 @@
+{
+    "name": "movie-summary",
+    "version": "1.0.0",
+    "description": "Responsive site that displays movie summaries with filters by year and genre, intelligent search, and detailed page for each movie. Data based on local JSON to avoid API limitations. ",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bruno-devbr/movie-summary.git"
+    },
+    "author": "bruno-devbr",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/bruno-devbr/movie-summary/issues"
+    },
+    "homepage": "https://github.com/bruno-devbr/movie-summary#readme",
+    "type": "module",
+    "dependencies": {
+        "express": "^5.1.0"
+    }
+}
