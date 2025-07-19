@@ -21,11 +21,14 @@
 }
 
 body {
+    width: 100vw;
+    height: 100vh;
     font-family: "Open Sans", Arial, sans-serif;
     margin: 0;
-    background: var(--body-bgColor);
+    background: var(--body-bgColor-light);
 }
 
+/* header */
 header {
     background: var(--header-bgColor);
     color: #fff;
@@ -109,3 +112,72 @@ header .head .toggle .btn {
         align-items: flex-start;
     }
 }
+/* header */
+
+/* main */
+.main {
+    position: relative;
+    padding-top: 15px;
+}
+
+main {
+    width: 100%;
+    padding: 0 20vw;
+    position: relative;
+}
+
+/* search area */
+.searchDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+}
+
+.searchDiv .search {
+    width: 100%;
+    position: relative;
+    max-width: 600px;
+}
+
+.searchDiv .search #search-input {
+    width: 100%;
+    padding: 5px 5px 5px 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.searchDiv .search #search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* distância da borda esquerda */
+    transform: translateY(-50%);
+    pointer-events: none; /* para clique passar pro input */
+    color: #666; /* cor do ícone, ajusta conforme seu tema */
+}
+
+.searchDiv .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchDiv .filter .filter-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--title-spanColor);
+    padding: 9px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.searchDiv .filter .filter-btn:hover {
+    transform: scale(1.1);
+}
+/* search area */
+/* main */
