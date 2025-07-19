@@ -56,6 +56,8 @@
             </main>
 
             <aside>
+                <h2>Filter Options</h2>
+
                 <div class="filter-options">
                     <div class="year">
                         <input
@@ -64,16 +66,18 @@
                             class="filter-check"
                             disabled
                         />
+
                         <span class="option">
                             Year
 
                             <ion-icon
                                 name="caret-down"
                                 class="down-icon"
+                                id="year"
                             ></ion-icon>
                         </span>
 
-                        <div class="optionsDiv"></div>
+                        <div class="optionsDiv" id="year-options"></div>
                     </div>
                     <div class="genre">
                         <input
@@ -87,11 +91,16 @@
                             <ion-icon
                                 name="caret-down"
                                 class="down-icon"
+                                id="genre"
                             ></ion-icon>
                         </span>
 
-                        <div class="optionsDiv"></div>
+                        <div class="optionsDiv" id="genre-options"></div>
                     </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn-aside" id="cancel">Cancel</button>
+                    <button class="btn-aside" id="aplly">Apply</button>
                 </div>
             </aside>
 
@@ -106,5 +115,7 @@
             nomodule
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
         ></script>
+
+        <script type="module" src="/js/aside.js"></script>
     </body>
 </html>

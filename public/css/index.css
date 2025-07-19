@@ -23,6 +23,7 @@
 body {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     font-family: "Open Sans", Arial, sans-serif;
     margin: 0;
     background: var(--body-bgColor-light);
@@ -188,11 +189,19 @@ aside {
     position: absolute;
     top: 0;
     right: 0;
-    width: 200px;
+    width: 300px;
     background: #fff;
-    height: 100vh;
+    height: calc(100vh - 124px);
     padding: 15px;
     z-index: 99;
+    display: none;
+}
+
+aside .filter-options {
+    height: calc(94% - 60px); /* ou algo como 70px se o botão for maior */
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
 }
 
 aside input[type="checkbox"] {
@@ -201,28 +210,159 @@ aside input[type="checkbox"] {
 
 aside span {
     display: inline-flex;
+}
+
+aside span.option {
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     gap: 2px;
 }
 
-aside span .down-icon {
-    cursor: pointer;
+@keyframes rotateOpen {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-90deg);
+    }
+}
+
+@keyframes rotateClose {
+    from {
+        transform: rotate(-90deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.open {
+    animation: rotateOpen 0.2s forwards;
+}
+
+.close {
+    animation: rotateClose 0.2s forwards;
 }
 
 aside .optionsDiv {
-    padding: 5px;
-    display: block;
-    width: 145px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    width: 250px;
+    height: 99%;
     background: #fff;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     margin-left: 20px;
     margin-bottom: 10px;
+
+    gap: 3px;
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* sombra leve */
     border-radius: 8px; /* cantos arredondados */
 }
 
+aside #year-options {
+    height: 269px;
+    display: none;
+}
+
+aside #genre-options {
+    height: 100%;
+    display: none;
+}
+
+aside .optionsDiv span {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+aside .buttons {
+    margin-top: 15px;
+    display: flex;
+    right: 15px;
+    bottom: 15px;
+    gap: 5px;
+    position: absolute;
+}
+
+aside .buttons button {
+    padding: 15px;
+    width: 100px;
+
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+
+    transition: transform 0.2s ease, background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+aside .buttons button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+aside #cancel {
+    background: var(--header-bgColor);
+    color: var(--btnColor);
+}
+
+aside #aplly {
+    background: var(--title-spanColor);
+    color: var(--header-bgColor);
+}
+
+aside #cancel:hover {
+    background: #2e2e2e; /* escurece o botão */
+}
+
+aside #aplly:hover {
+    background: #ffae00; /* cor mais viva */
+}
+
+@media (max-width: 600px) {
+    aside {
+        height: calc(100vh - 184.6px);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+aside.slide-in {
+    display: block;
+    animation: slideIn 0.3s ease forwards;
+}
+
+aside.slide-out {
+    animation: slideOut 0.3s ease forwards;
+}
 /* aside */
 
 /* modal */
@@ -234,5 +374,6 @@ aside .optionsDiv {
     bottom: 0;
 
     background: rgba(0, 0, 0, 0.498);
+    display: none;
 }
 /* modal */
