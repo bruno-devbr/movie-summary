@@ -121,6 +121,7 @@ header .head .toggle .btn {
 }
 
 main {
+    height: 100vh;
     width: 100%;
     padding: 0 20vw;
     position: relative;
@@ -181,3 +182,57 @@ main {
 }
 /* search area */
 /* main */
+
+/* aside */
+aside {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    background: #fff;
+    height: 100vh;
+    padding: 15px;
+    z-index: 99;
+}
+
+aside input[type="checkbox"] {
+    accent-color: var(--title-spanColor); /* muda a cor do check */
+}
+
+aside span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+aside span .down-icon {
+    cursor: pointer;
+}
+
+aside .optionsDiv {
+    padding: 5px;
+    display: block;
+    width: 145px;
+    background: #fff;
+    border: 1px solid black;
+    margin-left: 20px;
+    margin-bottom: 10px;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* sombra leve */
+    border-radius: 8px; /* cantos arredondados */
+}
+
+/* aside */
+
+/* modal */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, 0.498);
+}
+/* modal */
