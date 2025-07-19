@@ -8,6 +8,7 @@
     </head>
     <body>
         <header>
+            <!-- TODO: corrigir os icones de dar/light para algo mais completo -->
             <div class="head">
                 <div class="title">
                     <h1>
@@ -31,6 +32,71 @@
                 </div>
             </div>
         </header>
+
+        <div class="main">
+            <main>
+                <div class="searchDiv">
+                    <div class="search">
+                        <ion-icon
+                            name="search-sharp"
+                            id="search-icon"
+                        ></ion-icon>
+                        <input
+                            type="text"
+                            id="search-input"
+                            placeholder="Search Movies"
+                        />
+                    </div>
+                    <div class="filter">
+                        <button class="filter-btn">
+                            <ion-icon name="funnel" id="filter-icon"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <aside>
+                <div class="filter-options">
+                    <div class="year">
+                        <input
+                            type="checkbox"
+                            id="year-checbox"
+                            class="filter-check"
+                            disabled
+                        />
+                        <span class="option">
+                            Year
+
+                            <ion-icon
+                                name="caret-down"
+                                class="down-icon"
+                            ></ion-icon>
+                        </span>
+
+                        <div class="optionsDiv"></div>
+                    </div>
+                    <div class="genre">
+                        <input
+                            type="checkbox"
+                            id="genre-checbox"
+                            class="filter-check"
+                            disabled
+                        />
+                        <span class="option">
+                            Genre
+                            <ion-icon
+                                name="caret-down"
+                                class="down-icon"
+                            ></ion-icon>
+                        </span>
+
+                        <div class="optionsDiv"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="modal"></div>
+        </div>
 
         <script
             type="module"
