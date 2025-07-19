@@ -39,7 +39,7 @@ body.dark {
     --search-icon-color: #999;
     --filter-btn-bg: var(--header-title-highlight);
     --filter-btn-border: #000;
-    --button-cancel-bg: #666;
+    --button-cancel-bg: #333;
     --button-cancel-color: #fff;
     --button-cancel-hover-bg: #2e2e2e;
     --button-apply-bg: var(--header-title-highlight);
@@ -67,6 +67,7 @@ body {
     margin: 0;
     background: var(--body-bg-color);
     color: var(--text-color);
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -212,6 +213,7 @@ main {
     border-radius: 5px;
     color: var(--text-color);
     background: var(--body-bg-color);
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
 .searchDiv .search #search-icon {
@@ -258,6 +260,7 @@ aside {
     z-index: 99;
     display: none;
     color: var(--text-color);
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
 aside .filter-options {
