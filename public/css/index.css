@@ -1,38 +1,79 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
+/* Variáveis gerais fixas */
 :root {
-    --header-bgColor: #222;
-    --title-spanColor: #ffb400;
-    --descriptionText-color: #ccc;
-    --btnColor: #fff;
-    --hoverBtn: #333;
+    /* HEADER */
+    --header-bg-color: #222;
+    --header-text-color: #fff;
+    --header-title-highlight: #ffb400;
+    --header-description-color: #ccc;
+    --header-hover-btn-bg: #333;
 
-    /* light */
-    --body-bgColor-light: #f5f5f5;
-
-    /* dark */
-    --body-bgColor-darrk: #1a1a1a;
+    /* Botões aside */
+    --button-border-radius: 10px;
+    --button-font-weight: 700;
 }
 
+/* Variáveis para light mode */
+body.light {
+    --body-bg-color: #f5f5f5;
+    --text-color: #000;
+    --search-icon-color: #666;
+    --filter-btn-bg: var(--header-title-highlight);
+    --filter-btn-border: #000;
+    --button-cancel-bg: var(--header-bg-color);
+    --button-cancel-color: var(--header-text-color);
+    --button-cancel-hover-bg: #2e2e2e;
+    --button-apply-bg: var(--header-title-highlight);
+    --button-apply-color: var(--header-bg-color);
+    --button-apply-hover-bg: #ffae00;
+    --aside-bg: var(--button-cancel-color);
+    --aside-border-color: var(--header-description-color);
+}
+
+/* Variáveis para dark mode */
+/* Variáveis para dark mode */
+body.dark {
+    --body-bg-color: #1a1a1a;
+    --text-color: #fff;
+    --search-icon-color: #999;
+    --filter-btn-bg: var(--header-title-highlight);
+    --filter-btn-border: #000;
+    --button-cancel-bg: #333;
+    --button-cancel-color: #fff;
+    --button-cancel-hover-bg: #2e2e2e;
+    --button-apply-bg: var(--header-title-highlight);
+    --button-apply-color: var(--header-bg-color);
+    --button-apply-hover-bg: #ffae00;
+
+    /* Corrigido aside dark */
+    --aside-bg: #222222; /* fundo escuro */
+    --aside-border-color: #555555; /* borda cinza escuro */
+}
+
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body */
 body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     font-family: "Open Sans", Arial, sans-serif;
     margin: 0;
-    background: var(--body-bgColor-light);
+    background: var(--body-bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
-/* header */
+/* Header */
 header {
-    background: var(--header-bgColor);
-    color: #fff;
+    background: var(--header-bg-color);
+    color: var(--header-text-color);
     padding: 32px 0 16px 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
@@ -61,19 +102,16 @@ header .head .title h1 {
 
 header .head .title h1 a {
     text-decoration: none;
-}
-
-header .head .title h1 a:visited {
     color: inherit;
 }
 
 header .head .title #span-h1 {
-    color: var(--title-spanColor);
+    color: var(--header-title-highlight);
 }
 
 header .head .title #description {
     font-size: 1.1rem;
-    color: var(--descriptionText-color);
+    color: var(--header-description-color);
     margin-top: 4px;
     font-weight: 400;
 }
@@ -87,7 +125,7 @@ header .head .toggle {
 header .head .toggle .btn {
     background: none;
     border: none;
-    color: var(--btnColor);
+    color: var(--header-text-color);
     font-size: 1.6rem;
     cursor: pointer;
     padding: 8px;
@@ -96,10 +134,36 @@ header .head .toggle .btn {
 }
 
 .btn:hover {
-    background: var(--hoverBtn);
+    background: var(--header-hover-btn-bg);
 }
 
-/* Responsivo */
+body.light #btn-dark ion-icon {
+    color: gray; /* ícone lua mais apagado no light mode */
+}
+
+body.light #btn-light ion-icon {
+    color: orange; /* ícone sol mais vivo no light mode */
+}
+
+body.dark #btn-dark ion-icon {
+    color: yellow; /* ícone lua mais vivo no dark mode */
+}
+
+body.dark #btn-light ion-icon {
+    color: gray; /* ícone sol mais apagado no dark mode */
+}
+
+#btn-dark:hover ion-icon {
+    color: #555 !important;
+    fill: #555 !important;
+}
+
+#btn-light:hover ion-icon {
+    color: #555 !important; /* laranja mais forte */
+    fill: #555 !important;
+}
+
+/* Responsivo header */
 @media (max-width: 600px) {
     .head {
         flex-direction: column;
@@ -113,9 +177,8 @@ header .head .toggle .btn {
         align-items: flex-start;
     }
 }
-/* header */
 
-/* main */
+/* Main */
 .main {
     position: relative;
     padding-top: 15px;
@@ -128,7 +191,7 @@ main {
     position: relative;
 }
 
-/* search area */
+/* Search area */
 .searchDiv {
     display: flex;
     justify-content: center;
@@ -146,17 +209,20 @@ main {
     width: 100%;
     padding: 5px 5px 5px 30px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--header-description-color);
     border-radius: 5px;
+    color: var(--text-color);
+    background: var(--body-bg-color);
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
 .searchDiv .search #search-icon {
     position: absolute;
     top: 50%;
-    left: 10px; /* distância da borda esquerda */
+    left: 10px;
     transform: translateY(-50%);
-    pointer-events: none; /* para clique passar pro input */
-    color: #666; /* cor do ícone, ajusta conforme seu tema */
+    pointer-events: none;
+    color: var(--search-icon-color);
 }
 
 .searchDiv .filter {
@@ -169,43 +235,43 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background-color: var(--title-spanColor);
+    background-color: var(--filter-btn-bg);
     padding: 9px;
-    border: 1px solid black;
+    border: 1px solid var(--filter-btn-border);
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.1s ease;
+    color: var(--button-apply-color);
 }
 
 .searchDiv .filter .filter-btn:hover {
     transform: scale(1.1);
 }
-/* search area */
-/* main */
 
-/* aside */
+/* Aside */
 aside {
     position: absolute;
     top: 0;
     right: 0;
     width: 300px;
-    background: #fff;
+    background: var(--aside-bg);
     height: calc(100vh - 124px);
     padding: 15px;
     z-index: 99;
     display: none;
+    color: var(--text-color);
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
 aside .filter-options {
-    height: calc(94% - 60px); /* ou algo como 70px se o botão for maior */
-    overflow: scroll;
+    height: calc(94% - 60px);
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
 aside input[type="checkbox"] {
-    accent-color: var(--title-spanColor); /* muda a cor do check */
+    accent-color: var(--header-title-highlight);
 }
 
 aside span {
@@ -254,15 +320,15 @@ aside .optionsDiv {
     padding: 10px;
     width: 250px;
     height: 99%;
-    background: #fff;
-    border: 1px solid #ccc;
+    background: var(--aside-bg);
+    border: 1px solid var(--aside-border-color);
     margin-left: 20px;
     margin-bottom: 10px;
 
     gap: 3px;
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* sombra leve */
-    border-radius: 8px; /* cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
 aside #year-options {
@@ -294,12 +360,10 @@ aside .buttons {
 aside .buttons button {
     padding: 15px;
     width: 100px;
-
     cursor: pointer;
-    font-weight: 700;
-    border-radius: 10px;
+    font-weight: var(--button-font-weight);
+    border-radius: var(--button-border-radius);
     border: none;
-
     transition: transform 0.2s ease, background-color 0.2s ease,
         box-shadow 0.2s ease;
 }
@@ -310,29 +374,31 @@ aside .buttons button:hover {
 }
 
 aside #cancel {
-    background: var(--header-bgColor);
-    color: var(--btnColor);
+    background: var(--button-cancel-bg);
+    color: var(--button-cancel-color);
 }
 
 aside #aplly {
-    background: var(--title-spanColor);
-    color: var(--header-bgColor);
+    background: var(--button-apply-bg);
+    color: var(--button-apply-color);
 }
 
 aside #cancel:hover {
-    background: #2e2e2e; /* escurece o botão */
+    background: var(--button-cancel-hover-bg);
 }
 
 aside #aplly:hover {
-    background: #ffae00; /* cor mais viva */
+    background: var(--button-apply-hover-bg);
 }
 
+/* Responsivo aside */
 @media (max-width: 600px) {
     aside {
         height: calc(100vh - 184.6px);
     }
 }
 
+/* Animações slide aside */
 @keyframes slideIn {
     from {
         transform: translateX(100%);
@@ -363,9 +429,8 @@ aside.slide-in {
 aside.slide-out {
     animation: slideOut 0.3s ease forwards;
 }
-/* aside */
 
-/* modal */
+/* Modal */
 .modal {
     position: absolute;
     top: 0;
@@ -376,4 +441,7 @@ aside.slide-out {
     background: rgba(0, 0, 0, 0.498);
     display: none;
 }
-/* modal */
+
+body.dark .modal {
+    background: rgba(0, 0, 0, 0.8); /* mais escuro no dark mode */
+}
