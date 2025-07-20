@@ -200,6 +200,10 @@ main {
     justify-content: center;
     width: 100%;
     gap: 15px;
+    position: fixed;
+    background: var(--body-bg-color);
+    padding: 0 40px 15px 0;
+    z-index: 8;
 }
 
 .searchDiv .search {
@@ -256,6 +260,10 @@ main {
     transform: scale(1.1);
 }
 
+.movies {
+    padding-top: 48px;
+}
+
 /* section */
 section {
     display: flex;
@@ -304,6 +312,31 @@ section h2 {
     border-radius: 8px 8px 0 0;
 }
 
+.no-image {
+    background: #eee;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    height: 300px; /* mantém altura igual ao .card img */
+
+    display: flex;
+    flex-direction: column;
+}
+
+.no-image #notFound-icon {
+    font-size: 35px;
+}
+
+body.dark .no-image {
+    background: #333;
+    color: #aaa;
+    border-color: #555;
+}
+
 .year-title {
     display: flex;
     justify-content: space-between;
@@ -317,7 +350,7 @@ section h2 {
     white-space: nowrap; /* Impede quebra de linha */
     overflow: hidden; /* Esconde o excesso */
     text-overflow: ellipsis; /* Mostra "..." */
-    max-width: 100%; /* Limita largura ao container */
+    max-width: 80%; /* Limita largura ao container */
     display: block; /* Block ou inline-block */
 }
 
