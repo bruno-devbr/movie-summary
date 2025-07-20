@@ -191,7 +191,7 @@ main {
     width: 100%;
     padding: 0 20px;
     position: relative;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 /* Search area */
