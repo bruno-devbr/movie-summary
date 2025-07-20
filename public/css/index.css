@@ -185,10 +185,11 @@ body.dark #btn-light ion-icon {
 }
 
 main {
-    height: 100vh;
+    height: 81vh;
     width: 100%;
-    padding: 0 20vw;
+    padding: 0 10vw;
     position: relative;
+    overflow-y: scroll;
 }
 
 /* Search area */
@@ -249,13 +250,29 @@ main {
 }
 
 /* section */
+section {
+    display: flex;
+    flex-direction: column;
+}
+
 section h2 {
-    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
 }
 
 .card {
-    width: 280px;
-    background: var(--aside-bg); /* usa o fundo já adaptado */
+    flex: 1 1 280px; /* base mínima de 280px */
+    max-width: 320px; /* não cresce além disso */
+    background: var(--aside-bg);
     border-radius: 8px;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
     overflow: hidden;
@@ -263,6 +280,7 @@ section h2 {
     flex-direction: column;
     cursor: pointer;
     transition: box-shadow 0.3s ease, background 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .card:hover {
@@ -300,7 +318,6 @@ section h2 {
 }
 
 .genre {
-    padding: 0 16px;
     margin-bottom: 8px;
 }
 
@@ -309,6 +326,7 @@ section h2 {
     color: var(--text-color);
     opacity: 0.7;
     font-style: italic;
+    margin-left: 16px;
 }
 
 .card p {
@@ -322,6 +340,10 @@ section h2 {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.sentinela {
+    height: 1px;
 }
 
 /* Aside */
