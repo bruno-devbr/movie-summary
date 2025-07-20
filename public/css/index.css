@@ -430,6 +430,32 @@ aside.slide-out {
     animation: slideOut 0.3s ease forwards;
 }
 
+/* footer */
+footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+}
+
+footer a {
+    color: #ffb400;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* Modal */
 .modal {
     position: absolute;
@@ -440,6 +466,7 @@ aside.slide-out {
 
     background: rgba(0, 0, 0, 0.498);
     display: none;
+    z-index: 9;
 }
 
 body.dark .modal {
