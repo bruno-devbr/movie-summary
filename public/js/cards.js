@@ -30,7 +30,7 @@ function buildCard(movie) {
     year_titleDiv.append(h3, spanYear);
 
     const genreDiv = document.createElement("div");
-    genreDiv.classList.add("genre");
+    genreDiv.classList.add("genreSpan");
 
     const spanGenre = document.createElement("span");
     spanGenre.textContent = movie.genres.join(", ");
