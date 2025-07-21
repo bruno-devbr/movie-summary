@@ -19,7 +19,9 @@ export function verifyData(data) {
             Array.isArray(dt.genres) &&
             dt.genres.length > 0 &&
             dt.extract !== undefined &&
-            dt.href !== undefined
+            dt.href !== undefined &&
+            Array.isArray(dt.cast) &&
+            dt.cast.length > 0
         );
     });
 }
@@ -27,6 +29,10 @@ export function verifyData(data) {
 export function buildCard(movie) {
     const card = document.createElement("div");
     card.classList.add("card");
+
+    const link = document.createElement("a");
+    const titleSlug = movie.title.toLowerCase().replace(/\s+/g, "_"); // substitui espaços por underline
+    link.setAttribute("href", `movie.html?href=/wiki/${titleSlug}`);
 
     const image = document.createElement("img");
     image.src = movie.thumbnail;
@@ -48,7 +54,7 @@ export function buildCard(movie) {
         fallback.appendChild(icon);
         fallback.append(text);
 
-        card.insertBefore(fallback, card.firstChild);
+        link.insertBefore(fallback, link.firstChild);
     };
 
     const year_titleDiv = document.createElement("div");
@@ -72,7 +78,9 @@ export function buildCard(movie) {
     const p = document.createElement("p");
     p.textContent = movie.extract;
 
-    card.append(image, year_titleDiv, genreDiv, p);
+    link.append(image, year_titleDiv, genreDiv, p);
+    card.appendChild(link);
+
     cardsDiv.appendChild(card);
 }
 

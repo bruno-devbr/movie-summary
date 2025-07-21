@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movie Summary</title>
+        <link rel="stylesheet" href="/css/movie.css" />
+    </head>
+    <body>
+        <header>
+            <div class="head">
+                <div class="title">
+                    <h1>
+                        <a href="index.html">
+                            Movie <span id="span-h1">Summary</span>
+                        </a>
+                    </h1>
+                    <span id="description">Explore and track movies</span>
+                </div>
+                <div class="toggle">
+                    <div class="dark">
+                        <button class="btn" id="btn-dark">
+                            <ion-icon name="moon"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="light">
+                        <button class="btn" id="btn-light">
+                            <ion-icon name="sunny"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="back">
+                <a href="index.html">
+                    <ion-icon name="arrow-back"></ion-icon>
+                </a>
+            </div>
+
+            <div class="movie-container">
+                <div class="movie-image">
+                    <img src="" alt="" />
+                </div>
+                <div class="movie-info">
+                    <h2 id="title"></h2>
+
+                    <h3>Year</h3>
+                    <p id="year"></p>
+
+                    <h3>Genres</h3>
+                    <p id="genres"></p>
+
+                    <h3>Cast</h3>
+                    <p id="casts"></p>
+
+                    <h3>Synopsis</h3>
+                    <p id="extract"></p>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <a href="" target="_blank" rel="noopener" class="btn-saber-mais"
+                    >Learn more →</a
+                >
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <p>© 2025 Movie Summary. All rights reserved.</p>
+                <p>
+                    Data source by
+                    <a
+                        href="https://github.com/prust"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >prust</a
+                    >
+                    from
+                    <a
+                        href="https://github.com/prust/wikipedia-movie-data"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >wikipedia-movie-data</a
+                    >.
+                </p>
+                <p>
+                    Developed by
+                    <a href="https://github.com/bruno-devbr" target="_blank"
+                        >bruno-devbr</a
+                    >.
+                </p>
+            </div>
+        </footer>
+
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
+
+        <script src="/js/dark-mode.js"></script>
+        <script type="module" src="js/movie.js"></script>
+    </body>
+</html>

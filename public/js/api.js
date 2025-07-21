@@ -15,7 +15,6 @@ export async function getData() {
         const data = await response.json();
         return data;
     } catch (error) {
-        // TODO: mostrar uma mensagem quando não conseguir carregar os arquivos
         // Caso dê erro, exibe no console e retorna array vazio
         console.error("Erro na requisição:", error);
         return [];
