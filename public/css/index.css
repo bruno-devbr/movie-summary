@@ -591,12 +591,18 @@ aside .optionsDiv span {
 }
 
 aside .buttons {
-    margin-top: 15px;
+    margin-top: 20px;
     display: flex;
-    right: 15px;
-    bottom: 15px;
-    gap: 5px;
-    position: absolute;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: env(
+        safe-area-inset-bottom,
+        20px
+    ); /* Suporte pra safe area */
+    position: sticky;
+    bottom: 0;
+    background: var(--aside-bg);
+    padding-top: 10px;
 }
 
 aside .buttons button {
