@@ -1,5 +1,5 @@
 // URL do arquivo JSON com os dados dos filmes
-const url = "/data/movies.json";
+const url = "data/movies.json";
 
 // Função assíncrona que busca os dados do JSON
 export async function getData() {
