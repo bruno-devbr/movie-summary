@@ -4,28 +4,27 @@ let Alldata = [];
 let currentIndex = 0;
 const batchSize = 10;
 
-const cardsDiv = document.querySelector(".cards");
+export const cardsDiv = document.querySelector(".cards");
 const main = document.querySelector("main");
 
 const sentinela = document.createElement("div");
 sentinela.classList.add("sentinela");
 
 export function verifyData(data) {
-    const filtered = data.filter((dt) => {
+    return data.filter((dt) => {
         return (
             dt.thumbnail !== undefined &&
             dt.title !== undefined &&
             dt.year !== undefined &&
-            dt.genres !== undefined &&
+            Array.isArray(dt.genres) &&
+            dt.genres.length > 0 &&
             dt.extract !== undefined &&
             dt.href !== undefined
         );
     });
-
-    return filtered;
 }
 
-function buildCard(movie) {
+export function buildCard(movie) {
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -43,11 +42,9 @@ function buildCard(movie) {
         icon.setAttribute("id", "notFound-icon");
         icon.setAttribute("name", "eye-off");
 
-        // cria o texto
         const text = document.createElement("p");
         text.textContent = "No image available";
 
-        // adiciona ícone e texto no fallback
         fallback.appendChild(icon);
         fallback.append(text);
 
@@ -79,13 +76,17 @@ function buildCard(movie) {
     cardsDiv.appendChild(card);
 }
 
-function loadMore(data) {
+export function loadMore(data) {
     const end = Math.min(currentIndex + batchSize, data.length);
     for (let i = currentIndex; i < end; i++) {
         buildCard(data[i]);
     }
     currentIndex = end;
     cardsDiv.appendChild(sentinela);
+}
+
+export function resetCurrentIndex() {
+    currentIndex = 0;
 }
 
 const observer = new IntersectionObserver(
@@ -110,8 +111,4 @@ async function init() {
 
 init();
 
-export { Alldata, loadMore, buildCard, observer, sentinela, currentIndex };
-
-export function resetCurrentIndex() {
-    currentIndex = 0;
-}
+export { Alldata, observer, sentinela, currentIndex };

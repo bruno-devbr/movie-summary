@@ -1,11 +1,12 @@
 // Importa a função para pegar os dados
 import { getData } from "./api.js";
+import { getInputs } from "./filter.js";
 
 // Seleciona elementos do DOM
 const asideTag = document.querySelector("aside");
 const modal = document.querySelector(".modal");
 const filterBtn = document.querySelector(".filter-btn");
-const applyBtn = document.querySelector("#aplly");
+const applyBtn = document.querySelector("#apply");
 const cancelBtn = document.querySelector("#cancel");
 
 // Mostra o aside e modal, com animação de entrada
@@ -90,6 +91,7 @@ function createInputs(genres, years) {
         yearsDiv.append(span);
     }
 
+    getInputs();
     setInputEvents(); // adiciona eventos aos inputs criados
 }
 
@@ -142,10 +144,10 @@ function setInputEvents() {
 }
 
 // Desabilita os checkboxes principais no início
-checkboxMain[0].checked = false;
-checkboxMain[0].disabled = true;
-checkboxMain[1].checked = false;
-checkboxMain[1].disabled = true;
+checkboxMain.forEach((checkbox) => {
+    checkbox.checked = false;
+    checkbox.disabled = true;
+});
 
 // Adiciona eventos para controlar seleção dos checkboxes dentro e fora dos grupos
 function inputsEvent(checkbox, element) {

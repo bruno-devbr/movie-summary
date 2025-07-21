@@ -615,7 +615,7 @@ aside #cancel {
     color: var(--button-cancel-color);
 }
 
-aside #aplly {
+aside #apply {
     background: var(--button-apply-bg);
     color: var(--button-apply-color);
 }
@@ -624,7 +624,7 @@ aside #cancel:hover {
     background: var(--button-cancel-hover-bg);
 }
 
-aside #aplly:hover {
+aside #apply:hover {
     background: var(--button-apply-hover-bg);
 }
 
