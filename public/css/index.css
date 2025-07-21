@@ -187,7 +187,7 @@ body.dark #btn-light ion-icon {
 }
 
 main {
-    height: calc(100vh - 300px);
+    height: calc(100vh - 240px);
     padding: 0 20px;
     position: relative;
     overflow-y: auto;
