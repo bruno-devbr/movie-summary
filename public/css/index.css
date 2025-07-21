@@ -479,6 +479,12 @@ body.dark .no-image {
     }
 }
 
+@media (max-width: 600px) {
+    main {
+        height: calc(100vh - 300px);
+    }
+}
+
 /* Aside */
 aside {
     position: absolute;
