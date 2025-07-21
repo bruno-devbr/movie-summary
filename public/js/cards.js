@@ -10,7 +10,7 @@ const main = document.querySelector("main");
 const sentinela = document.createElement("div");
 sentinela.classList.add("sentinela");
 
-function verifyData(data) {
+export function verifyData(data) {
     const filtered = data.filter((dt) => {
         return (
             dt.thumbnail !== undefined &&
@@ -109,3 +109,9 @@ async function init() {
 }
 
 init();
+
+export { Alldata, loadMore, buildCard, observer, sentinela, currentIndex };
+
+export function resetCurrentIndex() {
+    currentIndex = 0;
+}
