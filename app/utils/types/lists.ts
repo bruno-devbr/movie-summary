@@ -45,3 +45,7 @@ export interface UserList {
     total_pages: number;
     total_results: number;
 }
+
+export interface UserListBody {
+    media_id: number;
+}
