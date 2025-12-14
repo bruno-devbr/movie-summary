@@ -1,24 +1,6 @@
-import { SessionProps, TokenProps } from "@/app/utils/types";
 import { NextRequest, NextResponse } from "next/server";
-import { AxiosError } from "axios";
-import { api } from "@/app/utils/api";
-
-// Função auxiliar para tratar erros
-function getError(error: unknown) {
-    // Se o erro for do axios, retorna a mensagem e o status apropriado
-    if (error instanceof AxiosError) {
-        return NextResponse.json(
-            { message: error.message },
-            { status: error.response?.status || 500 }
-        );
-    } else {
-        // Para outros erros, retorna erro interno do servidor
-        return NextResponse.json(
-            { message: "erro interno do servidor" },
-            { status: 500 }
-        );
-    }
-}
+import { api, getError } from "@/app/utils/api";
+import { SessionProps, TokenProps } from "@/app/utils/types/auth";
 
 // GET para criar um novo request token da TMDB
 export async function GET() {
@@ -26,7 +8,7 @@ export async function GET() {
         // Faz a requisição para obter um novo request token
         const res = await api.get<TokenProps>("/authentication/token/new");
         // Retorna o token obtido com status 200
-        return NextResponse.json({ data: res.data }, { status: 200 });
+        return NextResponse.json(res.data, { status: 200 });
     } catch (error) {
         // Chama a função de tratamento de erros
         return getError(error);
@@ -96,6 +78,13 @@ export async function DELETE(request: NextRequest) {
             name: "session_id", // Nome do cookie a ser removido
             value: "", // Valor vazio
             path: "/", // Mesmo path do cookie original
+        });
+
+        //limpa o cookie do account_id
+        response.cookies.set({
+            name: "account_id",
+            value: "",
+            path: "/",
         });
 
         // Retorna a resposta
