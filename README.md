@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# movie-summary
 
-## Getting Started
+Aplicação web para explorar filmes usando a API do TMDB.
 
-First, run the development server:
+O foco do projeto é arquitetura correta, separação de responsabilidades e uso de boas práticas. O backend controla autenticação e sessão; o frontend consome apenas o backend.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Objetivo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   Listar filmes populares, em alta e por busca
+-   Exibir detalhes de filmes
+-   Permitir login via TMDB
+-   Gerenciar sessão do usuário
+-   Trabalhar com favoritos e watchlist
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Não é um clone visual. É um projeto técnico.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Escopo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Incluído:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-   Autenticação via TMDB
+-   Consumo da API do TMDB através do backend
+-   Organização clara de rotas e fluxos
+-   Frontend focado apenas em UI e estado
 
-## Deploy on Vercel
+Fora do escopo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Sistema de pagamento
+-   Upload de conteúdo
+-   Comentários ou avaliações próprias
+-   Backend complexo com regras de negócio pesadas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Arquitetura
+
+-   Frontend: responsável apenas por interface e interação do usuário
+-   Backend: responsável por:
+
+    -   autenticação
+    -   criação e controle de sessão
+    -   proxy da API do TMDB
+
+O frontend nunca se comunica diretamente com o TMDB.
+
+---
+
+## Tecnologias
+
+Frontend:
+
+-   React
+-   TypeScript
+-   Tailwind CSS
+
+Backend:
+
+-   Node.js
+-   API REST
+
+Outros:
+
+-   TMDB API
+-   Variáveis de ambiente para chaves e tokens
+
+---
+
+## Organização do Projeto
+
+-   Autenticação isolada do restante da aplicação
+-   Rotas divididas por domínio (auth, user, movies, lists)
+-   Uma ação do usuário corresponde a uma ação clara no backend
+
+---
+
+## Licença
+
+Uso pessoal e educacional.
+
+Não é permitido copiar, redistribuir ou utilizar este projeto, no todo ou em partes, para fins comerciais ou como base de outro projeto público sem autorização do autor.
+
+---
+
+## Observações
+
+Este projeto existe para aprendizado real. Decisões de arquitetura são mais importantes do que aparência.
