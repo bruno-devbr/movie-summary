@@ -49,3 +49,9 @@ export interface UserList {
 export interface UserListBody {
     media_id: number;
 }
+
+export interface ActionListBody {
+    media_type: string;
+    media_id: number;
+    favorite: boolean;
+}
