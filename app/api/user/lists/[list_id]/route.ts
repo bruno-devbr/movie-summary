@@ -15,7 +15,9 @@ export async function GET(request: NextRequest, { params }: ParamsProps) {
 
         // pega page do searchParams e faz o fetch
         const page = Number(searchParams.get("page")) || 1;
-        const res = await api.get<UserList>(`/list/${list_id}?page=${page}`);
+        const res = await api.get<UserList>(
+            `/list/${list_id}?page=${page}&language=pt-BR`
+        );
 
         // retorna os dados
         return NextResponse.json(res.data, { status: 200 });

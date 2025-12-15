@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
         // faz o get retornando uma ListResponse
         const { data } = await api.get<ListResponse>(
             `/account/${account_id}/favorite/movies`,
-            { params: { session_id, page } }
+            { params: { session_id, page, language: "pt-BR" } }
         );
 
         // retorna o o data
