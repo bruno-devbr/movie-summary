@@ -12,8 +12,7 @@ export function ConectBtn() {
 
     return (
         <button
-            ref
-            className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2
+            className={`w-full px-4 py-2 rounded-lg transition-colors flex items-center gap-2
                 bg-blue-600
                 ${
                     loading
