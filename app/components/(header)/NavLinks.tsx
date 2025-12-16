@@ -47,9 +47,9 @@ export function NavLinks() {
 function DropDown({ arr }: { arr: SubLink[] }) {
     return (
         <div className="absolute top-full left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden">
-            {arr.map((data, x) => (
+            {arr.map((data) => (
                 <Link
-                    key={x}
+                    key={data.link}
                     href={data.link}
                     className="block px-4 py-2 hover:bg-gray-700 transition-colors"
                 >

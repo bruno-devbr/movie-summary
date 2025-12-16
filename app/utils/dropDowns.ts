@@ -1,4 +1,5 @@
-import { DropDownProps } from "./types/dropDownTypes";
+import { Bookmark, Heart, List } from "lucide-react";
+import { DropDownProps, SubLink } from "./types/dropDownTypes";
 
 export const navLinks: DropDownProps[] = [
     {
@@ -24,4 +25,10 @@ export const navLinks: DropDownProps[] = [
         title: "Pessoas",
         arr: [{ title: "Populares", link: "/pessoas" }],
     },
+];
+
+export const userDropDow: SubLink[] = [
+    { title: "Minhas Listas", icon: List, link: "/list" },
+    { title: "Watchlist", icon: Bookmark, link: "/watchlist" },
+    { title: "Favorites", icon: Heart, link: "/favorites" },
 ];

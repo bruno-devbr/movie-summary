@@ -1,5 +1,7 @@
 import { Logo } from "./Logo";
 import { NavLinks } from "./NavLinks";
+import { Input } from "./Search";
+import { ConectBtn, UserBtn } from "./UserBtns";
 
 export function Header() {
     return (
@@ -8,6 +10,10 @@ export function Header() {
                 <div className="flex items-center justify-between h-16">
                     <Logo />
                     <NavLinks />
+                    <div className="hidden md:flex items-center gap-4">
+                        <Input />
+                        <UserBtn />
+                    </div>
                 </div>
             </div>
         </header>
