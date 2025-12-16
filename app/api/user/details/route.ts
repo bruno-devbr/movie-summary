@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AccountDetails } from "@/app/utils/types/account";
-import { api, getError } from "@/app/utils/api";
+import { api, getError } from "@/app/utils/api/api";
 
 export async function GET(request: NextRequest) {
     try {

@@ -1,6 +1,6 @@
 import { MovieBodyRequest, MovieResponse } from "@/app/utils/types/movies";
 import { NextRequest, NextResponse } from "next/server";
-import { api, getError } from "@/app/utils/api";
+import { api, getError } from "@/app/utils/api/api";
 
 // POST que retorna os resultados por filtro
 export async function POST(request: NextRequest) {

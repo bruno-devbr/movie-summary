@@ -1,4 +1,4 @@
-import { api, getError } from "@/app/utils/api";
+import { api, getError } from "@/app/utils/api/api";
 import { NextRequest, NextResponse } from "next/server";
 
 type ParamsProps = {

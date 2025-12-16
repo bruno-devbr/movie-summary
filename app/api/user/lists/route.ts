@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { api, getError } from "@/app/utils/api";
+import { api, getError } from "@/app/utils/api/api";
 import {
     CreateListBody,
     CreateListResponse,
