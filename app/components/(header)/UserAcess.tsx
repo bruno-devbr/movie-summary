@@ -62,9 +62,7 @@ export function UserError({ setError, setLoading }: fecthUserProps) {
         <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-red-500/40 bg-red-500/10 text-red-400">
             <AlertTriangle className="w-4 h-4" />
 
-            <span className="hidden lg:inline text-sm">
-                Erro ao carregar usuário
-            </span>
+            <span className=" lg:inline text-sm">Erro ao carregar usuário</span>
 
             <button
                 className="ml-2 hover:text-red-300 transition-colors"

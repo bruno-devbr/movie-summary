@@ -1,73 +1,70 @@
-import { ChevronDown } from "lucide-react";
-import { DropDownProps } from "@/app/utils/types/dropDownTypes";
-import { userDropDow } from "@/app/utils/dropDowns";
-import { useState } from "react";
-import Link from "next/link";
 import { Input } from "./Search";
-import { ConectBtn } from "./UserBtns";
+import { UserError, UserLoading } from "./UserAcess";
 import { MobileDropDown } from "./DropDowns";
+import { ConectBtn } from "./UserBtns";
+import { useEffect, useState } from "react";
+import { useGlobalStore } from "@/app/utils/hooks/store";
+import { getUserData } from "@/app/utils/api/getUserData";
+import { userDropDow } from "@/app/utils/dropDowns";
+import { MobileNavAccordion } from "./MobileNavAccordion";
 
 export function MobileMenuDropdown({
     showMenu,
     setShowMenu,
     navLinks,
-    isLoggedin,
 }: {
     showMenu: boolean;
     setShowMenu: (value: boolean) => void;
     navLinks: DropDownProps[];
     isLoggedin: boolean;
 }) {
-    const [dropDown, setDropDown] = useState<number | null>(null);
+    const { setUser, user } = useGlobalStore();
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        async function fetchUserData() {
+            setLoading(true);
+            setError(false);
+
+            const data = await getUserData({ setError, setLoading });
+
+            if (data) {
+                setUser(data);
+            } else {
+                setUser(null);
+            }
+
+            setLoading(false);
+        }
+
+        fetchUserData();
+    }, [setUser]);
+
+    if (!showMenu) return null;
 
     return (
-        <>
-            {showMenu && (
-                <div className="md:hidden border-t border-gray-800 py-4">
-                    <Input />
-                    <nav className="space-y-2">
-                        {navLinks.map((data, i) => (
-                            <div key={i}>
-                                <button
-                                    className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors cursor-pointer"
-                                    onClick={() =>
-                                        setDropDown(dropDown === i ? null : i)
-                                    }
-                                >
-                                    <span>{data.title}</span>
-                                    <ChevronDown
-                                        className={`w-4 h-4 transition-transform ${
-                                            dropDown === i ? "rotate-180" : ""
-                                        }`}
-                                    />
-                                </button>
-                                {dropDown === i && (
-                                    <div className="ml-4 mt-1 space-y-1">
-                                        {data.arr.map((data, i) => (
-                                            <Link
-                                                key={i}
-                                                href={data.link}
-                                                className="block px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors"
-                                            >
-                                                {data.title}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+        <div className="md:hidden border-t border-gray-800 py-4">
+            <Input />
+            <nav className="space-y-2">
+                <MobileNavAccordion navLinks={navLinks} />
+                {/* ÁREA DO USUÁRIO — prioridade clara */}
+                {loading && <UserLoading />}
 
-                        {isLoggedin ? (
-                            <MobileDropDown
-                                props={userDropDow}
-                                setShowMenu={setShowMenu}
-                            />
-                        ) : (
-                            <ConectBtn />
-                        )}
-                    </nav>
-                </div>
-            )}
-        </>
+                {!loading && error && (
+                    <UserError setError={setError} setLoading={setLoading} />
+                )}
+
+                {!loading && !error && user && (
+                    <MobileDropDown
+                        props={userDropDow}
+                        setShowMenu={setShowMenu}
+                    />
+                )}
+
+                {!loading && !error && !user && <ConectBtn />}
+            </nav>
+        </div>
     );
 }
