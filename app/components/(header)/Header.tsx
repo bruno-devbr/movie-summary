@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 import { MobileMenu, MobileMenuDropdown } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 import { Input } from "./Search";
-import { ConectBtn, UserBtn } from "./UserBtns";
+import { ConectBtn, UserBtn, UserError } from "./UserBtns";
 import { navLinks } from "@/app/utils/dropDowns";
 
 export function Header() {

@@ -1,5 +1,6 @@
 import { Header } from "./components/(header)/Header";
 import "./globals.css";
+import { ToastProvider } from "./utils/ToastProvider";
 
 export default function RootLayout({
     children,
@@ -11,6 +12,7 @@ export default function RootLayout({
             <body className="min-h-screen bg-gray-950 text-white">
                 <Header />
                 {children}
+                <ToastProvider />
             </body>
         </html>
     );
