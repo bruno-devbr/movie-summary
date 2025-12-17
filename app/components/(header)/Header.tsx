@@ -57,13 +57,16 @@ export function Header() {
                         <Input hidden={false} />
                         {isLoggedin ? <UserDisplay /> : <ConectBtn />}
                     </div>
-                    <MobileMenu setShowMenu={setShowMenu} showMenu={showMenu} />
+                    <MobileMenu
+                        isLoggedin={isLoggedin}
+                        setShowMenu={setShowMenu}
+                        showMenu={showMenu}
+                    />
                 </div>
                 <MobileMenuDropdown
                     setShowMenu={setShowMenu}
                     showMenu={showMenu}
                     navLinks={navLinks}
-                    isLoggedin={isLoggedin}
                 />
             </div>
         </header>

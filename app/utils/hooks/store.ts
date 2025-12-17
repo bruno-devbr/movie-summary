@@ -15,7 +15,7 @@ interface globalStoreProps {
 
 export const useGlobalStore = create<globalStoreProps>((set) => ({
     user: { avatar: "", id: "", username: "", ratings_itens: [] },
-    setUser: (newUser) => set({ user: newUser }), // <-- Adicionado aqui
+    setUser: (newUser) => set({ user: newUser }),
     ts: { type: null, msg: "" },
     setToast: (newToast) => set({ ts: newToast }),
 }));

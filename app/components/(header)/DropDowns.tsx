@@ -3,6 +3,7 @@ import { ShowDropDownProps } from "./ShowDropDownProps";
 import { ChevronDown, LogOut } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useGlobalStore } from "@/app/utils/hooks/store";
 
 export function DropDown({
     prop,
@@ -45,6 +46,8 @@ export function MobileDropDown({
     props: SubLink[];
     setShowMenu: (value: boolean) => void;
 }) {
+    const { user } = useGlobalStore();
+
     const [dropDown, setDropDown] = useState(false);
 
     return (
@@ -54,7 +57,7 @@ export function MobileDropDown({
                 onClick={() => setDropDown(!dropDown)}
                 className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors cursor-pointer"
             >
-                <span>bruno-devbr</span>
+                <span>{user.username}</span>
                 <ChevronDown
                     className={`w-4 h-4 transition-transform ${
                         dropDown ? "rotate-180" : ""

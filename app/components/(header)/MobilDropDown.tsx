@@ -16,7 +16,6 @@ export function MobileMenuDropdown({
     showMenu: boolean;
     setShowMenu: (value: boolean) => void;
     navLinks: DropDownProps[];
-    isLoggedin: boolean;
 }) {
     const { setUser, user } = useGlobalStore();
 

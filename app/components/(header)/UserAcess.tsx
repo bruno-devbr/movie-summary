@@ -32,15 +32,27 @@ export function UserBtn({ user }: { user: User }) {
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
                 onClick={() => setShowDropDown(true)}
             >
-                <Image
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=demo"
-                    alt="usuario_demo"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8 rounded-full"
-                    unoptimized
-                />
-                <span className="hidden lg:inline">bruno-devbr</span>
+                {!user.avatar ? (
+                    <div
+                        className="w-8 h-8 flex items-center justify-center rounded-full bg-purple-600 text-white font-bold text-lg select-none"
+                        style={{ minWidth: 32, minHeight: 32 }}
+                    >
+                        {user.username ? (
+                            user.username.charAt(0).toUpperCase()
+                        ) : (
+                            <span className="text-xl">?</span>
+                        )}
+                    </div>
+                ) : (
+                    <Image
+                        src={`https://www.gravatar.com/avatar/${user.avatar}`}
+                        width={32}
+                        height={32}
+                        alt="user image"
+                        className="w-8 h-8 rounded-full"
+                    />
+                )}
+                <span className="hidden lg:inline">{user.username}</span>
             </button>
             {showDropDown && (
                 <DropDown
