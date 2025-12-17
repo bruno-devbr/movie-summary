@@ -1,6 +1,6 @@
-import { Header } from "./components/(header)/Header";
-import "./globals.css";
-import { ToastProvider } from "./utils/ToastProvider";
+import { Header } from "../components/(header)/Header";
+import "../globals.css";
+import { ToastProvider } from "../utils/ToastProvider";
 
 export default function RootLayout({
     children,

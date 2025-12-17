@@ -7,8 +7,8 @@ import Loading from "../loading";
 import axios from "axios";
 
 export default function ApprovedPage() {
-    const { setToast } = useGlobalStore();
     const [loading, setLoading] = useState(true);
+    const { setToast } = useGlobalStore();
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -25,31 +25,28 @@ export default function ApprovedPage() {
                     });
 
                     if (res.status !== 200) {
-                        setToast({
-                            msg: "nao foi possivel fazer o login",
-                            type: "error",
-                        });
+                        window.opener.postMessage(
+                            "tmdb_error",
+                            window.location.origin
+                        );
                     } else {
-                        setToast({
-                            msg: "logado com sucesso",
-                            type: "success",
-                        });
+                        window.opener.postMessage(
+                            "tmdb_success",
+                            window.location.origin
+                        );
                     }
-                } catch (error) {
-                    setToast({
-                        msg: "nao foi possivel fazer o login",
-                        type: "error",
-                    });
+                } catch {
+                    window.opener.postMessage(
+                        "tmdb_error",
+                        window.location.origin
+                    );
                 }
             } else {
-                setToast({
-                    msg: "nao foi possivel fazer o login",
-                    type: "error",
-                });
+                window.opener.postMessage("tmdb_error", window.location.origin);
             }
 
             setLoading(false);
-            router.push("/");
+            window.close();
         }
 
         handleAuth();
