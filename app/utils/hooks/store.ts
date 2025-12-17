@@ -12,5 +12,5 @@ interface globalStoreProps {
 
 export const useGlobalStore = create<globalStoreProps>((set) => ({
     ts: { type: null, msg: "" },
-    setToast: (newToast) => set({ toast: newToast }),
+    setToast: (newToast) => set({ ts: newToast }),
 }));

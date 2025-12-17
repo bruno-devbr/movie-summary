@@ -4,7 +4,7 @@ import { SessionProps, TokenProps } from "@/app/utils/types/auth";
 
 export async function GET() {
     try {
-        // 1️⃣ cria request_token na TMDB
+        // cria request_token na TMDB
         const res = await api.get<TokenProps>("/authentication/token/new");
 
         const { request_token, success } = res.data;
@@ -16,10 +16,10 @@ export async function GET() {
             );
         }
 
-        // 2️⃣ monta a URL de autenticação
+        // monta a URL de autenticação
         const authUrl = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${process.env.NEXT_PUBLIC_APP_URL}/approved`;
 
-        // 3️⃣ devolve só o necessário pro client
+        // devolve só o necessário pro client
         return NextResponse.json({ authUrl }, { status: 200 });
     } catch (error) {
         return getError(error);
