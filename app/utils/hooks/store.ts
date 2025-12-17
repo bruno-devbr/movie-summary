@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { User } from "../types/user";
 
 export type Toast = {
     type: "succes" | "error" | null;
@@ -6,11 +7,15 @@ export type Toast = {
 };
 
 interface globalStoreProps {
+    user: User;
+    setUser: (newUser: User) => void;
     ts: Toast;
     setToast: (newToast: Toast) => void;
 }
 
 export const useGlobalStore = create<globalStoreProps>((set) => ({
+    user: { avatar: "", id: "", username: "", ratings_itens: [] },
+    setUser: (newUser) => set({ user: newUser }), // <-- Adicionado aqui
     ts: { type: null, msg: "" },
     setToast: (newToast) => set({ ts: newToast }),
 }));

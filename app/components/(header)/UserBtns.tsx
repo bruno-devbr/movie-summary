@@ -1,8 +1,9 @@
 import { startTmdbAuth } from "@/app/utils/api/startTmdbAuth";
 import { useGlobalStore } from "@/app/utils/hooks/store";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
-import { UserBtn } from "./UserAcess";
+import { useEffect, useState } from "react";
+import { UserBtn, UserError, UserLoading } from "./UserAcess";
+import { getUserData } from "@/app/utils/api/getUserData";
 
 export function ConectBtn() {
     const { setToast } = useGlobalStore();
@@ -34,5 +35,26 @@ export function ConectBtn() {
 }
 
 export function UserDisplay() {
-    return <UserBtn />;
+    const { setUser, user } = useGlobalStore();
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        async function fetchUserData() {
+            const user = await getUserData({ setError, setLoading });
+
+            if (user) {
+                setUser(user);
+            }
+        }
+
+        fetchUserData();
+    }, [setUser]);
+
+    if (loading) return <UserLoading />;
+    if (error) return <UserError setError={setError} setLoading={setLoading} />;
+    if (user) return <UserBtn user={user} />;
+
+    return null;
 }

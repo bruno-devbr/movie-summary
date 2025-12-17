@@ -1,5 +1,7 @@
 "use client";
 
+// FIX: no proxy quando window.opener for null redireciona
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
