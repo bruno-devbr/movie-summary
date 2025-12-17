@@ -1,15 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { MobileMenu, MobileMenuDropdown } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 import { Input } from "./Search";
-import { ConectBtn, UserBtn, UserError } from "./UserBtns";
 import { navLinks } from "@/app/utils/dropDowns";
+import { ConectBtn, UserDisplay } from "./UserBtns";
+import { useGlobalStore } from "@/app/utils/hooks/store";
+import { MobileMenu } from "./MobileMenu";
+import { MobileMenuDropdown } from "./MobilDropDown";
 
 export function Header() {
+    const { setToast } = useGlobalStore();
+
     const [showMenu, setShowMenu] = useState(false);
+    const [isLoggedin, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        async function verifyLogin() {
+            const session_id = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("loggedIn="))
+                ?.split("=")[1];
+
+            if (session_id === "true") {
+                setIsLoggedIn(true);
+            }
+        }
+
+        verifyLogin();
+
+        function handleMessage(event: MessageEvent) {
+            if (event.data === "tmdb_success") {
+                setToast({ msg: "Logado com sucesso", type: "success" });
+                setIsLoggedIn(true);
+            } else if (event.data === "tmdb_error") {
+                setIsLoggedIn(true);
+                setToast({
+                    msg: "Não foi possível fazer o login",
+                    type: "error",
+                });
+            }
+        }
+
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
+    }, [setToast]);
 
     return (
         <header className="sticky top-0 z-50 bg-gray-900 border-b border-gray-800">
@@ -19,7 +55,7 @@ export function Header() {
                     <NavLinks />
                     <div className="hidden md:flex items-center gap-4">
                         <Input hidden={false} />
-                        <ConectBtn />
+                        {isLoggedin ? <UserDisplay /> : <ConectBtn />}
                     </div>
                     <MobileMenu setShowMenu={setShowMenu} showMenu={showMenu} />
                 </div>
@@ -27,6 +63,7 @@ export function Header() {
                     setShowMenu={setShowMenu}
                     showMenu={showMenu}
                     navLinks={navLinks}
+                    isLoggedin={isLoggedin}
                 />
             </div>
         </header>

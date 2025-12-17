@@ -50,6 +50,12 @@ export async function POST(request: NextRequest) {
             path: "/", // Cookie disponível em toda a aplicação
         });
 
+        response.cookies.set({
+            name: "loggedIn",
+            value: "true",
+            path: "/",
+        });
+
         // Retorna a resposta com o cookie setado
         return response;
     } catch (error) {
@@ -94,6 +100,12 @@ export async function DELETE(request: NextRequest) {
         response.cookies.set({
             name: "account_id",
             value: "",
+            path: "/",
+        });
+
+        response.cookies.set({
+            name: "loggedIn",
+            value: "false",
             path: "/",
         });
 

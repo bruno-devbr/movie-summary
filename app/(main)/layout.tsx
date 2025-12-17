@@ -9,6 +9,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                <title>Movie Summary</title>
+            </head>
             <body className="min-h-screen bg-gray-950 text-white">
                 <Header />
                 {children}
