@@ -1,3 +1,5 @@
+import { logout } from "@/app/utils/api/logout";
+import { useGlobalStore } from "@/app/utils/hooks/store";
 import { SubLink } from "@/app/utils/types/dropDownTypes";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
@@ -9,6 +11,8 @@ export function ShowDropDownProps({
     props: SubLink[];
     setShowMenu: (value: boolean) => void;
 }) {
+    const { setToast, setUser } = useGlobalStore();
+
     return (
         <div className="ml-4 mt-1 space-y-1">
             {props.map((data, i) => {
@@ -26,7 +30,10 @@ export function ShowDropDownProps({
                 );
             })}
             <button
-                onClick={() => setShowMenu(false)}
+                onClick={() => {
+                    logout({ setToast, setUser });
+                    setShowMenu(false);
+                }}
                 className="flex items-center gap-2 w-full px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors cursor-pointer text-red-400"
             >
                 <LogOut className="w-4 h-4" />

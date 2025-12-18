@@ -11,7 +11,7 @@ import { MobileMenu } from "./MobileMenu";
 import { MobileMenuDropdown } from "./MobilDropDown";
 
 export function Header() {
-    const { setToast } = useGlobalStore();
+    const { user } = useGlobalStore();
 
     const [showMenu, setShowMenu] = useState(false);
     const [isLoggedin, setIsLoggedIn] = useState(false);
@@ -25,6 +25,8 @@ export function Header() {
 
             if (session_id === "true") {
                 setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
             }
         }
 
@@ -32,20 +34,15 @@ export function Header() {
 
         function handleMessage(event: MessageEvent) {
             if (event.data === "tmdb_success") {
-                setToast({ msg: "Logado com sucesso", type: "success" });
                 setIsLoggedIn(true);
             } else if (event.data === "tmdb_error") {
-                setIsLoggedIn(true);
-                setToast({
-                    msg: "Não foi possível fazer o login",
-                    type: "error",
-                });
+                setIsLoggedIn(false);
             }
         }
 
         window.addEventListener("message", handleMessage);
         return () => window.removeEventListener("message", handleMessage);
-    }, [setToast]);
+    }, [user]);
 
     return (
         <header className="sticky top-0 z-50 bg-gray-900 border-b border-gray-800">
@@ -67,6 +64,7 @@ export function Header() {
                     setShowMenu={setShowMenu}
                     showMenu={showMenu}
                     navLinks={navLinks}
+                    isLoggedin={isLoggedin}
                 />
             </div>
         </header>

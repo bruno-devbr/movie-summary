@@ -5,14 +5,23 @@ import { useEffect, useState } from "react";
 import { UserBtn, UserError, UserLoading } from "./UserAcess";
 import { getUserData } from "@/app/utils/api/getUserData";
 
-export function ConectBtn() {
+export function ConectBtn({
+    setShowMenu = null,
+}: {
+    setShowMenu: (value: boolean) => void;
+}) {
     const { setToast } = useGlobalStore();
     const [loading, setLoading] = useState(false);
 
     return (
         <button
             disabled={loading}
-            onClick={() => startTmdbAuth({ setLoading, setToast })}
+            onClick={() => {
+                startTmdbAuth({ setLoading, setToast });
+                if (setShowMenu) {
+                    setShowMenu(false);
+                }
+            }}
             className={`w-full px-4 py-2 rounded-lg transition-colors flex items-center gap-2
                 bg-blue-600
                 ${

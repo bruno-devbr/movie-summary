@@ -1,15 +1,12 @@
 import { toast, Slide } from "react-toastify";
 import { useGlobalStore } from "./store";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export function useToast() {
     const { ts, setToast } = useGlobalStore();
-    const hasShown = useRef(false);
 
     useEffect(() => {
-        if (!ts.type || !ts.msg || hasShown.current) return;
-
-        hasShown.current = true; // marca que o toast já foi mostrado
+        if (!ts.type || !ts.msg) return;
 
         if (ts.type === "success") {
             toast.success(ts.msg, {
@@ -30,8 +27,7 @@ export function useToast() {
         }
 
         const timer = setTimeout(() => {
-            setToast({ msg: "", type: null });
-            hasShown.current = false; // reseta para próximos toasts
+            setToast({ msg: "", type: null, id: null });
         }, 5000);
 
         return () => clearTimeout(timer);

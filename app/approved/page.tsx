@@ -1,55 +1,45 @@
 "use client";
 
-// FIX: no proxy quando window.opener for null redireciona
-
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import Loading from "../(main)/loading";
 
 export default function ApprovedPage() {
-    const [loading, setLoading] = useState(true);
-
     const searchParams = useSearchParams();
 
-    const request_token = searchParams.get("request_token");
-    const approved = searchParams.get("approved");
-
     useEffect(() => {
-        async function handleAuth() {
-            if (approved === "true" && request_token) {
-                try {
-                    const res = await axios.post("/api/authentication", {
+        // acesso direto
+        if (!window.opener) {
+            window.location.href = "/";
+            return;
+        }
+
+        const request_token = searchParams.get("request_token");
+        const approved = searchParams.get("approved");
+
+        async function run() {
+            try {
+                if (approved === "true" && request_token) {
+                    await axios.post("/api/authentication", {
                         request_token,
                     });
 
-                    if (res.status !== 200) {
-                        window.opener.postMessage(
-                            "tmdb_error",
-                            window.location.origin
-                        );
-                    } else {
-                        window.opener.postMessage(
-                            "tmdb_success",
-                            window.location.origin
-                        );
-                    }
-                } catch {
                     window.opener.postMessage(
-                        "tmdb_error",
+                        "tmdb_success",
                         window.location.origin
                     );
+                } else {
+                    throw new Error();
                 }
-            } else {
+            } catch {
                 window.opener.postMessage("tmdb_error", window.location.origin);
+            } finally {
+                window.close();
             }
-
-            setLoading(false);
-            window.close();
         }
 
-        handleAuth();
-    }, [approved, request_token]);
+        run();
+    }, [searchParams]);
 
-    return <>{loading && <Loading />}</>;
+    return null;
 }

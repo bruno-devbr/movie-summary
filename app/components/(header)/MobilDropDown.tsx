@@ -12,34 +12,38 @@ export function MobileMenuDropdown({
     showMenu,
     setShowMenu,
     navLinks,
+    isLoggedin,
 }: {
     showMenu: boolean;
     setShowMenu: (value: boolean) => void;
     navLinks: DropDownProps[];
+    isLoggedin: boolean;
 }) {
     const { setUser, user } = useGlobalStore();
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         async function fetchUserData() {
-            setLoading(true);
-            setError(false);
+            if (isLoggedin) {
+                setLoading(true);
+                setError(false);
 
-            const data = await getUserData({ setError, setLoading });
+                const data = await getUserData({ setError, setLoading });
 
-            if (data) {
-                setUser(data);
-            } else {
-                setUser(null);
+                if (data) {
+                    setUser(data);
+                } else {
+                    setUser(null);
+                }
+
+                setLoading(false);
             }
-
-            setLoading(false);
         }
 
         fetchUserData();
-    }, [setUser]);
+    }, [setUser, isLoggedin]);
 
     if (!showMenu) return null;
 
@@ -55,14 +59,16 @@ export function MobileMenuDropdown({
                     <UserError setError={setError} setLoading={setLoading} />
                 )}
 
-                {!loading && !error && user && (
+                {!loading && !error && isLoggedin && user && (
                     <MobileDropDown
                         props={userDropDow}
                         setShowMenu={setShowMenu}
                     />
                 )}
 
-                {!loading && !error && !user && <ConectBtn />}
+                {!loading && !error && !isLoggedin && !user && (
+                    <ConectBtn setShowMenu={setShowMenu} />
+                )}
             </nav>
         </div>
     );

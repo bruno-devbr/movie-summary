@@ -17,7 +17,7 @@ export function MobileMenu({
         <>
             <div className="flex md:hidden items-center gap-2">
                 {/* Avatar substituído por círculo roxo com inicial do usuário */}
-                {isLoggedin && (
+                {isLoggedin && user && (
                     <>
                         {!user.avatar ? (
                             <div

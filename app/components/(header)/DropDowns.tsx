@@ -4,6 +4,7 @@ import { ChevronDown, LogOut } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { useGlobalStore } from "@/app/utils/hooks/store";
+import { logout } from "@/app/utils/api/logout";
 
 export function DropDown({
     prop,
@@ -12,6 +13,8 @@ export function DropDown({
     prop: SubLink[];
     setShowDropDown: (value: boolean) => void;
 }) {
+    const { setToast, setUser } = useGlobalStore();
+
     return (
         <div className="absolute top-full right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden">
             {prop.map((data) => {
@@ -29,7 +32,10 @@ export function DropDown({
                 );
             })}
             <button
-                onClick={() => setShowDropDown(false)}
+                onClick={() => {
+                    logout({ setToast, setUser });
+                    setShowDropDown(false);
+                }}
                 className="flex items-center gap-2 w-full px-4 py-2 hover:bg-gray-700 transition-colors text-red-400 cursor-pointer"
             >
                 <LogOut className="w-4 h-4" />

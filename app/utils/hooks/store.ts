@@ -2,19 +2,20 @@ import { create } from "zustand";
 import { User } from "../types/user";
 
 export type Toast = {
-    type: "succes" | "error" | null;
+    type: "success" | "error" | null;
     msg: string;
+    id: Date;
 };
 
 interface globalStoreProps {
-    user: User;
-    setUser: (newUser: User) => void;
+    user: User | null;
+    setUser: (newUser: User | null) => void;
     ts: Toast;
     setToast: (newToast: Toast) => void;
 }
 
 export const useGlobalStore = create<globalStoreProps>((set) => ({
-    user: { avatar: "", id: "", username: "", ratings_itens: [] },
+    user: null,
     setUser: (newUser) => set({ user: newUser }),
     ts: { type: null, msg: "" },
     setToast: (newToast) => set({ ts: newToast }),
