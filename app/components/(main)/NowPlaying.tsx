@@ -7,7 +7,7 @@ import { Carrosel } from "./(now_playing)/NowPlayingCarrosel";
 import { Movie } from "@/app/utils/types/movies";
 
 export function NowPlaying() {
-    const [data, setData] = useState<Movie[] | null>(null);
+    const [data, setData] = useState<Movie[] | undefined>();
 
     const { setGlobalError, setGlobalLoading } = useGlobalStore();
 

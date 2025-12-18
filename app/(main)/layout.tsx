@@ -8,17 +8,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <head>
-                <title>Movie Summary</title>
-            </head>
-            <body className="min-h-screen bg-gray-950 text-white">
-                <main>
-                    <Header />
-                    {children}
-                    <ToastProvider />
-                </main>
-            </body>
-        </html>
+        <div className="min-h-screen bg-gray-950 text-white">
+            <main>
+                <Header />
+                {children}
+                <ToastProvider />
+            </main>
+        </div>
     );
 }

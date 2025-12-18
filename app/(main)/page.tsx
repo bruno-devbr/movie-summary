@@ -1,5 +1,6 @@
 "use client";
 
+import { BestRating } from "../components/(main)/BestRating";
 import { NowPlaying } from "../components/(main)/NowPlaying";
 import { PopularMovies } from "../components/(main)/Popular";
 import { useGlobalStore } from "../utils/hooks/store";
@@ -24,6 +25,7 @@ export default function Home() {
             >
                 <NowPlaying />
                 <PopularMovies />
+                <BestRating />
             </div>
         </div>
     );
