@@ -1,20 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { api, getError } from "@/app/utils/api";
+import { api, getError } from "@/app/utils/api/api";
 import { SessionProps, TokenProps } from "@/app/utils/types/auth";
 
-// GET para criar um novo request token da TMDB
 export async function GET() {
     try {
-        // Faz a requisição para obter um novo request token
+        // cria request_token na TMDB
         const res = await api.get<TokenProps>("/authentication/token/new");
-        // Retorna o token obtido com status 200
-        return NextResponse.json(res.data, { status: 200 });
+
+        const { request_token, success } = res.data;
+
+        if (!success || !request_token) {
+            return NextResponse.json(
+                { message: "Failed to create request token" },
+                { status: 500 }
+            );
+        }
+
+        // monta a URL de autenticação
+        const authUrl = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${process.env.NEXT_PUBLIC_APP_URL}/approved`;
+
+        // devolve só o necessário pro client
+        return NextResponse.json({ authUrl }, { status: 200 });
     } catch (error) {
-        // Chama a função de tratamento de erros
         return getError(error);
     }
 }
-
 // POST para criar uma nova sessão usando o request token
 export async function POST(request: NextRequest) {
     try {
@@ -38,6 +48,12 @@ export async function POST(request: NextRequest) {
             value: res.data.session_id, // Valor do cookie (session_id)
             httpOnly: true, // Garante que o cookie não seja acessível via JavaScript
             path: "/", // Cookie disponível em toda a aplicação
+        });
+
+        response.cookies.set({
+            name: "loggedIn",
+            value: "true",
+            path: "/",
         });
 
         // Retorna a resposta com o cookie setado
@@ -84,6 +100,12 @@ export async function DELETE(request: NextRequest) {
         response.cookies.set({
             name: "account_id",
             value: "",
+            path: "/",
+        });
+
+        response.cookies.set({
+            name: "loggedIn",
+            value: "false",
             path: "/",
         });
 

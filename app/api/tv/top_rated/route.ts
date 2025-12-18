@@ -1,4 +1,4 @@
-import { api, getError } from "@/app/utils/api";
+import { api, getError } from "@/app/utils/api/api";
 import { SeriesResponse } from "@/app/utils/types/series";
 import { NextRequest, NextResponse } from "next/server";
 
