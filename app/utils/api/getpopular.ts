@@ -1,29 +1,29 @@
 import axios from "axios";
-import { DatesMoviesResponse } from "../types/movies";
-import { Movie } from "../types/globalItens";
 import { fetchFunctioProps } from "../types/fetchFunctionProps";
+import { MovieResponse } from "../types/movies";
+import { Movie } from "../types/globalItens";
 
-export async function getNowPlaying({
+export async function getPopular({
     setGlobalError,
     setGlobalLoading,
 }: fetchFunctioProps): Promise<Movie[]> {
     try {
         setGlobalLoading(true);
 
-        const nowPlaying = await axios
-            .get<DatesMoviesResponse>("/api/movies/now_playing")
+        const movies = await axios
+            .get<MovieResponse>("/api/movies/popular")
             .then((res) =>
-                res.data.results.slice(0, 9).map<Movie>((movie) => ({
-                    image: movie.backdrop_path,
-                    title: movie.title,
-                    rate: movie.vote_average.toFixed(1),
-                    year: new Date(movie.release_date).getFullYear(),
-                    overview: movie.overview,
+                res.data.results.map<Movie>((movie) => ({
                     id: movie.id,
+                    image: movie.backdrop_path,
+                    overview: movie.overview,
+                    rate: movie.vote_average.toFixed(1),
+                    title: movie.title,
+                    year: new Date(movie.release_date).getFullYear(),
                 }))
             );
 
-        return nowPlaying;
+        return movies;
     } catch {
         setGlobalError(true);
     } finally {

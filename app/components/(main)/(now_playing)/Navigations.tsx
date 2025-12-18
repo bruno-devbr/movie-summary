@@ -36,7 +36,7 @@ export function Navigation({
                 onMouseEnter={() => setIsMouseOver(true)}
                 onMouseLeave={() => setIsMouseOver(false)}
                 onClick={() => handleClick(index, "negative")}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded-full transition-colors cursor-pointer"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-black/70 hover:bg-black/70 rounded-full transition-colors cursor-pointer"
             >
                 <ChevronLeft className="w-6 h-6" />
             </button>
@@ -45,7 +45,7 @@ export function Navigation({
                 onMouseEnter={() => setIsMouseOver(true)}
                 onMouseLeave={() => setIsMouseOver(false)}
                 onClick={() => handleClick(index, "positive")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded-full transition-colors cursor-pointer"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-black/70 hover:bg-black/70 rounded-full transition-colors cursor-pointer"
             >
                 <ChevronRight className="w-6 h-6" />
             </button>

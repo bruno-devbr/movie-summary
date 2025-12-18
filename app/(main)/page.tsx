@@ -17,8 +17,14 @@ export default function Home() {
             {globalLoading && <Loading />}
             {globalError && <Error />}
 
-            <NowPlaying />
-            <PopularMovies />
+            <div
+                style={{
+                    display: globalLoading || globalError ? "none" : "block",
+                }}
+            >
+                <NowPlaying />
+                <PopularMovies />
+            </div>
         </div>
     );
 }
