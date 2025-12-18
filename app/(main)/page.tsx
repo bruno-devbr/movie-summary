@@ -1,6 +1,7 @@
 "use client";
 
 import { NowPlaying } from "../components/(main)/NowPlaying";
+import { PopularMovies } from "../components/(main)/Popular";
 import { useGlobalStore } from "../utils/hooks/store";
 import { useToast } from "../utils/hooks/useToast";
 import Error from "./error";
@@ -13,11 +14,11 @@ export default function Home() {
 
     return (
         <div className="pb-12">
-            {/* O componente continua montado, mas você mostra o loading por cima ou em outro lugar */}
             {globalLoading && <Loading />}
             {globalError && <Error />}
 
             <NowPlaying />
+            <PopularMovies />
         </div>
     );
 }

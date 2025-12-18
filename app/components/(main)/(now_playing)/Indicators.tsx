@@ -1,4 +1,4 @@
-import { Result } from "@/app/utils/types/movies";
+import { Movie } from "@/app/utils/types/globalItens";
 
 export function Indicators({
     movies,
@@ -6,7 +6,7 @@ export function Indicators({
     setIndex,
     setIsMouseOver,
 }: {
-    movies: Result[];
+    movies: Movie[];
     index: number;
     setIndex: (newIndex: number) => void;
     setIsMouseOver: (newValue: boolean) => void;

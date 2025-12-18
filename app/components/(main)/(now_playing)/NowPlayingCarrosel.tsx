@@ -1,11 +1,11 @@
-import { Result } from "@/app/utils/types/movies";
 import { CarroselImage } from "./CarroselImage";
 import { Content } from "./Content";
 import { useEffect, useState } from "react";
 import { Navigation } from "./Navigations";
 import { Indicators } from "./Indicators";
+import { Movie } from "@/app/utils/types/globalItens";
 
-export function Carrosel({ movies }: { movies: Result[] }) {
+export function Carrosel({ movies }: { movies: Movie[] }) {
     const [index, setIndex] = useState(0);
     const [isMouseOver, setIsMouseOver] = useState(false);
 

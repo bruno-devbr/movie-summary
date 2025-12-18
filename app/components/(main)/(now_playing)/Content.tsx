@@ -1,8 +1,8 @@
-import { Result } from "@/app/utils/types/movies";
+import { Movie } from "@/app/utils/types/globalItens";
 import { Play, Star } from "lucide-react";
 import Link from "next/link";
 
-export function Content({ movie }: { movie: Result }) {
+export function Content({ movie }: { movie: Movie }) {
     return (
         <div className="relative container mx-auto px-4 h-full flex items-center">
             <div className="relative container mx-auto px-4 h-full flex items-center">
@@ -11,12 +11,10 @@ export function Content({ movie }: { movie: Result }) {
                     <div className="flex items-center gap-4 mb-4">
                         <div className="flex items-center gap-1 text-yellow-400">
                             <Star className="w-5 h-5 fill-current" />
-                            <span className="text-xl">
-                                {movie.vote_average.toFixed(1)}
-                            </span>
+                            <span className="text-xl">{movie.rate}</span>
                         </div>
                         <span className="text-gray-400">
-                            {new Date(movie.release_date).getFullYear()}
+                            {new Date(movie.year).getFullYear()}
                         </span>
                     </div>
                     <p className="text-gray-300 mb-6 line-clamp-3">

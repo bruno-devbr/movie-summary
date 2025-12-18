@@ -1,13 +1,13 @@
 import { getNowPlaying } from "@/app/utils/api/getNowPlaying";
 import { useGlobalStore } from "@/app/utils/hooks/store";
-import { Result } from "@/app/utils/types/movies";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Carrosel } from "./(now_playing)/NowPlayingCarrosel";
+import { Movie } from "@/app/utils/types/movies";
 
 export function NowPlaying() {
-    const [data, setData] = useState<Result[] | null>(null);
+    const [data, setData] = useState<Movie[] | null>(null);
 
     const { setGlobalError, setGlobalLoading } = useGlobalStore();
 

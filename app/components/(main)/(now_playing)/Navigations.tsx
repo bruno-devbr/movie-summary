@@ -1,10 +1,10 @@
-import { Result } from "@/app/utils/types/movies";
+import { Movie } from "@/app/utils/types/globalItens";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface NavigationProps {
     index: number;
     setIndex: (newIndex: number) => void;
-    movies: Result[];
+    movies: Movie[];
     setIsMouseOver: (newValue: boolean) => void;
 }
 

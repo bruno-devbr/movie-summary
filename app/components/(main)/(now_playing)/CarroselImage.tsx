@@ -1,8 +1,8 @@
-import { Result } from "@/app/utils/types/movies";
+import { Movie } from "@/app/utils/types/globalItens";
 import Image from "next/image";
 import { useState } from "react";
 
-export function CarroselImage({ movie }: { movie: Result }) {
+export function CarroselImage({ movie }: { movie: Movie }) {
     const [loaded, setLoaded] = useState(false);
 
     return (
@@ -11,7 +11,7 @@ export function CarroselImage({ movie }: { movie: Result }) {
                 className={`w-full h-full object-cover transition-opacity duration-500 ${
                     loaded ? "opacity-100" : "opacity-0"
                 }`}
-                src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}.jpg`}
+                src={`https://image.tmdb.org/t/p/w1280/${movie.image}.jpg`}
                 alt="movie poster"
                 fill
                 onLoadingComplete={() => setLoaded(true)}
