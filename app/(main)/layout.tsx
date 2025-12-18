@@ -13,9 +13,11 @@ export default function RootLayout({
                 <title>Movie Summary</title>
             </head>
             <body className="min-h-screen bg-gray-950 text-white">
-                <Header />
-                {children}
-                <ToastProvider />
+                <main>
+                    <Header />
+                    {children}
+                    <ToastProvider />
+                </main>
             </body>
         </html>
     );
