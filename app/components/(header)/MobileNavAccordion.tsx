@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronDown } from "lucide-react";
 import { DropDownProps } from "@/app/utils/types/dropDownTypes";
 import { useState } from "react";

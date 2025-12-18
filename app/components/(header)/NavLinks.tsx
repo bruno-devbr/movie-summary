@@ -1,5 +1,3 @@
-"use client";
-
 import { SubLink } from "@/app/utils/types/dropDownTypes";
 import { useState, useRef, useEffect } from "react";
 import { navLinks } from "@/app/utils/dropDowns";
