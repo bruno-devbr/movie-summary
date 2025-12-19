@@ -24,7 +24,7 @@ export function NavLinks() {
     }, []);
 
     return (
-        <nav ref={navRef} className="hidden md:flex items-center gap-6">
+        <nav ref={navRef} className="hidden lg:flex items-center gap-4">
             {navLinks.map((prop, i) => (
                 <div className="relative" key={i}>
                     <button

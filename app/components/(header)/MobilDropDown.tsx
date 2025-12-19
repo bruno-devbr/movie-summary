@@ -48,7 +48,7 @@ export function MobileMenuDropdown({
     if (!showMenu) return null;
 
     return (
-        <div className="md:hidden border-t border-gray-800 py-4">
+        <div className="lg:hidden border-t border-gray-800 py-4">
             <Input />
             <nav className="space-y-2">
                 <MobileNavAccordion navLinks={navLinks} />

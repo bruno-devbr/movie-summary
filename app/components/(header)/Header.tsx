@@ -50,8 +50,8 @@ export function Header() {
                 <div className="flex items-center justify-between h-16">
                     <Logo />
                     <NavLinks />
-                    <div className="hidden md:flex items-center gap-4">
-                        <Input hidden={false} />
+                    <div className="hidden lg:flex items-center gap-4">
+                        <Input />
                         {isLoggedin ? <UserDisplay /> : <ConectBtn />}
                     </div>
                     <MobileMenu
