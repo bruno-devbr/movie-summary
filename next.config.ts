@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
             },
             {
                 protocol: "https",
+                hostname: "media.themoviedb.org",
+            },
+            {
+                protocol: "https",
                 hostname: "www.gravatar.com",
             },
         ],

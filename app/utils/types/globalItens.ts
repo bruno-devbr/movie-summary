@@ -7,7 +7,7 @@ export interface Movie {
     image: string;
     title: string;
     rate: string;
-    year: number;
+    year: number | "Sem data";
     overview: string;
     id: number;
 }

@@ -1,13 +1,13 @@
 import { getPopular } from "@/app/utils/api/getpopular";
 import { useGlobalStore } from "@/app/utils/hooks/store";
-import { Movie } from "@/app/utils/types/globalItens";
+import { Movies } from "@/app/utils/types/globalItens";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MovieCard } from "./(popular)/MovieCard";
 
 export function PopularMovies() {
-    const [data, setData] = useState<Movie[] | undefined>();
+    const [data, setData] = useState<Movies | undefined>();
 
     const { setGlobalError, setGlobalLoading } = useGlobalStore();
 
@@ -35,7 +35,7 @@ export function PopularMovies() {
                     </Link>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                    {data?.map((movie) => (
+                    {data.movies.map((movie) => (
                         <MovieCard key={movie.id} movie={movie} />
                     ))}
                 </div>

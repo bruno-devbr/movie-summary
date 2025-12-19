@@ -11,7 +11,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
             <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center">
                 {hasImage ? (
                     <Image
-                        src={`https://image.tmdb.org/t/p/w780/${movie.image}.jpg`}
+                        src={`https://media.themoviedb.org/t/p/w220_and_h330_face/${movie.image}`}
                         alt="movie image"
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                         fill

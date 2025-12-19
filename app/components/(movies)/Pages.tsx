@@ -4,11 +4,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 interface PageProps {
     page: number;
     totalPages: number;
-    body: MovieBodyRequest; // Adicionado para manter os filtros
+    body: MovieBodyRequest;
     setBody: (newBody: MovieBodyRequest) => void;
 }
 
-export function Pages({ page, setBody, totalPages, body }: PageProps) {
+export function Pages({ page, setBody = null, totalPages, body }: PageProps) {
     const handlePageChange = (newPage: number) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
 

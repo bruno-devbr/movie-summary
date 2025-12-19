@@ -22,7 +22,9 @@ export async function getGeneralMovies({
                             overview: movie.overview,
                             rate: movie.vote_average.toFixed(1),
                             title: movie.title,
-                            year: new Date(movie.release_date).getFullYear(),
+                            year: movie.release_date
+                                ? new Date(movie.release_date).getFullYear()
+                                : "Sem data",
                         })),
 
                         totalPages: res.data.total_pages,
