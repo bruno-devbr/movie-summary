@@ -1,11 +1,20 @@
 export interface MovieBodyRequest {
-    language: string;
+    language: "pt-Br";
     page: number;
     primary_release_year: number;
-    region: string;
-    sort_by: string;
+    region: "BR";
+    sort_by: sort_by;
     "vote_average.gte": number;
     with_genres: number[];
+}
+
+export enum sort_by {
+    PopularityAsc = "popularity.asc",
+    PopularityDesc = "popularity.desc",
+    PrimaryReleaseDateAsc = "primary_release_date.asc",
+    PrimaryReleaseDateDesc = "primary_release_date.desc",
+    VoteAverageDesc = "vote_average.desc",
+    VoteAverageAsc = "vote_average.asc",
 }
 
 export interface MovieResponse {

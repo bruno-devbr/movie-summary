@@ -9,8 +9,11 @@ import { ConectBtn, UserDisplay } from "./UserBtns";
 import { useGlobalStore } from "@/app/utils/hooks/store";
 import { MobileMenu } from "./MobileMenu";
 import { MobileMenuDropdown } from "./MobilDropDown";
+import { useToast } from "@/app/utils/hooks/useToast";
 
 export function Header() {
+    useToast();
+
     const { user } = useGlobalStore();
 
     const [showMenu, setShowMenu] = useState(false);

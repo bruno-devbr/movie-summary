@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { User } from "../types/user";
+import { MovieBodyRequest } from "../types/movies";
+import { defaultBody } from "../defaultMovieBody";
 
 export type Toast = {
     type: "success" | "error" | null;
@@ -27,4 +29,14 @@ export const useGlobalStore = create<globalStoreProps>((set) => ({
     setGlobalError: (newError) => set({ globalError: newError }),
     globalLoading: false,
     setGlobalLoading: (newLoad) => set({ globalLoading: newLoad }),
+}));
+
+interface filtersProps {
+    body: MovieBodyRequest;
+    setBody: (newBody: MovieBodyRequest) => void;
+}
+
+export const useFilters = create<filtersProps>((set) => ({
+    body: defaultBody,
+    setBody: (newBody) => set({ body: newBody }),
 }));
