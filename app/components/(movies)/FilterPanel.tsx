@@ -6,21 +6,23 @@ import { useState } from "react";
 
 interface FilterProps {
     genres: Genre[];
-    page: number;
     setShowFilters: (newValue: boolean) => void;
 }
 
-export function FilterPanel({ genres, page, setShowFilters }: FilterProps) {
+export function FilterPanel({ genres, setShowFilters }: FilterProps) {
     const { setBody, body } = useFilters();
+
+    const [minRate, setMinRate] = useState(body["vote_average.gte"] || 0);
+    const [year, setYear] = useState<number>(body.primary_release_year || 2025);
 
     const [sortOpt, setSortOpt] = useState<sort_by>(
         body.sort_by || sort_by.PopularityDesc
     );
+
     const [genreList, setGenreList] = useState<number[]>(
         body.with_genres || []
     );
-    const [minRate, setMinRate] = useState(body["vote_average.gte"] || 0);
-    const [year, setYear] = useState<number>(body.primary_release_year || 2025);
+
     const options = [
         {
             text: "Popularidade (Decrescente)",
@@ -61,7 +63,7 @@ export function FilterPanel({ genres, page, setShowFilters }: FilterProps) {
         setBody({
             "vote_average.gte": minRate,
             language: "pt-Br",
-            page: page,
+            page: 1,
             primary_release_year: year,
             region: "BR",
             sort_by: sortOpt,
@@ -79,13 +81,13 @@ export function FilterPanel({ genres, page, setShowFilters }: FilterProps) {
                     <label className="block mb-2 text-sm text-gray-400">
                         Ordenar Por
                     </label>
-                    <select className="w-full px-3 py-2 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500 cursor-pointer">
+                    <select
+                        value={sortOpt}
+                        onChange={(e) => setSortOpt(e.target.value as sort_by)}
+                        className="w-full px-3 py-2 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500 cursor-pointer"
+                    >
                         {options.map((opt, i) => (
-                            <option
-                                key={i}
-                                value={opt.value}
-                                onClick={() => setSortOpt(opt.value)}
-                            >
+                            <option key={i} value={opt.value}>
                                 {opt.text}
                             </option>
                         ))}

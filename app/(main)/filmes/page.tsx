@@ -1,13 +1,15 @@
 "use client";
 
+import { MovieCard } from "@/app/components/(main)/(popular)/MovieCard";
 import { useFilters, useGlobalStore } from "@/app/utils/hooks/store";
-import { useEffect, useState } from "react";
-import { Movie } from "@/app/utils/types/globalItens";
 import { getGeneralMovies } from "@/app/utils/api/getGeneralMovies";
 import { FilterPanel } from "@/app/components/(movies)/FilterPanel";
 import { defaultBody } from "@/app/utils/defaultMovieBody";
-import { Genre } from "@/app/utils/types/genre";
+import { Pages } from "@/app/components/(movies)/Pages";
+import { Movies } from "@/app/utils/types/globalItens";
 import { getGenres } from "@/app/utils/api/getGenres";
+import { Genre } from "@/app/utils/types/genre";
+import { useEffect, useState } from "react";
 import Loading from "../loading";
 import Error from "../error";
 
@@ -16,10 +18,9 @@ export default function MoviesPage() {
     const { globalError, globalLoading, setGlobalError, setGlobalLoading } =
         useGlobalStore();
 
-    const [data, setData] = useState<Movie | null>(null);
+    const [data, setData] = useState<Movies | null>(null);
     const [genres, setGenres] = useState<Genre[] | null>(null);
     const [showFilters, setShowFilters] = useState(false);
-    const [page, setPage] = useState(1);
 
     useEffect(() => {
         // Busca os gêneros apenas uma vez ao carregar a página
@@ -52,7 +53,7 @@ export default function MoviesPage() {
         }
 
         fetchData();
-    }, [body, setGlobalError, setGlobalLoading]);
+    }, [body, setGlobalError, setGlobalLoading]); // Remova page daqui
 
     return (
         <div className="pb-12">
@@ -79,8 +80,22 @@ export default function MoviesPage() {
                     {showFilters && (
                         <FilterPanel
                             genres={genres}
-                            page={page}
                             setShowFilters={setShowFilters}
+                        />
+                    )}
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-8">
+                        {data?.movies.map((movie) => (
+                            <MovieCard key={movie.id} movie={movie} />
+                        ))}
+                    </div>
+
+                    {data?.totalPages === 1 ? null : (
+                        <Pages
+                            page={body.page}
+                            body={body} // Passando o objeto body atual
+                            setBody={setBody}
+                            totalPages={data?.totalPages || 0}
                         />
                     )}
                 </div>

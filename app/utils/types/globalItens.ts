@@ -1,3 +1,8 @@
+export interface Movies {
+    totalPages: number;
+    movies: Movie[];
+}
+
 export interface Movie {
     image: string;
     title: string;
