@@ -1,7 +1,7 @@
 export interface MovieBodyRequest {
     language: "pt-Br";
     page: number;
-    primary_release_year: number;
+    primary_release_year: number | null;
     region: "BR";
     sort_by: sort_by;
     "vote_average.gte": number;

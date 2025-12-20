@@ -1,10 +1,9 @@
-import { MovieCard } from "./(popular)/MovieCard";
-import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useGlobalStore } from "@/app/utils/hooks/store";
 import { getBestRating } from "@/app/utils/api/getBestRatingMovies";
-import Link from "next/link";
 import { Movies } from "@/app/utils/types/globalItens";
+import { MoviesGrid } from "../(movies)/MoviesGrid";
+import { Link_Title } from "./LinkComponent";
 
 export function BestRating() {
     const [data, setData] = useState<Movies | null>(null);
@@ -28,20 +27,11 @@ export function BestRating() {
     return (
         <section>
             <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl">Melhor Avaliados</h2>
-                    <Link
-                        href="/filmes/mais-avaliados"
-                        className="flex items-center gap-1 text-blue-500 hover:text-blue-400 transition-colors"
-                    >
-                        Ver todos <ChevronRight className="w-5 h-5" />
-                    </Link>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                    {data.movies.map((movie) => (
-                        <MovieCard key={movie.id} movie={movie} type="movie" />
-                    ))}
-                </div>
+                <Link_Title
+                    link="/filmes/mais-avaliados"
+                    title="Melhor Avaliados"
+                />
+                <MoviesGrid movies={data.movies} />
             </div>
         </section>
     );

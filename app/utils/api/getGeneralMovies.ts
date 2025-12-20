@@ -7,12 +7,13 @@ export async function getGeneralMovies({
     setGlobalError,
     setGlobalLoading,
     body,
+    page,
 }: fetchFunctioProps): Priomise<Movies> {
     try {
         setGlobalLoading(true);
 
         const generalMovies = await axios
-            .post<MovieResponse>("/api/movies", body)
+            .post<MovieResponse>("/api/movies", { ...body, page: page })
             .then(
                 (res) =>
                     <Movies>{
@@ -28,6 +29,7 @@ export async function getGeneralMovies({
                         })),
 
                         totalPages: res.data.total_pages,
+                        page: res.data.page,
                     }
             );
 

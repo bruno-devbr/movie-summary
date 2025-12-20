@@ -1,10 +1,9 @@
 import { getNowPlaying } from "@/app/utils/api/getNowPlaying";
 import { useGlobalStore } from "@/app/utils/hooks/store";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Carrosel } from "./(now_playing)/NowPlayingCarrosel";
 import { Movies } from "@/app/utils/types/globalItens";
+import { Link_Title } from "./LinkComponent";
 
 export function NowPlaying() {
     const [data, setData] = useState<Movies | undefined>();
@@ -28,15 +27,7 @@ export function NowPlaying() {
     return (
         <section className="mb-12">
             <div className="container mx-auto px-4 mb-6">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-2xl">Em Cartaz Agora</h2>
-                    <Link
-                        href="/filmes/em-cartaz"
-                        className="flex items-center gap-1 text-blue-500 hover:text-blue-400 transition-colors"
-                    >
-                        Ver todos <ChevronRight className="w-5 h-5" />
-                    </Link>
-                </div>
+                <Link_Title link="/filmes/em-cartaz" title="Em Cartaz Agora" />
             </div>
             <Carrosel movies={data} />
         </section>

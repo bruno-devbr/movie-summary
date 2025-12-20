@@ -1,5 +1,6 @@
 export interface Movies {
     totalPages: number;
+    page: number;
     movies: Movie[];
 }
 
