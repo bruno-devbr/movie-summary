@@ -3,9 +3,9 @@ import { Content } from "./Content";
 import { useEffect, useState } from "react";
 import { Navigation } from "./Navigations";
 import { Indicators } from "./Indicators";
-import { Movie } from "@/app/utils/types/globalItens";
+import { Movies } from "@/app/utils/types/globalItens";
 
-export function Carrosel({ movies }: { movies: Movie[] }) {
+export function Carrosel({ movies }: { movies: Movies }) {
     const [index, setIndex] = useState(0);
     const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -14,7 +14,9 @@ export function Carrosel({ movies }: { movies: Movie[] }) {
 
         if (!isMouseOver) {
             interval = setInterval(() => {
-                setIndex((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
+                setIndex((prev) =>
+                    prev === movies.movies.length - 1 ? 0 : prev + 1
+                );
             }, 5000);
         }
 
@@ -29,8 +31,8 @@ export function Carrosel({ movies }: { movies: Movie[] }) {
             onMouseEnter={() => setIsMouseOver(true)}
             onMouseLeave={() => setIsMouseOver(false)}
         >
-            <CarroselImage movie={movies[index]} />
-            <Content movie={movies[index]} />
+            <CarroselImage movie={movies.movies[index]} />
+            <Content movie={movies.movies[index]} />
             <Navigation
                 index={index}
                 setIndex={setIndex}

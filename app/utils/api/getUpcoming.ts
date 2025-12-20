@@ -3,7 +3,7 @@ import { DatesMoviesResponse } from "../types/movies";
 import { Movie, Movies } from "../types/globalItens";
 import { fetchFunctioProps } from "../types/fetchFunctionProps";
 
-export async function getNowPlaying({
+export async function getUpcoming({
     setGlobalError,
     setGlobalLoading,
     page,
@@ -11,8 +11,8 @@ export async function getNowPlaying({
     try {
         setGlobalLoading(true);
 
-        const nowPlaying = await axios
-            .get<DatesMoviesResponse>(`/api/movies/now_playing?page=${page}`)
+        const upComing = await axios
+            .get<DatesMoviesResponse>(`/api/movies/upcoming?page=${page}`)
             .then(
                 (res) =>
                     <Movies>{
@@ -31,7 +31,7 @@ export async function getNowPlaying({
                     }
             );
 
-        return nowPlaying;
+        return upComing;
     } catch {
         setGlobalError(true);
     } finally {

@@ -1,10 +1,10 @@
-import { Movie } from "@/app/utils/types/globalItens";
+import { Movies } from "@/app/utils/types/globalItens";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface NavigationProps {
     index: number;
     setIndex: (newIndex: number) => void;
-    movies: Movie[];
+    movies: Movies;
     setIsMouseOver: (newValue: boolean) => void;
 }
 
@@ -16,14 +16,14 @@ export function Navigation({
 }: NavigationProps) {
     function handleClick(i: number, action: "positive" | "negative") {
         if (action === "positive") {
-            if (i + 1 === movies.length) {
+            if (i + 1 === movies.movies.length) {
                 setIndex(0);
             } else {
                 setIndex((prev) => prev + 1);
             }
         } else if (action === "negative") {
             if (i - 1 === -1) {
-                setIndex(movies.length - 1);
+                setIndex(movies.movies.length - 1);
             } else {
                 setIndex((prev) => prev - 1);
             }

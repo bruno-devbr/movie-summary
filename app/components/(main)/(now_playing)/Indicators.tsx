@@ -1,4 +1,4 @@
-import { Movie } from "@/app/utils/types/globalItens";
+import { Movies } from "@/app/utils/types/globalItens";
 
 export function Indicators({
     movies,
@@ -6,14 +6,14 @@ export function Indicators({
     setIndex,
     setIsMouseOver,
 }: {
-    movies: Movie[];
+    movies: Movies;
     index: number;
     setIndex: (newIndex: number) => void;
     setIsMouseOver: (newValue: boolean) => void;
 }) {
     return (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {movies.map((_, i) => (
+            {movies.movies.map((_, i) => (
                 <button
                     key={i}
                     onMouseEnter={() => setIsMouseOver(true)}

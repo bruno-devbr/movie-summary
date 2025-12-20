@@ -4,10 +4,10 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Carrosel } from "./(now_playing)/NowPlayingCarrosel";
-import { Movie } from "@/app/utils/types/movies";
+import { Movies } from "@/app/utils/types/globalItens";
 
 export function NowPlaying() {
-    const [data, setData] = useState<Movie[] | undefined>();
+    const [data, setData] = useState<Movies | undefined>();
 
     const { setGlobalError, setGlobalLoading } = useGlobalStore();
 
