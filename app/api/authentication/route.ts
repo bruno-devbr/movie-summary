@@ -1,5 +1,7 @@
-import { api, getError } from "@/app/utils/api/api";
+import { getApi, getError } from "@/app/utils/api/api";
 import { NextRequest, NextResponse } from "next/server";
+
+const api = getApi();
 
 // ========================
 // Rota GET: cria request_token
