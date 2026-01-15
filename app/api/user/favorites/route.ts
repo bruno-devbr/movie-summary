@@ -1,7 +1,7 @@
 import { getApi, getError } from "@/app/utils/api/api";
 import { NextRequest, NextResponse } from "next/server";
 
-// Função que trata requisições GET para obter a watchlist do usuário
+// Função que trata requisições GET para obter os favoritos do usuário
 export async function GET(req: NextRequest) {
     try {
         // Inicializa a instância da API com base na requisição
@@ -21,15 +21,15 @@ export async function GET(req: NextRequest) {
             );
         }
 
-        // Chama a API para buscar a watchlist de filmes do usuário
-        const watchlist = await api.accountMovieWatchlist({
+        // Chama a API para buscar os filmes favoritos do usuário
+        const favorites = await api.accountFavoriteMovies({
             id: account_id,
             language: "pt-BR",
             page,
         });
 
-        // Retorna a watchlist encontrada com status 200
-        return NextResponse.json(watchlist, { status: 200 });
+        // Retorna os favoritos encontrados com status 200
+        return NextResponse.json(favorites, { status: 200 });
     } catch (error) {
         // Em caso de erro, retorna resposta de erro formatada
         return getError(error);
