@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
         // Faz a requisição para buscar filmes mais bem avaliados, usando idioma e região do Brasil
         const rawData = await api.movieTopRated({
-            language: "pt-Br", // idioma português do Brasil
+            language: "pt-BR", // idioma português do Brasil
             region: "BR", // região Brasil
             page,
         });

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
         // Chama o endpoint de filmes que estão por vir
         const rawData = await api.upcomingMovies({
-            language: "pt-Br", // Define o idioma da resposta
+            language: "pt-BR", // Define o idioma da resposta
             region: "BR", // Define a região para os resultados
             page, // Página de resultados
         });

@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
         // Busca séries de acordo com os filtros
         const rawData = await api.discoverTv({
-            language: "pt-Br",
+            language: "pt-BR",
             page,
             first_air_date_year: year,
             sort_by,

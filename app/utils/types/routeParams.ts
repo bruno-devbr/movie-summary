@@ -1,8 +1,8 @@
 export interface routeParamsProps {
     params: {
         list_id: string;
-        movie_id: number;
-        series_id: number;
-        person_id: number;
+        movie_id: string;
+        series_id: string;
+        person_id: string;
     };
 }

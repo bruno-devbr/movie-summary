@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
         // Chama a API para buscar filmes em cartaz no Brasil, em português
         const rawData = await api.movieNowPlaying({
-            language: "pt-Br",
+            language: "pt-BR",
             region: "BR",
             page,
         });

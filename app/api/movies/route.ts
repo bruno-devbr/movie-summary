@@ -13,8 +13,8 @@ export async function GET(req: NextRequest) {
         const year = Number(searchParams.get("year")) || undefined;
         const sort_by = searchParams.get("sort_by") as string;
         const genres = searchParams.get("genres") as number[]; // gêneros dos filmes
-        const vote_avarege =
-            Number(searchParams.get("vote_avarege")) || undefined; // nota mínima
+        const vote_averege =
+            Number(searchParams.get("vote_averege")) || undefined; // nota mínima
 
         // Faz a requisição para buscar filmes conforme filtros informados
         const rawData = await api.discoverMovie({
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
             primary_release_year: year, // ano de lançamento
             region: "BR", // região Brasil
             sort_by, // ordenação
-            "vote_average.gte": vote_avarege, // nota mínima
+            "vote_average.gte": vote_averege, // nota mínima
             with_genres: genres, // gêneros
         });
 

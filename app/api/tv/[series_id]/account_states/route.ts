@@ -9,7 +9,7 @@ export async function GET(req: NextRequest, context: routeParamsProps) {
         const { series_id } = await context.params; // Extrai o ID da série dos parâmetros da rota
 
         // Busca os estados da conta do usuário para a série
-        const rawData = await api.movieAccountStates({
+        const rawData = await api.tvAccountStates({
             id: series_id,
         });
 

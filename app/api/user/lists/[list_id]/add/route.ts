@@ -15,7 +15,7 @@ export async function POST(req: NextRequest, context: routeParamsProps) {
         const { media_id } = ListBodyActionsSchema.parse(await req.json());
         // Adiciona o item à lista especificada, utilizando headers customizados
         await api.createListItem(
-            { media_id, id: list_id, language: "pt-Br" },
+            { media_id, id: list_id, language: "pt-BR" },
             setHeaders()
         );
 

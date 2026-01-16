@@ -36,7 +36,7 @@ export async function DELETE(req: NextRequest, context: routeParamsProps) {
         const { series_id } = await context.params; // Extrai o ID da série dos parâmetros da rota
 
         // Remove a avaliação da série usando a API
-        await api.movieRatingDelete(
+        await api.tvRatingDelete(
             { id: series_id, language: "pt-BR" },
             setHeaders()
         );
