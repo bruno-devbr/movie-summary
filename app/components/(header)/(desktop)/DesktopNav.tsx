@@ -1,5 +1,3 @@
-"use client";
-
 import { contents } from "@/app/utils/(header)/navContents";
 import { useState } from "react";
 import { NavBtn } from "../NavBtn";

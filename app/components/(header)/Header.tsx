@@ -1,3 +1,5 @@
+"use client";
+
 import { HeaderWrapper } from "./HeaderWrapper";
 import { Logo } from "./Logo";
 
