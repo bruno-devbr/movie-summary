@@ -1,3 +1,4 @@
+import { HeaderWrapper } from "./HeaderWrapper";
 import { Logo } from "./Logo";
 
 export function Header() {
@@ -6,6 +7,7 @@ export function Header() {
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     <Logo />
+                    <HeaderWrapper />
                 </div>
             </div>
         </header>
