@@ -7,4 +7,6 @@ export const UserActionsBodySchema = z.object({
     favorites: z.boolean().optional(),
 });
 
-export const UserRateBodySchema = z.object({ value: z.number() });
+export const UserRateBodySchema = z.object({
+    value: z.number().min(1).max(10),
+});
