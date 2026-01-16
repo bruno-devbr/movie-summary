@@ -1,4 +1,4 @@
-export interface routeParamsProps {
+export interface RouteParamsProps {
     params: {
         list_id: string;
         movie_id: string;

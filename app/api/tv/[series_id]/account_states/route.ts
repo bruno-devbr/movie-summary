@@ -1,9 +1,9 @@
 import { getApi, getError } from "@/app/utils/api/api";
-import { routeParamsProps } from "@/app/utils/types/routeParams";
+import { RouteParamsProps } from "@/app/utils/types/routeParams";
 import { NextRequest, NextResponse } from "next/server";
 
 // Função para obter o estado da conta do usuário em relação a uma série (favorito, avaliação, etc)
-export async function GET(req: NextRequest, context: routeParamsProps) {
+export async function GET(req: NextRequest, context: RouteParamsProps) {
     try {
         const api = getApi(req); // Obtém a instância da API autenticada
         const { series_id } = await context.params; // Extrai o ID da série dos parâmetros da rota

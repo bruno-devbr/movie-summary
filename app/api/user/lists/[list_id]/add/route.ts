@@ -1,10 +1,10 @@
 import { getApi, getError, setHeaders } from "@/app/utils/api/api";
 import { ListBodyActionsSchema } from "@/app/utils/types/listsSchema";
-import { routeParamsProps } from "@/app/utils/types/routeParams";
+import { RouteParamsProps } from "@/app/utils/types/routeParams";
 import { NextRequest, NextResponse } from "next/server";
 
 // Função para tratar requisições POST na rota /api/user/lists/[list_id]/add
-export async function POST(req: NextRequest, context: routeParamsProps) {
+export async function POST(req: NextRequest, context: RouteParamsProps) {
     try {
         // Obtém a instância da API personalizada, passando a requisição
         const api = getApi(req);

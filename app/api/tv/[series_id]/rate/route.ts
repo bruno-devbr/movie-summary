@@ -1,10 +1,10 @@
 import { getApi, getError, setHeaders } from "@/app/utils/api/api";
-import { routeParamsProps } from "@/app/utils/types/routeParams";
+import { RouteParamsProps } from "@/app/utils/types/routeParams";
 import { UserRateBodySchema } from "@/app/utils/types/userActions";
 import { NextRequest, NextResponse } from "next/server";
 
-// Função para atualizar a avaliação do usuário para uma série específico
-export async function POST(req: NextRequest, context: routeParamsProps) {
+// Função para atualizar a avaliação do usuário para uma série específica
+export async function POST(req: NextRequest, context: RouteParamsProps) {
     try {
         const api = getApi(req); // Obtém a instância da API autenticada
 
@@ -29,8 +29,8 @@ export async function POST(req: NextRequest, context: routeParamsProps) {
     }
 }
 
-// Função para remover a avaliação do usuário para uma série específico
-export async function DELETE(req: NextRequest, context: routeParamsProps) {
+// Função para remover a avaliação do usuário para uma série específica
+export async function DELETE(req: NextRequest, context: RouteParamsProps) {
     try {
         const api = getApi(req); // Obtém a instância da API autenticada
         const { series_id } = await context.params; // Extrai o ID da série dos parâmetros da rota

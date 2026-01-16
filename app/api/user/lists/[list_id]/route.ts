@@ -1,9 +1,9 @@
 import { getApi, getError, setHeaders } from "@/app/utils/api/api";
-import { routeParamsProps } from "@/app/utils/types/routeParams";
+import { RouteParamsProps } from "@/app/utils/types/routeParams";
 import { NextRequest, NextResponse } from "next/server";
 
 // Função para tratar requisições GET na rota /api/user/lists/[list_id]
-export async function GET(req: NextRequest, context: routeParamsProps) {
+export async function GET(req: NextRequest, context: RouteParamsProps) {
     try {
         // Obtém a instância da API personalizada, passando a requisição
         const api = getApi(req);
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, context: routeParamsProps) {
 }
 
 // Função para tratar requisições DELETE na rota /api/user/lists/[list_id]
-export async function DELETE(req: NextRequest, context: routeParamsProps) {
+export async function DELETE(req: NextRequest, context: RouteParamsProps) {
     try {
         // Obtém a instância da API personalizada, passando a requisição
         const api = getApi(req);

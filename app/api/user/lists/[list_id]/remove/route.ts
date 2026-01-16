@@ -1,10 +1,10 @@
 import { getApi, getError, setHeaders } from "@/app/utils/api/api";
 import { ListBodyActionsSchema } from "@/app/utils/types/listsSchema";
-import { routeParamsProps } from "@/app/utils/types/routeParams";
+import { RouteParamsProps } from "@/app/utils/types/routeParams";
 import { NextRequest, NextResponse } from "next/server";
 
 // Função para tratar requisições DELETE na rota /api/user/lists/[list_id]/remove
-export async function DELETE(req: NextRequest, context: routeParamsProps) {
+export async function DELETE(req: NextRequest, context: RouteParamsProps) {
     try {
         // Obtém a instância da API personalizada, passando a requisição
         const api = getApi(req);

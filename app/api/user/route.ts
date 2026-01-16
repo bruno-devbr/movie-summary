@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
         const response = NextResponse.json(user, { status: 200 });
 
         // Salva o ID da conta em cookie seguro, httpOnly, válido por 30 dias
-        response.cookies.set("account_id", user.id, {
+        response.cookies.set("account_id", String(user.id), {
             httpOnly: true, // impede acesso via JS do frontend
             maxAge: 60 * 60 * 24 * 30, // duração de 30 dias em segundos
             path: "/", // cookie disponível em todas as rotas

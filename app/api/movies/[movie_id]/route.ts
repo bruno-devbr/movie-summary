@@ -1,9 +1,9 @@
 import { getApi, getError } from "@/app/utils/api/api";
-import { routeParamsProps } from "@/app/utils/types/routeParams";
+import { RouteParamsProps } from "@/app/utils/types/routeParams";
 import { NextRequest, NextResponse } from "next/server";
 
 // Função para obter informações detalhadas de um filme específico
-export async function GET(req: NextRequest, context: routeParamsProps) {
+export async function GET(req: NextRequest, context: RouteParamsProps) {
     try {
         const api = getApi(); // Obtém a instância da API (não requer autenticação)
         const { movie_id } = await context.params; // Extrai o ID do filme dos parâmetros da rota
