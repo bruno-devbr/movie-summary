@@ -1,8 +1,8 @@
 "use client";
 
 import { contents } from "@/app/utils/(header)/navContents";
-import { NavBtn } from "./NavBtn";
 import { useState } from "react";
+import { NavBtn } from "../NavBtn";
 
 export function DesktopNav() {
     const [dropDown, setDropDown] = useState<number | undefined>(undefined);
