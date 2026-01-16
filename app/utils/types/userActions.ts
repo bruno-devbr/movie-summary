@@ -6,3 +6,5 @@ export const UserActionsBodySchema = z.object({
     watchlist: z.boolean().optional(),
     favorites: z.boolean().optional(),
 });
+
+export const UserRateBodySchema = z.object({ value: z.number() });
