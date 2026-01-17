@@ -1,9 +1,14 @@
 import { Loader2, TriangleAlert } from "lucide-react";
 
-export function ConnectBtn() {
+export function ConnectBtn({
+    handleLogin,
+}: {
+    handleLogin: () => Promise<void>;
+}) {
     return (
         <button
             type="button"
+            onClick={handleLogin}
             className="w-full lg:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors whitespace-nowrap flex gap-2 items-center"
         >
             Conectar com TMDB

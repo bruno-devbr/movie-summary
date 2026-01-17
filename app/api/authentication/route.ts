@@ -12,10 +12,7 @@ export async function GET() {
         const rawData = await api.requestToken();
 
         // Cria a resposta JSON com sucesso
-        const response = NextResponse.json(
-            { ok: rawData.success },
-            { status: 200 }
-        );
+        const response = NextResponse.json(rawData, { status: 200 });
 
         // Salva o request_token em cookie seguro, httpOnly e com expiração
         response.cookies.set("request_token", rawData.request_token, {
@@ -44,7 +41,7 @@ export async function POST(req: NextRequest) {
             // Se não tiver token, retorna erro 400
             return NextResponse.json(
                 { error: "request_token inexistente" },
-                { status: 400 }
+                { status: 400 },
             );
         }
 
