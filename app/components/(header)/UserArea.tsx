@@ -15,10 +15,11 @@ import {
 
 import { UserMenuDesktop } from "./(desktop)/UserMenuDesktop";
 import { UserMenuMobile } from "./(mobile)/UserMenuMobile";
+import { useUser } from "@/app/utils/hooks/store";
 
 export function UserArea() {
-    const [load, setLoad] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const { isLoggedIn, setIsLoggedIn } = useUser();
 
     const authSuccessRef = useRef(false);
 
@@ -29,11 +30,11 @@ export function UserArea() {
         }
 
         verifyIsLoggedIn();
-    }, []);
+    }, [setIsLoggedIn]);
 
     const handleLogin = async () => {
         try {
-            setLoad(true);
+            setLoading(true);
 
             const { data } = await axios.get("/api/authentication");
 
@@ -63,7 +64,7 @@ export function UserArea() {
             const timer = setInterval(() => {
                 if (requestPage?.closed) {
                     clearInterval(timer);
-                    setLoad(false);
+                    setLoading(false);
 
                     if (!authSuccessRef.current) {
                         showToast("Não foi possível se conectar", "error");
@@ -84,7 +85,7 @@ export function UserArea() {
                 </>
             ) : (
                 <>
-                    {load ? (
+                    {loading ? (
                         <ConnectBtnLoad />
                     ) : (
                         <ConnectBtn handleLogin={handleLogin} />

@@ -1,3 +1,4 @@
+import { useUser } from "@/app/utils/hooks/store";
 import Image from "next/image";
 
 interface UserBtnProps {
@@ -5,20 +6,26 @@ interface UserBtnProps {
 }
 
 export function UserBtn({ onClick }: UserBtnProps) {
+    const { user } = useUser();
+
     return (
         <button
             className="flex items-center gap-2"
             onClick={onClick}
             type="button"
         >
-            <Image
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=demo"
-                alt="Imagem do perfil do usuario"
-                width={32}
-                height={32}
-                unoptimized
-            />
-            bruno-devbr
+            {user && (
+                <Image
+                    src={user?.avatar}
+                    alt="Imagem do perfil do usuario"
+                    width={32}
+                    height={32}
+                    unoptimized
+                    className="rounded-full"
+                />
+            )}
+
+            {user?.username}
         </button>
     );
 }
