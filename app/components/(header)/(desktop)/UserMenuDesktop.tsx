@@ -25,7 +25,7 @@ export function UserMenuDesktop() {
     }, [open]);
 
     return (
-        <div className="relative" ref={menuRef}>
+        <div className="relative hidden lg:flex" ref={menuRef}>
             <UserBtn onClick={() => setOpen((prev) => !prev)} />
             <UserDropDown open={open} />
         </div>

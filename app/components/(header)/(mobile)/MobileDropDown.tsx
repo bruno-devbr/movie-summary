@@ -1,6 +1,6 @@
 import { SearchComponent } from "../Search";
+import { UserArea } from "../UserArea";
 import { NavMobile } from "./NavMobile";
-import { UserArea } from "./UserArea";
 
 interface MobiledropDownProps {
     isOpen: boolean;

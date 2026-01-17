@@ -7,7 +7,7 @@ export function UserMenuMobile() {
     const [open, setOpen] = useState(false);
 
     return (
-        <>
+        <div className="lg:hidden">
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
@@ -41,6 +41,6 @@ export function UserMenuMobile() {
                     </button>
                 </div>
             )}
-        </>
+        </div>
     );
 }
