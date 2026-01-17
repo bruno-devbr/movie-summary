@@ -1,27 +1,43 @@
-import { UserMenuMobile } from "./(mobile)/UserMenuMobile";
-import { UserMenuDesktop } from "./(desktop)/UserMenuDesktop";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import axios from "axios";
+import Cookies from "js-cookie";
+
+import { RequestTokenSchema } from "@/app/utils/types/requestToken";
+import { showToast } from "@/app/utils/toast";
+
 import {
     ConnectBtn,
     ConnectBtnError,
     ConnectBtnErrorHover,
     ConnectBtnLoad,
 } from "./ConnectBtn";
-import axios from "axios";
-import { RequestTokenSchema } from "@/app/utils/types/requestToken";
+
+import { UserMenuDesktop } from "./(desktop)/UserMenuDesktop";
+import { UserMenuMobile } from "./(mobile)/UserMenuMobile";
 
 export function UserArea() {
     const [load, setLoad] = useState(false);
-    const [error, setError] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const authSuccessRef = useRef(false);
+
+    useEffect(() => {
+        function verifyIsLoggedIn() {
+            const sessionID = Cookies.get("session_id");
+            if (sessionID) setIsLoggedIn(true);
+        }
+
+        verifyIsLoggedIn();
+    }, []);
 
     const handleLogin = async () => {
         try {
             setLoad(true);
 
-            const rawData = await axios
-                .get("/api/authentication")
-                .then((res) => RequestTokenSchema.parse(res.data));
+            const { data } = await axios.get("/api/authentication");
 
+            const rawData = RequestTokenSchema.parse(data);
             const redirectUrl = `${process.env.NEXT_PUBLIC_APLICATION_URL}/approved`;
 
             const requestPage = window.open(
@@ -33,7 +49,12 @@ export function UserArea() {
             const handleMessage = (event) => {
                 if (event.origin !== window.location.origin) return;
 
-                console.log(event.data.type);
+                if (event.data.type === "TMDB_AUTH_SUCCESS") {
+                    authSuccessRef.current = true;
+                    setIsLoggedIn(true);
+                    showToast("Conectado com Sucesso", "success");
+                }
+
                 window.removeEventListener("message", handleMessage);
             };
 
@@ -43,19 +64,32 @@ export function UserArea() {
                 if (requestPage?.closed) {
                     clearInterval(timer);
                     setLoad(false);
+
+                    if (!authSuccessRef.current) {
+                        showToast("Não foi possível se conectar", "error");
+                    }
                 }
             }, 1000);
         } catch {
-            setError(true);
+            showToast("Não foi possível se conectar", "error");
         }
     };
 
     return (
         <>
-            {load ? (
-                <ConnectBtnLoad />
+            {isLoggedIn ? (
+                <>
+                    <UserMenuDesktop />
+                    <UserMenuMobile />
+                </>
             ) : (
-                <ConnectBtn handleLogin={handleLogin} />
+                <>
+                    {load ? (
+                        <ConnectBtnLoad />
+                    ) : (
+                        <ConnectBtn handleLogin={handleLogin} />
+                    )}
+                </>
             )}
         </>
     );

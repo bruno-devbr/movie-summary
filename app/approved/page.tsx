@@ -30,7 +30,10 @@ export default function ApprovedPage() {
                 if (approved) {
                     setLoading(true);
 
-                    const { data } = await axios.post("/api/authentication");
+                    const { data } = await axios.post("/api/authentication", {
+                        request_token: requestToken,
+                    });
+
                     const rawData = RawDataSchema.parse(data);
 
                     if (rawData?.ok) {
