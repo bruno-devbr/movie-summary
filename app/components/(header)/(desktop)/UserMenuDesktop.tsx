@@ -8,6 +8,7 @@ export function UserMenuDesktop() {
 
     useEffect(() => {
         if (!open) return;
+
         function handleClickOutside(event: MouseEvent) {
             if (
                 menuRef.current &&
@@ -16,6 +17,7 @@ export function UserMenuDesktop() {
                 setOpen(false);
             }
         }
+
         document.addEventListener("click", handleClickOutside);
         return () => {
             document.removeEventListener("click", handleClickOutside);
