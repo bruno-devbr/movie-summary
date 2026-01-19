@@ -1,8 +1,14 @@
-import { userContents } from "@/app/utils/(header)/userDropdownContents";
-import { LogOut } from "lucide-react";
+import { userContents } from "@/app/utils/header/userDropdownContents";
+import { LogoutBtn } from "../LogoutBtn";
 import Link from "next/link";
 
-export function UserDropDown({ open }: { open: boolean }) {
+export function UserDropDown({
+    open,
+    setOpen,
+}: {
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}) {
     return (
         <div
             className={`absolute top-full left-0 mt-2 w-48 bg-gray-800 rounded-lg border border-gray-700 transition-all duration-200
@@ -27,13 +33,10 @@ export function UserDropDown({ open }: { open: boolean }) {
                 );
             })}
 
-            <button
-                type="button"
+            <LogoutBtn
                 className="flex p-2 gap-2 items-center hover:bg-gray-700 transition-colors text-red-400 w-full"
-            >
-                <LogOut className="w-5 h-5" />
-                Logout
-            </button>
+                setOpen={setOpen}
+            />
         </div>
     );
 }

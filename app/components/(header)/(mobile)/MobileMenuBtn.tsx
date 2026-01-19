@@ -4,7 +4,7 @@ import { useUser } from "@/app/utils/hooks/store";
 
 interface MobileMenuProps {
     isMobileMenuOpen: boolean;
-    setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsMobileMenuOpen: (value: boolean) => void;
 }
 
 export function MobileMenu({

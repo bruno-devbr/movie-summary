@@ -17,7 +17,7 @@ export const contents: NavProps[] = [
     {
         btnContent: "Séries",
         dropDownContent: [
-            { content: "Populares", link: "/series/poupulares" },
+            { content: "Populares", link: "/series/populares" },
             { content: "Em Exibição Hoje", link: "/series/em_exibicao" },
             {
                 content: "Mais Bem Avaliados",

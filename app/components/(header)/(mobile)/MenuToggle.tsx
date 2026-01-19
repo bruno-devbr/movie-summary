@@ -1,11 +1,11 @@
 import { Menu, X } from "lucide-react";
 
-interface MenuToogleProps {
+interface MenuToggleProps {
     open: boolean;
     setOpen: (value: boolean) => void;
 }
 
-export function MenuToggle({ open, setOpen }: MenuToogleProps) {
+export function MenuToggle({ open, setOpen }: MenuToggleProps) {
     const handleClick = () => {
         setOpen(!open);
     };

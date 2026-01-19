@@ -52,13 +52,12 @@ export function NavBtn({
             </button>
 
             <div
-                className={`absolute top-full left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden
-                    transition-all duration-200
-                    ${
-                        dropDown === index
-                            ? "opacity-100 translate-y-0 pointer-events-auto"
-                            : "opacity-0 -translate-y-2 pointer-events-none"
-                    }`}
+                className={`absolute top-full left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden transition-all duration-200
+                ${
+                    dropDown === index
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 -translate-y-2 pointer-events-none"
+                }`}
             >
                 {dropDownContent.map((c) => (
                     <Link

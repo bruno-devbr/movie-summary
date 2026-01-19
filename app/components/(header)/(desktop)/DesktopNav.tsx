@@ -1,4 +1,4 @@
-import { contents } from "@/app/utils/(header)/navContents";
+import { contents } from "@/app/utils/header/navContents";
 import { useState } from "react";
 import { NavBtn } from "../NavBtn";
 
