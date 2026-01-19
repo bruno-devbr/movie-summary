@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavBtn } from "../NavBtn";
 
 export function DesktopNav() {
-    const [dropDown, setDropDown] = useState<number | undefined>(undefined);
+    const [dropDown, setDropDown] = useState<number | null>(null);
 
     return (
         <div className="hidden lg:flex gap-2">

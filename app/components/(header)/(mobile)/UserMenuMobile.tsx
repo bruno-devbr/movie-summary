@@ -24,19 +24,21 @@ export function UserMenuMobile() {
             {open && (
                 <div className="ml-4 mt-1 space-y-1">
                     {userContents.map((c) => {
-                        const icon = c.icon;
+                        const Icon = c.icon;
 
                         return (
                             <Link
                                 key={c.link}
                                 href={c.link}
+                                onClick={() => setOpen(false)}
                                 className="flex items-center gap-2 px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors"
                             >
-                                <icon.type className="w-4 h-4" />
+                                {Icon && <Icon className="w-4 h-4" />}
                                 {c.text}
                             </Link>
                         );
                     })}
+
                     <LogoutBtn
                         setOpen={setOpen}
                         className="text-red-400 flex items-center gap-2 px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors w-full"

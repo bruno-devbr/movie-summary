@@ -19,7 +19,7 @@ export function UserDropDown({
                 }`}
         >
             {userContents.map((content) => {
-                const icon = content.icon;
+                const Icon = content.icon;
 
                 return (
                     <Link
@@ -27,7 +27,7 @@ export function UserDropDown({
                         href={content.link}
                         className="flex p-2 gap-2 items-center hover:bg-gray-700 transition-colors"
                     >
-                        {icon && <icon.type className="w-5 h-5" />}
+                        {Icon && <Icon className="w-5 h-5" />}
                         {content.text}
                     </Link>
                 );

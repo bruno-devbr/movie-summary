@@ -6,7 +6,7 @@ interface NavBtnProps {
     index: number;
     btnContent: string;
     dropDownContent: DropDownProps[];
-    dropDown: number | undefined;
+    dropDown: number | null;
     setDropDown: (value: number | undefined) => void;
 }
 
@@ -35,9 +35,9 @@ export function NavBtn({
             }
         }
 
-        document.addEventListener("click", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener("click", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dropDown, index, setDropDown]);
 

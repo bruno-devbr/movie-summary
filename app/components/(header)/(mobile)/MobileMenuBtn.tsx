@@ -11,11 +11,11 @@ export function MobileMenu({
     isMobileMenuOpen,
     setIsMobileMenuOpen,
 }: MobileMenuProps) {
-    const { user, isLoggedIn } = useUser();
+    const { user } = useUser();
 
     return (
         <div className="lg:hidden flex gap-2 items-center">
-            {isLoggedIn && user && (
+            {user?.avatar && (
                 <Image
                     src={user?.avatar}
                     alt="Imagem do perfil do usuario"

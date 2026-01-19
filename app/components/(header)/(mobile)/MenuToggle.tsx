@@ -6,17 +6,13 @@ interface MenuToggleProps {
 }
 
 export function MenuToggle({ open, setOpen }: MenuToggleProps) {
-    const handleClick = () => {
-        setOpen(!open);
-    };
-
     return (
-        <button type="button" className="p-2 hover:bg-gray-700 transition-all">
-            {open ? (
-                <X onClick={handleClick} />
-            ) : (
-                <Menu onClick={handleClick} />
-            )}
+        <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="p-2 hover:bg-gray-700 transition-all"
+        >
+            {open ? <X /> : <Menu />}
         </button>
     );
 }

@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 export function NavMobile() {
-    const [dropDown, setDropDown] = useState<number | undefined>(undefined);
+    const [dropDown, setDropDown] = useState<number | null>(null);
 
     return (
         <div className="space-y-2">
@@ -13,9 +13,7 @@ export function NavMobile() {
                     <button
                         type="button"
                         className="flex justify-between w-full hover:bg-gray-700 p-2 rounded-lg transition-colors"
-                        onClick={() =>
-                            setDropDown(dropDown === i ? undefined : i)
-                        }
+                        onClick={() => setDropDown(dropDown === i ? null : i)}
                     >
                         <span>{content.btnContent}</span>
                         <ChevronDown
@@ -28,6 +26,7 @@ export function NavMobile() {
                             {content.dropDownContent.map((c) => (
                                 <Link
                                     href={c.link}
+                                    onClick={() => setDropDown(null)}
                                     className="block px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors"
                                     key={c.link}
                                 >

@@ -1,5 +1,6 @@
 import { startTMDBAuth } from "@/app/utils/login";
 import { ConnectBtn, ConnectBtnLoad } from "./ConnectBtn";
+import { RefObject } from "react";
 
 interface ButtonProps {
     loading: boolean;

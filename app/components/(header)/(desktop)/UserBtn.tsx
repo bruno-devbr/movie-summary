@@ -14,7 +14,7 @@ export function UserBtn({ onClick }: UserBtnProps) {
             onClick={onClick}
             type="button"
         >
-            {user && (
+            {user?.avatar && (
                 <Image
                     src={user?.avatar}
                     alt="Imagem do perfil do usuario"
