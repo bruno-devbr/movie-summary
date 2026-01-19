@@ -4,26 +4,21 @@ import { useEffect, useState } from "react";
 import { MobiledropDown } from "./(mobile)/MobileDropDown";
 import { HeaderWrapper } from "./HeaderWrapper";
 import { Logo } from "./Logo";
-import axios from "axios";
-import { UserSchema } from "@/app/utils/types/User";
 import { useUser } from "@/app/utils/hooks/store";
+import Cookies from "js-cookie";
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { setUser, isLoggedIn } = useUser();
+    const { setIsLoggedIn } = useUser();
 
     useEffect(() => {
-        async function loadUserData() {
-            if (isLoggedIn) {
-                const { data } = await axios.get("/api/user");
-                const rawData = UserSchema.parse(data);
-
-                setUser(rawData);
-            }
+        function verifyIsLoggedIn() {
+            const sessionID = Cookies.get("session_id");
+            if (sessionID) setIsLoggedIn(true);
         }
 
-        loadUserData();
-    }, [setUser, isLoggedIn]);
+        verifyIsLoggedIn();
+    }, [setIsLoggedIn]);
 
     return (
         <header className="sticky top-0 bg-gray-900 border-b border-gray-800">

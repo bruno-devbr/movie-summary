@@ -14,3 +14,5 @@ export const UserSchema = z.object({
     id: z.number(),
     username: z.string(),
 });
+
+export type User = z.infer<typeof UserSchema>;

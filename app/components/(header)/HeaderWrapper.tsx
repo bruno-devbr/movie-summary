@@ -4,7 +4,7 @@ import { MobileMenu } from "./(mobile)/MobileMenuBtn";
 
 interface HeaderWrapperProps {
     isMobileMenuOpen: boolean;
-    setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsMobileMenuOpen: (value: boolean) => void;
 }
 
 export function HeaderWrapper({

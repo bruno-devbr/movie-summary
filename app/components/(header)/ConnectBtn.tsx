@@ -1,4 +1,7 @@
-import { Loader2, TriangleAlert } from "lucide-react";
+import { useUser } from "@/app/utils/hooks/store";
+import { loadUserData } from "@/app/utils/login";
+import { Loader, Loader2, TriangleAlert } from "lucide-react";
+import { useState } from "react";
 
 export function ConnectBtn({
     handleLogin,
@@ -29,19 +32,33 @@ export function ConnectBtnLoad() {
 }
 
 export function ConnectBtnError() {
-    return (
-        <button className="w-full lg:w-auto px-4 py-2 bg-red-600 rounded-lg flex gap-2 items-center transition-colors">
-            <TriangleAlert className="w-5 h-5" />
-            Erro ao carregar dados
-        </button>
-    );
-}
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(true);
+    const [isMouseEnter, setIsMouseEnter] = useState(false);
 
-export function ConnectBtnErrorHover() {
+    const { setUser } = useUser();
+
     return (
-        <button className="w-full lg:w-auto px-4 py-2 bg-red-700 rounded-lg flex gap-2 items-center transition-colors">
-            <TriangleAlert className="w-5 h-5" />
-            Tentar Novamente
-        </button>
+        <>
+            {error && (
+                <button
+                    onMouseEnter={() => setIsMouseEnter(true)}
+                    onMouseLeave={() => setIsMouseEnter(false)}
+                    onClick={() =>
+                        loadUserData({ setError, setUser, setLoading })
+                    }
+                    className={`w-full lg:w-auto px-4 py-2 ${isMouseEnter ? "bg-red-700" : "bg-red-600"} rounded-lg flex gap-2 items-center transition-colors`}
+                >
+                    {loading ? (
+                        <Loader className="w-5 h-5 animate-spin" />
+                    ) : (
+                        <TriangleAlert className="w-5 h-5" />
+                    )}
+                    {isMouseEnter
+                        ? "Tentar Novamente"
+                        : "Erro ao carregar dados"}
+                </button>
+            )}
+        </>
     );
 }
