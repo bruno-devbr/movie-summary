@@ -12,7 +12,7 @@ export default function RootLayout({
         <html lang="en" className="h-full min-h-screen">
             <body className="text-white bg-gray-950 min-h-screen h-full">
                 <Header />
-                <main className="w-full h-full">{children}</main>
+                <main className="w-full h-full py-3">{children}</main>
                 <ToastContainer />
             </body>
         </html>
