@@ -1,13 +1,16 @@
-"use client";
-
 import { MoviesList, MoviesListSchema } from "@/app/utils/types/moviesSchema";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { TitleSection } from "../TitleSection";
+import { MoviesCarrosel } from "./MoviesCarrosel";
 
-export function EmCartaz() {
+interface EmCartazProps {
+    setLoading: (value: boolean) => void;
+    setError: (value: boolean) => void;
+}
+
+export function EmCartaz({ setError, setLoading }: EmCartazProps) {
     const [data, setData] = useState<MoviesList | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function loadData() {
@@ -26,7 +29,13 @@ export function EmCartaz() {
         }
 
         loadData();
-    }, []);
+    }, [setError, setLoading]);
 
-    return null;
+    if (!data) return null;
+    return (
+        <div className="mb-12">
+            <TitleSection link="/movies/em_cartaz" text="Em Cartaz" />
+            <MoviesCarrosel movies={data} />
+        </div>
+    );
 }
