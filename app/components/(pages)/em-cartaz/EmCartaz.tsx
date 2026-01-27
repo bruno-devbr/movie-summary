@@ -17,8 +17,10 @@ export function EmCartaz({ setError, setLoading }: EmCartazProps) {
             try {
                 setLoading(true);
 
-                const { data } = await axios.get("/api/movies/em_cartaz");
-                const rawData = MoviesListSchema.parse(data);
+                const dt = await axios
+                    .get("/api/movies/em_cartaz")
+                    .then((res) => res.data);
+                const rawData = MoviesListSchema.parse(dt);
 
                 setData(rawData);
             } catch {
