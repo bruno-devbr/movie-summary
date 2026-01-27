@@ -3,6 +3,8 @@ import { Background } from "./Background";
 import { Navigation } from "./Navigation";
 import { useEffect, useState, useCallback } from "react";
 import { Timer } from "./Timer";
+import { Content } from "./Content";
+import { Indicators } from "./Indicators";
 
 export function MoviesCarrosel({ movies }: { movies: MoviesList }) {
     const [isAwaysPaused, setIsAwaysPaused] = useState(false);
@@ -36,24 +38,19 @@ export function MoviesCarrosel({ movies }: { movies: MoviesList }) {
     }
 
     useEffect(() => {
-        let interval: NodeJS.Timeout | undefined;
+        if (isPaused) return;
 
-        if (!isPaused) {
-            interval = setInterval(() => {
-                setCount((prev) => {
-                    if (prev === 0) {
-                        handleNext();
-                        return 5;
-                    }
+        const interval = setInterval(() => {
+            setCount((prev) => {
+                if (prev <= 1) {
+                    handleNext();
+                    return 5;
+                }
+                return prev - 1;
+            });
+        }, 1000);
 
-                    return prev - 1;
-                });
-            }, 1000);
-        }
-
-        return () => {
-            if (interval) clearInterval(interval);
-        };
+        return () => clearInterval(interval);
     }, [isPaused, handleNext]);
 
     return (
@@ -64,11 +61,17 @@ export function MoviesCarrosel({ movies }: { movies: MoviesList }) {
         >
             <Background movie={movies.results[index]} />
             <Navigation handleNext={handleNext} handlePrev={handlePrev} />
+            <Content movie={movies.results[index]} />
             <Timer
                 count={count}
                 isPaused={isPaused}
                 setIsAwaysPaused={setIsAwaysPaused}
                 IsAwaysPaused={isAwaysPaused}
+            />
+            <Indicators
+                movies={movies.results}
+                index={index}
+                setIndex={setIndex}
             />
         </div>
     );
