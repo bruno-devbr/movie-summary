@@ -30,7 +30,10 @@ export function Header() {
                         setIsMobileMenuOpen={setIsMobileMenuOpen}
                     />
                 </div>
-                <MobiledropDown isOpen={isMobileMenuOpen} />
+                <MobiledropDown
+                    isOpen={isMobileMenuOpen}
+                    setIsMobileMenuOpen={setIsMobileMenuOpen}
+                />
             </div>
         </header>
     );

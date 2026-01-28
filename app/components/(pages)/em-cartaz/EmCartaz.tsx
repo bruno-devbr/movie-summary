@@ -1,8 +1,8 @@
 import { MoviesList, MoviesListSchema } from "@/app/utils/types/moviesSchema";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TitleSection } from "../TitleSection";
 import { MoviesCarrosel } from "./MoviesCarrosel";
+import { TitleSection } from "../main/TitleSection";
 
 interface EmCartazProps {
     setLoading: (value: boolean) => void;

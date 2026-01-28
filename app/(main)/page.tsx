@@ -5,7 +5,7 @@ import { EmCartaz } from "../components/(pages)/em-cartaz/EmCartaz";
 import Loading from "./loading";
 import Error from "./error";
 import { mainCarrossels } from "../utils/pages/MainCarrossels";
-import { Carrosel } from "../components/(pages)/GlobalCarrossel";
+import { Carrosel } from "../components/(pages)/main/GlobalCarrossel";
 
 export default function Home() {
     const [loading, setLoading] = useState(false);

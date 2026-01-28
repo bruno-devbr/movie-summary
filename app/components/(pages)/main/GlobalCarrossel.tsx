@@ -3,7 +3,7 @@ import { TitleSection } from "./TitleSection";
 import { MoviesList, MoviesListSchema } from "@/app/utils/types/moviesSchema";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { GlobalGrid } from "./Grid";
+import { GlobalGrid } from "../Grid";
 
 interface CarroselProps {
     content: CarrosselTypes;
@@ -34,8 +34,6 @@ export function Carrosel({ content, setLoading, setError }: CarroselProps) {
 
         loadData();
     }, [setError, setLoading, content.apiRoute]);
-
-    console.log(data, content.title);
 
     if (!data) return null;
     return (

@@ -6,7 +6,7 @@ export const contents: NavProps[] = [
         dropDownContent: [
             { content: "Populares", link: "/filmes/populares" },
             { content: "Em Cartaz", link: "/filmes/em_cartaz" },
-            { content: "Próximas Estreias", link: "/filmes/proximas_estreias" },
+            { content: "Próximas Estreias", link: "/filmes/em_breve" },
             {
                 content: "Mais Bem Avaliados",
                 link: "/filmes/mais_bem_avaliados",

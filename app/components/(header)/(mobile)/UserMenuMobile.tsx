@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { LogoutBtn } from "../../(header)/LogoutBtn";
 
-export function UserMenuMobile() {
+interface UserMenuMobileProps {
+    setIsMenuOpen: (value: boolean) => void;
+}
+
+export function UserMenuMobile({ setIsMenuOpen }: UserMenuMobileProps) {
     const [open, setOpen] = useState(false);
     const { user } = useUser();
 
@@ -40,7 +44,7 @@ export function UserMenuMobile() {
                     })}
 
                     <LogoutBtn
-                        setOpen={setOpen}
+                        setOpen={setIsMenuOpen}
                         className="text-red-400 flex items-center gap-2 px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors w-full"
                     />
                 </div>

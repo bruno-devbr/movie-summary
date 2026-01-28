@@ -3,7 +3,11 @@ import { contents } from "@/app/utils/header/navContents";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
-export function NavMobile() {
+interface NavMobileProps {
+    setIsOpen: (value: boolean) => void;
+}
+
+export function NavMobile({ setIsOpen }: NavMobileProps) {
     const [dropDown, setDropDown] = useState<number | null>(null);
 
     return (
@@ -25,9 +29,9 @@ export function NavMobile() {
                         <div className="ml-4 mt-1 space-y-1">
                             {content.dropDownContent.map((c) => (
                                 <Link
-                                    href={c.link}
-                                    onClick={() => setDropDown(null)}
                                     className="block px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors"
+                                    onClick={() => setIsOpen(false)}
+                                    href={c.link}
                                     key={c.link}
                                 >
                                     {c.content}

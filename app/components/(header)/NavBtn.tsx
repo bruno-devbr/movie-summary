@@ -62,6 +62,7 @@ export function NavBtn({
                 {dropDownContent.map((c) => (
                     <Link
                         className="block px-4 py-2 hover:bg-gray-700 transition-colors"
+                        onClick={() => setDropDown(null)}
                         key={c.link}
                         href={c.link}
                     >
