@@ -10,11 +10,10 @@ export async function GET(req: NextRequest) {
 
         // Recupera parâmetros da URL, com valores padrão se não informados
         const page = Number(searchParams.get("page")) || 1;
-        const year = Number(searchParams.get("year")) || undefined;
+        const year = Number(searchParams.get("year")) || null;
         const sort_by = searchParams.get("sort_by") as string;
         const genres = searchParams.get("genres") as number[]; // gêneros dos filmes
-        const vote_average =
-            Number(searchParams.get("vote_average")) || undefined; // nota mínima
+        const vote_average = Number(searchParams.get("vote_average")) || null; // nota mínima
 
         // Faz a requisição para buscar filmes conforme filtros informados
         const rawData = await api.discoverMovie({

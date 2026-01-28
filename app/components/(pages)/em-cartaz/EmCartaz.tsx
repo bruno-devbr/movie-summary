@@ -36,7 +36,7 @@ export function EmCartaz({ setError, setLoading }: EmCartazProps) {
     if (!data) return null;
     return (
         <div className="mb-12">
-            <TitleSection link="/movies/em_cartaz" text="Em Cartaz" />
+            <TitleSection link="/filmes/em_cartaz" text="Em Cartaz" />
             <MoviesCarrosel movies={data} />
         </div>
     );
