@@ -1,32 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import { EmCartaz } from "../components/(pages)/em-cartaz/EmCartaz";
 import Loading from "./loading";
 import Error from "./error";
 import { mainCarrossels } from "../utils/pages/MainCarrossels";
 import { Carrosel } from "../components/(pages)/main/GlobalCarrossel";
+import { useGlobalStates } from "../utils/hooks/store";
 
 export default function Home() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const { loading, error } = useGlobalStates();
 
     return (
         <>
             {loading && <Loading />}
-
             {error && <Error />}
 
             {!error && !loading && (
                 <div className="pb-12">
-                    <EmCartaz setError={setError} setLoading={setLoading} />
+                    <EmCartaz />
                     {mainCarrossels.map((content) => (
-                        <Carrosel
-                            key={content.link}
-                            content={content}
-                            setError={setError}
-                            setLoading={setLoading}
-                        />
+                        <Carrosel key={content.link} content={content} />
                     ))}
                 </div>
             )}

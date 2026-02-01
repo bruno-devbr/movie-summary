@@ -63,3 +63,23 @@ export const useFilters = create<FiltesStoreProps>((set) => ({
     },
     setParams: (value) => set({ params: value }),
 }));
+
+interface GlobalStatesProps {
+    loading: boolean;
+    error: boolean;
+    data: unknown;
+
+    setLoading: (value: boolean) => void;
+    setError: (value: boolean) => void;
+    setData: (value: unknown) => void;
+}
+
+export const useGlobalStates = create<GlobalStatesProps>((set) => ({
+    data: null,
+    error: false,
+    loading: false,
+
+    setLoading: (value) => set({ loading: value }),
+    setError: (value) => set({ error: value }),
+    setData: (value) => set({ data: value }),
+}));

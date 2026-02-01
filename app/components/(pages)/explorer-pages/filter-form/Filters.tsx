@@ -7,10 +7,10 @@ export function Filters() {
     return (
         <>
             {isOpen && (
-                <div className="bg-gray-800 rounded-lg p-6 mb-8">
+                <form className="bg-gray-800 rounded-lg p-6 mb-8">
                     <h3 className="text-xl mb-4">Filtros</h3>
                     <TopWrapper />
-                </div>
+                </form>
             )}
         </>
     );

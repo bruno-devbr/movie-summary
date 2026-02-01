@@ -2,7 +2,7 @@ import { useDropDown, useUser } from "@/app/utils/hooks/store";
 import { handleLogout } from "@/app/utils/login";
 import { LogOut } from "lucide-react";
 
-export function LogoutBtn() {
+export function LogoutBtn({ className }: { classname?: string }) {
     const { setIsMobileMenuOpen } = useDropDown();
     const { setUser, setIsLoggedIn } = useUser();
 

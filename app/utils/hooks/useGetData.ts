@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import { MoviesList, MoviesListSchema } from "../types/moviesSchema";
 import axios from "axios";
+import { useEffect } from "react";
+import { MoviesListSchema } from "../types/moviesSchema";
 import { FiltersProps } from "../types/filters";
+import { useGlobalStates } from "./store";
 
 export function useGetData(endpoint: string, params: FiltersProps) {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const [data, setData] = useState<null | MoviesList>(null);
+    const { setData, setError, setLoading, data } = useGlobalStates();
 
     useEffect(() => {
+        if (data) return;
+
         async function loadData() {
             try {
                 setLoading(true);
@@ -27,7 +28,5 @@ export function useGetData(endpoint: string, params: FiltersProps) {
         }
 
         loadData();
-    }, []);
-
-    return { data, loading, error };
+    }, [setData, setError, setLoading, data, endpoint, params]);
 }

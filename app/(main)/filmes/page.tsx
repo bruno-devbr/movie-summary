@@ -5,11 +5,13 @@ import { useGetData } from "@/app/utils/hooks/useGetData";
 import Loading from "../loading";
 import Error from "../error";
 import { Filters } from "@/app/components/(pages)/explorer-pages/filter-form/Filters";
-import { useFilters } from "@/app/utils/hooks/store";
+import { useFilters, useGlobalStates } from "@/app/utils/hooks/store";
 
 export default function ExplorerMoviesPage() {
     const { params } = useFilters();
-    const { error, loading } = useGetData("/api/movies", params);
+    const { loading, error } = useGlobalStates();
+
+    useGetData("/api/movies", params);
 
     return (
         <>

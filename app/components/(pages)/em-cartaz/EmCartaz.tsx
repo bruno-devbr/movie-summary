@@ -1,37 +1,11 @@
-import { MoviesList, MoviesListSchema } from "@/app/utils/types/moviesSchema";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { MoviesCarrosel } from "./MoviesCarrosel";
 import { TitleSection } from "../main/TitleSection";
+import { useGetData } from "@/app/utils/hooks/useGetData";
+import { useGlobalStates } from "@/app/utils/hooks/store";
 
-interface EmCartazProps {
-    setLoading: (value: boolean) => void;
-    setError: (value: boolean) => void;
-}
-
-export function EmCartaz({ setError, setLoading }: EmCartazProps) {
-    const [data, setData] = useState<MoviesList | null>(null);
-
-    useEffect(() => {
-        async function loadData() {
-            try {
-                setLoading(true);
-
-                const dt = await axios
-                    .get("/api/movies/em_cartaz")
-                    .then((res) => res.data);
-                const rawData = MoviesListSchema.parse(dt);
-
-                setData(rawData);
-            } catch {
-                setError(true);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        loadData();
-    }, [setError, setLoading]);
+export function EmCartaz() {
+    const { data } = useGlobalStates();
+    useGetData("/api/movies/em_cartaz");
 
     if (!data) return null;
     return (
