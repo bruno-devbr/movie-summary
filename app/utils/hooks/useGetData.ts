@@ -29,7 +29,5 @@ export function useGetData(endpoint: string, params: FiltersProps) {
         loadData();
     }, []);
 
-    console.log(data);
-
     return { data, loading, error };
 }
