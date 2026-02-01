@@ -1,18 +1,16 @@
+import { useDropDown } from "@/app/utils/hooks/store";
 import { Menu, X } from "lucide-react";
 
-interface MenuToggleProps {
-    open: boolean;
-    setOpen: (value: boolean) => void;
-}
+export function MenuToggle() {
+    const { isMobileMenuOpen, setIsMobileMenuOpen } = useDropDown();
 
-export function MenuToggle({ open, setOpen }: MenuToggleProps) {
     return (
         <button
             type="button"
-            onClick={() => setOpen(!open)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 hover:bg-gray-700 transition-all"
         >
-            {open ? <X /> : <Menu />}
+            {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
     );
 }

@@ -2,13 +2,11 @@ import { useState } from "react";
 import { contents } from "@/app/utils/header/navContents";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { useDropDown } from "@/app/utils/hooks/store";
 
-interface NavMobileProps {
-    setIsOpen: (value: boolean) => void;
-}
-
-export function NavMobile({ setIsOpen }: NavMobileProps) {
+export function NavMobile() {
     const [dropDown, setDropDown] = useState<number | null>(null);
+    const { setIsMobileMenuOpen } = useDropDown();
 
     return (
         <div className="space-y-2">
@@ -30,7 +28,7 @@ export function NavMobile({ setIsOpen }: NavMobileProps) {
                             {content.dropDownContent.map((c) => (
                                 <Link
                                     className="block px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors"
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                     href={c.link}
                                     key={c.link}
                                 >

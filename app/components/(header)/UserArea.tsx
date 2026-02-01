@@ -4,11 +4,7 @@ import { useUser } from "@/app/utils/hooks/store";
 import { Buttons } from "./Buttons";
 import { UserMenus } from "./UserMenus";
 
-interface UserAreaProps {
-    setIsOpen: (value: boolean) => void;
-}
-
-export function UserArea({ setIsOpen }: UserAreaProps) {
+export function UserArea() {
     const [loading, setLoading] = useState(false);
     const { isLoggedIn, setIsLoggedIn } = useUser();
 
@@ -17,7 +13,7 @@ export function UserArea({ setIsOpen }: UserAreaProps) {
     return (
         <>
             {isLoggedIn ? (
-                <UserMenus setIsOpen={setIsOpen} />
+                <UserMenus />
             ) : (
                 <Buttons
                     authSuccessRef={authSuccessRef}

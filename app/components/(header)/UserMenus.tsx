@@ -5,11 +5,7 @@ import { useUser } from "@/app/utils/hooks/store";
 import { ConnectBtnError } from "./ConnectBtn";
 import { loadUserData } from "@/app/utils/login";
 
-interface UserMenusProps {
-    setIsOpen: (value: boolean) => void;
-}
-
-export function UserMenus({ setIsOpen }: UserMenusProps) {
+export function UserMenus() {
     const [error, setError] = useState(false);
     const { isLoggedIn, setUser } = useUser();
 
@@ -28,7 +24,7 @@ export function UserMenus({ setIsOpen }: UserMenusProps) {
             ) : (
                 <>
                     <UserMenuDesktop />
-                    <UserMenuMobile setIsMenuOpen={setIsOpen} />
+                    <UserMenuMobile />
                 </>
             )}
         </>
