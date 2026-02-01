@@ -4,12 +4,13 @@ import { Title } from "@/app/components/(pages)/explorer-pages/TitleComponent";
 import Loading from "../../loading";
 import { useGetData } from "@/app/utils/hooks/useGetData";
 import Error from "../../error";
-import { useState } from "react";
+import { useFilters } from "@/app/utils/hooks/store";
 
 export default function BestRatePage() {
-    const [page, setPage] = useState(1);
-
-    const { data, error, loading } = useGetData("/api/movies", { page });
+    const { page } = useFilters();
+    const { error, loading } = useGetData("/api/movies/mais_bem_avaliados", {
+        page,
+    });
 
     return (
         <>

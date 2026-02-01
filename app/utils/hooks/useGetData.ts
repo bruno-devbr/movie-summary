@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { MoviesList, MoviesListSchema } from "../types/moviesSchema";
 import axios from "axios";
+import { FiltersProps } from "../types/filters";
 
-type paramsType = {
-    page: number;
-    year: number | null;
-};
-
-export function useGetData(endpoint: string, params: paramsType) {
+export function useGetData(endpoint: string, params: FiltersProps) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [data, setData] = useState<null | MoviesList>(null);
@@ -20,8 +16,8 @@ export function useGetData(endpoint: string, params: paramsType) {
                 const dt = await axios
                     .get(endpoint, { params })
                     .then((res) => res.data);
-                const rawData = MoviesListSchema.parse(dt);
 
+                const rawData = MoviesListSchema.parse(dt);
                 setData(rawData);
             } catch {
                 setError(true);

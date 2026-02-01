@@ -2,14 +2,13 @@
 
 import { Title } from "@/app/components/(pages)/explorer-pages/TitleComponent";
 import { useGetData } from "@/app/utils/hooks/useGetData";
-import { useState } from "react";
 import Loading from "../../loading";
 import Error from "../../error";
+import { useFilters } from "@/app/utils/hooks/store";
 
 export default function EnCartazPage() {
-    const [page, setPage] = useState(1);
-
-    const { data, error, loading } = useGetData("/api/movies", { page });
+    const { page } = useFilters();
+    const { error, loading } = useGetData("/api/movies/em_cartaz", { page });
 
     return (
         <>

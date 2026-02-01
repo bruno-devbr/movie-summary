@@ -2,15 +2,23 @@
 
 import { Title } from "@/app/components/(pages)/explorer-pages/TitleComponent";
 import { useGetData } from "@/app/utils/hooks/useGetData";
-import { useState } from "react";
 import Loading from "../loading";
 import Error from "../error";
+import { useFilters } from "@/app/utils/hooks/store";
+import { FiltersProps } from "@/app/utils/types/filters";
 
 export default function ExplorerMoviesPage() {
-    const [page, setPage] = useState(1);
-    const [year, setYear] = useState<number | null>(null);
+    const { genres, page, sort_by, vote_average, year } = useFilters();
 
-    const { data, error, loading } = useGetData("/api/movies", { page, year });
+    const params: FiltersProps = {
+        genres,
+        page,
+        sort_by,
+        vote_average,
+        year,
+    };
+
+    const { error, loading } = useGetData("/api/movies", params);
 
     return (
         <>
