@@ -45,6 +45,17 @@ export async function startTMDBAuth({
         "width=650,height=600,top=100,left=100",
     );
 
+    if (!requestPage) {
+        setLoading(false);
+        return;
+    }
+
+    const cleanup = () => {
+        window.removeEventListener("message", messageHandler);
+        clearInterval(timer);
+        setLoading(false);
+    };
+
     const messageHandler = (event: MessageEvent) => {
         if (event.origin !== window.location.origin) return;
 
@@ -52,20 +63,19 @@ export async function startTMDBAuth({
             authSuccessRef.current = true;
             setIsLoggedIn(true);
             showToast("Conectado com Sucesso", "success");
+            cleanup();
+        } else if (event.data.type === "TMDB_AUTH_ERROR") {
+            cleanup();
         }
-
-        window.removeEventListener("message", messageHandler);
     };
 
     window.addEventListener("message", messageHandler);
 
     const timer = setInterval(() => {
-        if (requestPage?.closed) {
-            clearInterval(timer);
-            setLoading(false); // encerra o loading sempre que popup fechar
-            window.removeEventListener("message", messageHandler);
+        if (requestPage.closed) {
+            cleanup();
         }
-    }, 1000);
+    }, 500);
 }
 
 export async function loadUserData({
