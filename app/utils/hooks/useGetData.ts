@@ -28,5 +28,6 @@ export function useGetData(endpoint: string, params: FiltersProps) {
         }
 
         loadData();
-    }, [setData, setError, setLoading, data, endpoint, params]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 }
