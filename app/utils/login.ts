@@ -62,13 +62,8 @@ export async function startTMDBAuth({
     const timer = setInterval(() => {
         if (requestPage?.closed) {
             clearInterval(timer);
-            setLoading(false);
-
+            setLoading(false); // encerra o loading sempre que popup fechar
             window.removeEventListener("message", messageHandler);
-
-            if (!authSuccessRef.current) {
-                showToast("Não foi possível se conectar", "error");
-            }
         }
     }, 1000);
 }

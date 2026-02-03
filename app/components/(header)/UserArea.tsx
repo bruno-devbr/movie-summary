@@ -6,7 +6,7 @@ import { UserMenus } from "./UserMenus";
 
 export function UserArea() {
     const [loading, setLoading] = useState(false);
-    const { isLoggedIn, setIsLoggedIn } = useUser();
+    const { isLoggedIn } = useUser();
 
     const authSuccessRef = useRef(false);
 
@@ -18,7 +18,6 @@ export function UserArea() {
                 <Buttons
                     authSuccessRef={authSuccessRef}
                     loading={loading}
-                    setIsLoggedIn={setIsLoggedIn}
                     setLoading={setLoading}
                 />
             )}

@@ -18,12 +18,16 @@ export const useUser = create<UserProps>((set) => ({
 
 interface DropDownProps {
     isMobileMenuOpen: boolean;
+    DesktopMenu: number | null;
     setIsMobileMenuOpen: (value: boolean) => void;
+    setDesktopMenu: (value: number | null) => void;
 }
 
 export const useDropDown = create<DropDownProps>((set) => ({
     isMobileMenuOpen: false,
+    isDesktopMenuOpen: null,
     setIsMobileMenuOpen: (value) => set({ isMobileMenuOpen: value }),
+    setDesktopMenu: (value) => set({ DesktopMenu: value }),
 }));
 
 interface FiltesStoreProps extends FiltersProps {
