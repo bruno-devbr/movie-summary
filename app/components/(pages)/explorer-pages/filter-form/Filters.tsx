@@ -1,6 +1,7 @@
 import { useFilters } from "@/app/utils/hooks/store";
 import { TopWrapper } from "./TopWrapper";
 import { MiddleWrapper } from "./MidleWrapper";
+import { FormButtons } from "./FormButtons";
 
 export function Filters() {
     const { isOpen } = useFilters();
@@ -12,6 +13,7 @@ export function Filters() {
             <h3 className="text-xl mb-4">Filtros</h3>
             <TopWrapper />
             <MiddleWrapper />
+            <FormButtons />
         </form>
     );
 }

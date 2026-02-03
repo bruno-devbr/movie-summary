@@ -20,8 +20,6 @@ export default function PopularMoviesPage() {
             {!error && !loading && (
                 <div className="container mx-auto px-4 py-12">
                     <Title text="Próximas Estreias" />
-                    {/* teste*/}
-                    {/* teste*/}
                 </div>
             )}
         </>

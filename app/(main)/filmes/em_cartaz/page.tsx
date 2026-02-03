@@ -20,8 +20,6 @@ export default function EnCartazPage() {
             {!error && !loading && (
                 <div className="container mx-auto px-4 py-12">
                     <Title text="Filmes em Cartaz" />
-                    {/* teste*/}
-                    {/* teste*/}
                 </div>
             )}
         </>

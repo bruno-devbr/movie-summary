@@ -8,10 +8,8 @@ export enum SORT_BY {
 }
 
 export interface FiltersProps {
-    page: number;
     year: number | null;
     sort_by: SORT_BY;
     genres: number[] | null;
     vote_average: number;
-    isOpen: boolean;
 }

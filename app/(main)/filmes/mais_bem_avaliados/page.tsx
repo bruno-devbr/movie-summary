@@ -20,8 +20,6 @@ export default function BestRatePage() {
             {!error && !loading && (
                 <div className="container mx-auto px-4 py-12">
                     <Title text="Filmes Mais Bem Avaliados" />
-                    {/* teste*/}
-                    {/* teste*/}
                 </div>
             )}
         </>

@@ -34,7 +34,7 @@ interface FiltesStoreProps extends FiltersProps {
     setPage: (value: number) => void;
     setYear: (value: number | null) => void;
     setSort: (value: SORT_BY) => void;
-    setGenres: (value: number[] | null) => void;
+    setGenres: (value: number[]) => void;
     setVote: (value: number) => void;
     setIsOpen: (value: boolean) => void;
 
@@ -58,12 +58,10 @@ export const useFilters = create<FiltesStoreProps>((set) => ({
     setIsOpen: (value) => set({ isOpen: value }),
 
     params: {
-        page: 1,
         year: null,
         sort_by: SORT_BY.POPULARITY_DESC,
         genres: [],
         vote_average: 0,
-        isOpen: false,
     },
     setParams: (value) => set({ params: value }),
 }));
