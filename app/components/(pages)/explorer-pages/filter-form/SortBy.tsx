@@ -2,7 +2,7 @@ import { useFilters } from "@/app/utils/hooks/store";
 import { sortBy_contents } from "@/app/utils/pages/sortBy_contents";
 
 export function SortBy() {
-    const { setSort } = useFilters();
+    const { setSort, sort_by } = useFilters();
 
     return (
         <div>
@@ -15,14 +15,12 @@ export function SortBy() {
 
             <select
                 name="sort_by"
+                value={sort_by}
+                onChange={(e) => setSort(e.target.value)}
                 className="w-full px-3 py-2 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
             >
                 {sortBy_contents.map((content) => (
-                    <option
-                        onClick={() => setSort(content.value)}
-                        value={content.value}
-                        key={content.value}
-                    >
+                    <option value={content.value} key={content.value}>
                         {content.text}
                     </option>
                 ))}

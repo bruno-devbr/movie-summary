@@ -5,26 +5,27 @@ export function ClearBtn() {
     const filters = useFilters();
 
     const params: FiltersProps = {
-        genres: filters.genres,
-        sort_by: filters.sort_by,
-        vote_average: filters.vote_average,
-        year: filters.year,
+        genres: [],
+        sort_by: SORT_BY.POPULARITY_DESC,
+        vote_average: 0,
+        year: null,
     };
 
     const handleClick = (e: FormEvent) => {
         e.preventDefault();
 
-        filters.setGenres([]);
-        filters.setSort(SORT_BY.POPULARITY_DESC);
-        filters.setVote(0);
-        filters.setYear(null);
+        filters.setGenres(params.genres);
+        filters.setSort(params.sort_by);
+        filters.setVote(params.vote_average);
+        filters.setYear(params.year);
+
         filters.setParams(params);
         filters.setIsOpen(false);
     };
 
     return (
         <button
-            type="reset"
+            type="submit"
             onClick={handleClick}
             className="bg-gray-700 py-2 px-6 rounded-lg hover:bg-gray-600 transition-colors"
         >

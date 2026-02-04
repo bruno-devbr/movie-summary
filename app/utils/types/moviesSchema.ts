@@ -28,9 +28,7 @@ export const MoviesListSchema = z
                     .string()
                     .nullable()
                     .transform((str) =>
-                        str
-                            ? `https://image.tmdb.org/t/p/w500${str}`
-                            : "https://via.placeholder.com/500x750?text=No+Image",
+                        str ? `https://image.tmdb.org/t/p/w500${str}` : null,
                     ),
             }),
         ),
