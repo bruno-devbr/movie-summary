@@ -3,7 +3,7 @@ import { UserMenuDesktop } from "./(desktop)/UserMenuDesktop";
 import { UserMenuMobile } from "./(mobile)/UserMenuMobile";
 import { useUser } from "@/app/utils/hooks/store";
 import { ConnectBtnError } from "./ConnectBtn";
-import { loadUserData } from "@/app/utils/login";
+import { loadUserData } from "@/app/utils/login/login";
 
 export function UserMenus() {
     const [error, setError] = useState(false);

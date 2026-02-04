@@ -1,4 +1,4 @@
-import { startTMDBAuth } from "@/app/utils/login";
+import { startTMDBAuth } from "@/app/utils/login/login";
 import { ConnectBtn, ConnectBtnLoad } from "./ConnectBtn";
 import { RefObject } from "react";
 import { useUser } from "@/app/utils/hooks/store";

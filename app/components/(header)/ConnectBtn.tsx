@@ -1,5 +1,5 @@
 import { useUser } from "@/app/utils/hooks/store";
-import { loadUserData } from "@/app/utils/login";
+import { loadUserData } from "@/app/utils/login/login";
 import { Loader, Loader2, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 

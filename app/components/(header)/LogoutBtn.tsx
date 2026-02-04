@@ -1,5 +1,5 @@
 import { useDropDown, useUser } from "@/app/utils/hooks/store";
-import { handleLogout } from "@/app/utils/login";
+import { handleLogout } from "@/app/utils/login/login";
 import { LogOut } from "lucide-react";
 
 export function LogoutBtn({ className }: { classname?: string }) {

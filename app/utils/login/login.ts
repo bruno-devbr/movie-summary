@@ -1,8 +1,11 @@
 import axios from "axios";
-import { RawDataSchema } from "./types/rawData";
-import { User, UserSchema } from "./types/User";
-import { showToast } from "./toast";
-import { RequestTokenSchema } from "./types/requestToken";
+import { RawDataSchema } from "../types/rawData";
+import { User, UserSchema } from "../types/User";
+import { showToast } from "../toast";
+import { RequestTokenSchema } from "../types/requestToken";
+import { getRequestPage } from "./requestPage";
+import { cleanUp } from "./cleanUp";
+import { messageHandler } from "./handleMessage";
 
 interface LoginProps {
     setUser: (user: User | null) => void;
@@ -38,42 +41,26 @@ export async function startTMDBAuth({
     const rawData = RequestTokenSchema.parse(data);
 
     const redirectUrl = `${process.env.NEXT_PUBLIC_APLICATION_URL}/approved`;
-
-    const requestPage = window.open(
-        `https://www.themoviedb.org/authenticate/${rawData.request_token}?redirect_to=${redirectUrl}`,
-        "the movie db",
-        "width=650,height=600,top=100,left=100",
-    );
+    const requestPage = getRequestPage(rawData.request_token, redirectUrl);
 
     if (!requestPage) {
         setLoading(false);
         return;
     }
 
-    const cleanup = () => {
-        window.removeEventListener("message", messageHandler);
-        clearInterval(timer);
-        setLoading(false);
-    };
-
-    const messageHandler = (event: MessageEvent) => {
-        if (event.origin !== window.location.origin) return;
-
-        if (event.data.type === "TMDB_AUTH_SUCCESS") {
-            authSuccessRef.current = true;
-            setIsLoggedIn(true);
-            showToast("Conectado com Sucesso", "success");
-            cleanup();
-        } else if (event.data.type === "TMDB_AUTH_ERROR") {
-            cleanup();
-        }
-    };
-
-    window.addEventListener("message", messageHandler);
+    window.addEventListener("message", (event) =>
+        messageHandler({
+            authSuccessRef,
+            event,
+            setIsLoggedIn,
+            setLoading,
+            timer,
+        }),
+    );
 
     const timer = setInterval(() => {
         if (requestPage.closed) {
-            cleanup();
+            cleanUp({ setLoading, timer });
         }
     }, 500);
 }
