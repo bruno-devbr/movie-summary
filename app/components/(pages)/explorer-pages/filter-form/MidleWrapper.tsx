@@ -1,4 +1,5 @@
-import { useFilters, useGlobalStates } from "@/app/utils/hooks/store";
+import { useFilters } from "@/app/utils/hooks/store";
+import { useGetData } from "@/app/utils/hooks/useGetData";
 import { GenresList, GenresSchema } from "@/app/utils/types/genres";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -6,7 +7,7 @@ import { useEffect, useState } from "react";
 export function MiddleWrapper() {
     const [data, setData] = useState<GenresList | null>(null);
 
-    const { setError } = useGlobalStates();
+    const { setError } = useGetData();
     const { setGenres, genres } = useFilters();
 
     useEffect(() => {

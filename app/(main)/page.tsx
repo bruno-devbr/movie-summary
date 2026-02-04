@@ -5,10 +5,10 @@ import Loading from "./loading";
 import Error from "./error";
 import { mainCarrossels } from "../utils/pages/MainCarrossels";
 import { Carrosel } from "../components/(pages)/main/GlobalCarrossel";
-import { useGlobalStates } from "../utils/hooks/store";
+import { useGetData } from "../utils/hooks/useGetData";
 
 export default function Home() {
-    const { loading, error } = useGlobalStates();
+    const { loading, error } = useGetData();
 
     return (
         <>

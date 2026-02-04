@@ -1,33 +1,37 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { MoviesListSchema } from "../types/moviesSchema";
+import { useEffect, useState } from "react";
+import { MoviesList, MoviesListSchema } from "../types/moviesSchema";
 import { FiltersProps } from "../types/filters";
-import { useGlobalStates } from "./store";
 
-export function useGetData(endpoint: string, params: FiltersProps) {
-    const { setData, setError, setLoading, data } = useGlobalStates();
+export function useGetData(endpoint?: string, params?: FiltersProps) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [data, setData] = useState<MoviesList | null>(null);
+
+    const paramsKey = JSON.stringify(params);
 
     useEffect(() => {
-        if (data) return;
+        if (!endpoint) return;
 
-        async function loadData() {
+        const loadData = async () => {
             try {
                 setLoading(true);
-
+                setError(false);
                 const dt = await axios
                     .get(endpoint, { params })
                     .then((res) => res.data);
-
-                const rawData = MoviesListSchema.parse(dt);
-                setData(rawData);
+                setData(MoviesListSchema.parse(dt));
             } catch {
                 setError(true);
             } finally {
                 setLoading(false);
             }
-        }
+        };
 
         loadData();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [endpoint, paramsKey]);
+
+    return { data, loading, error, setError };
 }

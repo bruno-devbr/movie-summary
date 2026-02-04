@@ -2,15 +2,13 @@ import { CarrosselTypes } from "@/app/utils/types/CarrosselTypes";
 import { TitleSection } from "./TitleSection";
 import { GlobalGrid } from "../Grid";
 import { useGetData } from "@/app/utils/hooks/useGetData";
-import { useGlobalStates } from "@/app/utils/hooks/store";
 
 interface CarroselProps {
     content: CarrosselTypes;
 }
 
 export function Carrosel({ content }: CarroselProps) {
-    const { data } = useGlobalStates();
-    useGetData(content.apiRoute);
+    const { data } = useGetData(content.apiRoute, {});
 
     if (!data) return null;
     return (
