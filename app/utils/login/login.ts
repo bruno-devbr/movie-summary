@@ -12,6 +12,7 @@ interface LoginProps {
     setIsLoggedIn: (value: boolean) => void;
     setLoading?: (value: boolean) => void;
     setError: (value: boolean) => void;
+    setIsMobileMenuOpen?: (value: boolean) => void;
     authSuccessRef: RefObject<boolean>;
 }
 
@@ -48,19 +49,24 @@ export async function startTMDBAuth({
         return;
     }
 
-    window.addEventListener("message", (event) =>
+    function handler(event: MessageEvent) {
         messageHandler({
             authSuccessRef,
             event,
             setIsLoggedIn,
             setLoading,
             timer,
-        }),
-    );
+        });
+
+        window.removeEventListener("message", handler);
+    }
+
+    window.addEventListener("message", handler);
 
     const timer = setInterval(() => {
         if (requestPage.closed) {
             cleanUp({ setLoading, timer });
+            window.removeEventListener("message", handler); // Remove se fechar janela
         }
     }, 500);
 }
@@ -69,16 +75,20 @@ export async function loadUserData({
     setUser,
     setError,
     setLoading,
+    setIsMobileMenuOpen,
 }: LoginProps) {
     try {
+        setError(false);
         if (setLoading) setLoading(true);
 
         const { data } = await axios.get("/api/user");
         const rawData = UserSchema.parse(data);
 
         setUser(rawData);
+        if (setIsMobileMenuOpen) setIsMobileMenuOpen(false);
     } catch {
         setError(true);
+        if (setIsMobileMenuOpen) setIsMobileMenuOpen(true);
     } finally {
         if (setLoading) setLoading(false);
     }
