@@ -56,7 +56,10 @@ export function NavBtn({ btnContent, dropDownContent, index }: NavBtnProps) {
                 {dropDownContent.map((c) => (
                     <Link
                         className="block px-4 py-2 hover:bg-gray-700 transition-colors"
-                        onClick={() => setDesktopMenu(null)}
+                        onClick={() => {
+                            setDesktopMenu(null);
+                            window.scroll(0, 0);
+                        }}
                         key={c.link}
                         href={c.link}
                     >
