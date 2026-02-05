@@ -1,13 +1,12 @@
+import { useDropDown } from "@/app/utils/hooks/store";
 import { SearchComponent } from "../Search";
 import { UserArea } from "../UserArea";
 import { NavMobile } from "./NavMobile";
 
-interface MobiledropDownProps {
-    isOpen: boolean;
-}
+export function MobiledropDown() {
+    const { isMobileMenuOpen } = useDropDown();
 
-export function MobiledropDown({ isOpen }: MobiledropDownProps) {
-    if (!isOpen) return null;
+    if (!isMobileMenuOpen) return null;
 
     return (
         <div className="lg:hidden border-t border-gray-800 py-4">

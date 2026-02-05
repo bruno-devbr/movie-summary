@@ -2,15 +2,7 @@ import Image from "next/image";
 import { MenuToggle } from "./MenuToggle";
 import { useUser } from "@/app/utils/hooks/store";
 
-interface MobileMenuProps {
-    isMobileMenuOpen: boolean;
-    setIsMobileMenuOpen: (value: boolean) => void;
-}
-
-export function MobileMenu({
-    isMobileMenuOpen,
-    setIsMobileMenuOpen,
-}: MobileMenuProps) {
+export function MobileMenu() {
     const { user } = useUser();
 
     return (
@@ -26,7 +18,7 @@ export function MobileMenu({
                 />
             )}
 
-            <MenuToggle open={isMobileMenuOpen} setOpen={setIsMobileMenuOpen} />
+            <MenuToggle />
         </div>
     );
 }

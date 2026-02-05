@@ -25,6 +25,7 @@ export function UserDropDown({
                     <Link
                         key={content.link}
                         href={content.link}
+                        onClick={() => setOpen(false)}
                         className="flex p-2 gap-2 items-center hover:bg-gray-700 transition-colors"
                     >
                         {Icon && <Icon className="w-5 h-5" />}

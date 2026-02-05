@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 
 export function MoviePoster({ movie }: { movie: Movie }) {
     return (
-        <Link href={`/movies/${movie.id}`} className="group">
+        <Link href={`/filmes/${movie.id}`} className="group">
             <div className="relative aspect-2/3 rounded-lg overflow-hidden bg-gray-800">
                 {movie.poster_path ? (
                     <Image

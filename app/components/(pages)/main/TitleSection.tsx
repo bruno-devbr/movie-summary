@@ -9,6 +9,7 @@ export function TitleSection({ text, link }: { text: string; link: string }) {
 
                 <Link
                     className="text-blue-500 hover:text-blue-400 flex items-center gap-1"
+                    onClick={() => window.scroll(0, 0)}
                     href={link}
                 >
                     Ver Todos <ChevronRight />

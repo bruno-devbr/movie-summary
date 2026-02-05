@@ -39,10 +39,7 @@ export function UserMenuMobile() {
                         );
                     })}
 
-                    <LogoutBtn
-                        setOpen={setOpen}
-                        className="text-red-400 flex items-center gap-2 px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors w-full"
-                    />
+                    <LogoutBtn className="text-red-400 flex items-center gap-2 px-4 py-2 hover:bg-gray-800 rounded-lg transition-colors w-full" />
                 </div>
             )}
         </div>

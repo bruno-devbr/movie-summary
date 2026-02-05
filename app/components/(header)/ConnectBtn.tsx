@@ -1,5 +1,5 @@
-import { useUser } from "@/app/utils/hooks/store";
-import { loadUserData } from "@/app/utils/login";
+import { useDropDown, useUser } from "@/app/utils/hooks/store";
+import { loadUserData } from "@/app/utils/login/login";
 import { Loader, Loader2, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 
@@ -8,10 +8,15 @@ export function ConnectBtn({
 }: {
     handleLogin: () => Promise<void>;
 }) {
+    const { setIsMobileMenuOpen } = useDropDown();
+
     return (
         <button
             type="button"
-            onClick={handleLogin}
+            onClick={() => {
+                handleLogin();
+                setIsMobileMenuOpen(false);
+            }}
             className="w-full lg:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors whitespace-nowrap flex gap-2 items-center"
         >
             Conectar com TMDB
@@ -31,16 +36,29 @@ export function ConnectBtnLoad() {
     );
 }
 
-export function ConnectBtnError() {
+export function ConnectBtnError({
+    setError,
+}: {
+    setError: (value: boolean) => void;
+}) {
     const [loading, setLoading] = useState(false);
     const [isMouseEnter, setIsMouseEnter] = useState(false);
+
+    const { setIsMobileMenuOpen } = useDropDown();
     const { setUser } = useUser();
 
     return (
         <button
             onMouseEnter={() => setIsMouseEnter(true)}
             onMouseLeave={() => setIsMouseEnter(false)}
-            onClick={() => loadUserData({ setUser, setLoading })}
+            onClick={() => {
+                loadUserData({
+                    setUser,
+                    setLoading,
+                    setError,
+                    setIsMobileMenuOpen,
+                });
+            }}
             className={`w-full lg:w-auto px-4 py-2 ${
                 isMouseEnter ? "bg-red-700" : "bg-red-600"
             } rounded-lg flex gap-2 items-center transition-colors`}

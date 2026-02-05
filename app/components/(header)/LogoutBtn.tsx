@@ -1,13 +1,9 @@
-import { useUser } from "@/app/utils/hooks/store";
-import { handleLogout } from "@/app/utils/login";
+import { useDropDown, useUser } from "@/app/utils/hooks/store";
+import { handleLogout } from "@/app/utils/login/login";
 import { LogOut } from "lucide-react";
 
-type LogoutBtnProps = {
-    setOpen: (value: boolean) => void;
-    className?: string;
-};
-
-export function LogoutBtn({ setOpen, className }: LogoutBtnProps) {
+export function LogoutBtn({ className }: { classname?: string }) {
+    const { setIsMobileMenuOpen } = useDropDown();
     const { setUser, setIsLoggedIn } = useUser();
 
     return (
@@ -16,7 +12,7 @@ export function LogoutBtn({ setOpen, className }: LogoutBtnProps) {
             className={className}
             onClick={() => {
                 handleLogout({ setUser, setIsLoggedIn });
-                setOpen(false);
+                setIsMobileMenuOpen(false);
             }}
         >
             <LogOut className="w-5 h-5" />

@@ -1,14 +1,18 @@
 import axios from "axios";
-import { RawDataSchema } from "./types/rawData";
-import { User, UserSchema } from "./types/User";
-import { showToast } from "./toast";
-import { RequestTokenSchema } from "./types/requestToken";
+import { RawDataSchema } from "../types/rawData";
+import { User, UserSchema } from "../types/User";
+import { showToast } from "../toast";
+import { RequestTokenSchema } from "../types/requestToken";
+import { getRequestPage } from "./requestPage";
+import { cleanUp } from "./cleanUp";
+import { messageHandler } from "./handleMessage";
 
 interface LoginProps {
     setUser: (user: User | null) => void;
     setIsLoggedIn: (value: boolean) => void;
     setLoading?: (value: boolean) => void;
     setError: (value: boolean) => void;
+    setIsMobileMenuOpen?: (value: boolean) => void;
     authSuccessRef: RefObject<boolean>;
 }
 
@@ -38,55 +42,53 @@ export async function startTMDBAuth({
     const rawData = RequestTokenSchema.parse(data);
 
     const redirectUrl = `${process.env.NEXT_PUBLIC_APLICATION_URL}/approved`;
+    const requestPage = getRequestPage(rawData.request_token, redirectUrl);
 
-    const requestPage = window.open(
-        `https://www.themoviedb.org/authenticate/${rawData.request_token}?redirect_to=${redirectUrl}`,
-        "the movie db",
-        "width=650,height=600,top=100,left=100",
-    );
+    if (!requestPage) {
+        setLoading(false);
+        return;
+    }
 
-    const messageHandler = (event: MessageEvent) => {
-        if (event.origin !== window.location.origin) return;
+    function handler(event: MessageEvent) {
+        messageHandler({
+            authSuccessRef,
+            event,
+            setIsLoggedIn,
+            setLoading,
+            timer,
+        });
 
-        if (event.data.type === "TMDB_AUTH_SUCCESS") {
-            authSuccessRef.current = true;
-            setIsLoggedIn(true);
-            showToast("Conectado com Sucesso", "success");
-        }
+        window.removeEventListener("message", handler);
+    }
 
-        window.removeEventListener("message", messageHandler);
-    };
-
-    window.addEventListener("message", messageHandler);
+    window.addEventListener("message", handler);
 
     const timer = setInterval(() => {
-        if (requestPage?.closed) {
-            clearInterval(timer);
-            setLoading(false);
-
-            window.removeEventListener("message", messageHandler);
-
-            if (!authSuccessRef.current) {
-                showToast("Não foi possível se conectar", "error");
-            }
+        if (requestPage.closed) {
+            cleanUp({ setLoading, timer });
+            window.removeEventListener("message", handler); // Remove se fechar janela
         }
-    }, 1000);
+    }, 500);
 }
 
 export async function loadUserData({
     setUser,
     setError,
     setLoading,
+    setIsMobileMenuOpen,
 }: LoginProps) {
     try {
+        setError(false);
         if (setLoading) setLoading(true);
 
         const { data } = await axios.get("/api/user");
         const rawData = UserSchema.parse(data);
 
         setUser(rawData);
+        if (setIsMobileMenuOpen) setIsMobileMenuOpen(false);
     } catch {
         setError(true);
+        if (setIsMobileMenuOpen) setIsMobileMenuOpen(true);
     } finally {
         if (setLoading) setLoading(false);
     }

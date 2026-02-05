@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
 import { UserMenuDesktop } from "./(desktop)/UserMenuDesktop";
 import { UserMenuMobile } from "./(mobile)/UserMenuMobile";
-import { useUser } from "@/app/utils/hooks/store";
+import { useDropDown, useUser } from "@/app/utils/hooks/store";
 import { ConnectBtnError } from "./ConnectBtn";
-import { loadUserData } from "@/app/utils/login";
+import { loadUserData } from "@/app/utils/login/login";
 
 export function UserMenus() {
     const [error, setError] = useState(false);
+
+    const { setIsMobileMenuOpen } = useDropDown();
     const { isLoggedIn, setUser } = useUser();
 
     useEffect(() => {
         if (isLoggedIn) {
-            loadUserData({ isLoggedIn, setError, setUser });
+            loadUserData({ setError, setUser });
         }
-    }, [setUser, isLoggedIn]);
+
+        if (error) {
+            setIsMobileMenuOpen(true);
+        }
+    }, [setUser, isLoggedIn, error, setIsMobileMenuOpen]);
 
     if (!isLoggedIn) return null;
 
     return (
         <>
             {error ? (
-                <ConnectBtnError />
+                <ConnectBtnError setError={setError} />
             ) : (
                 <>
                     <UserMenuDesktop />

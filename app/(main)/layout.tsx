@@ -10,6 +10,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="h-full min-h-screen">
+            <head>
+                <title>Movie Summary</title>
+                <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+            </head>
             <body className="text-white bg-gray-950 min-h-screen h-full">
                 <Header />
                 <main className="w-full h-full py-3">{children}</main>
