@@ -48,6 +48,7 @@ export async function DELETE() {
     try {
         const response = NextResponse.json({ success: true }, { status: 200 }); // prepara o response
         response.cookies.delete("tmdb_session"); // retira o session id dos cookies
+        response.cookies.delete("account_id"); // retira o account id dos cookies
 
         return response; // retorna o response
     } catch (error) {

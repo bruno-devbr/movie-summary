@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { MovieDb } from "moviedb-promise";
 import { NextRequest, NextResponse } from "next/server";
+import { AuthError } from "../authError";
 
 // cria o obj da api usado na rota
 export function getApi(req: NextRequest) {
@@ -12,7 +13,7 @@ export function getApi(req: NextRequest) {
 
         // se session id nao existe retorna um erro
         if (!sessionId) {
-            throw new Error("session id is not found");
+            throw new AuthError("session id is not found");
         }
 
         api.sessionId = sessionId;
@@ -28,6 +29,14 @@ export function getError(error: unknown) {
         return NextResponse.json(
             { message: error.message },
             { status: error.response?.status || 400 },
+        );
+    }
+
+    // se for um erro de login retorna a msg perosnalizada e status 401
+    if (error instanceof AuthError) {
+        return NextResponse.json(
+            { message: error.message },
+            { status: 401 }, // Não autorizado
         );
     }
 
