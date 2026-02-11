@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { MovieDb } from "moviedb-promise";
 import { NextRequest, NextResponse } from "next/server";
 import { AuthError } from "../authError";
+import { cookiesStore } from "./cookiesStore";
 
 // cria o obj da api usado na rota
 export function getApi(req: NextRequest) {
@@ -9,7 +10,7 @@ export function getApi(req: NextRequest) {
 
     // se req existe poe o session id no api
     if (req) {
-        const sessionId = req.cookies.get("tmdb_session")?.value as string;
+        const { sessionId } = cookiesStore(req);
 
         // se session id nao existe retorna um erro
         if (!sessionId) {
