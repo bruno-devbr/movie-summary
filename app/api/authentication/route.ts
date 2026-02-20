@@ -22,6 +22,8 @@ export async function POST(req: NextRequest) {
 
         // O parse já valida a estrutura. Se falhar, vai direto para o catch(error)
         const { request_token } = CreateSessionIdBodySchema.parse(body);
+
+        // @ts-expect-error: a lib nao criou uma maneira manual de adicionar o token, podemos usar api.token de maneira manual
         api.token = { request_token }; // adiciona o request token no objeto da api
 
         // Requisita o session id, e prepara o response

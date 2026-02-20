@@ -5,7 +5,7 @@ import { AuthError } from "../authError";
 import { cookiesStore } from "./cookiesStore";
 
 // cria o obj da api usado na rota
-export function getApi(req: NextRequest) {
+export function getApi(req?: NextRequest) {
     const api = new MovieDb(process.env.TMDB_API_KEY as string); // cria o api passando a key
 
     // se req existe poe o session id no api

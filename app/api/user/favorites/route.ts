@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
         });
 
         // retorna o rawData, com status 200
-        return NextResponse.json({ rawData }, { status: 200 });
+        return NextResponse.json(rawData, { status: 200 });
     } catch (error) {
         return getError(error);
     }

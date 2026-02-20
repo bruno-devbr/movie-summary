@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
         const api = getApi(req); // cria o api
 
         const rawData = await api.accountInfo(); // requisita os dados do usuario
-        const response = NextResponse.json({ rawData }, { status: 200 }); // prepara o response
+        const response = NextResponse.json(rawData, { status: 200 }); // prepara o response
 
         // poe o accont id nos cookies
         response.cookies.set("account_id", String(rawData.id), {
