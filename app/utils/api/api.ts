@@ -23,6 +23,17 @@ export function getApi(req: NextRequest) {
     return api; // retorna o api
 }
 
+// função utilitaria que seta headers em requests que precisa d autorização
+export function setHeaders() {
+    return {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: process.env.TMDB_READ_TOKEN as string,
+        },
+    };
+}
+
 // função global de erro de rota
 export function getError(error: unknown) {
     // se o erro for do axios, retorna a msg do axios e retona status personalizado ou 400
