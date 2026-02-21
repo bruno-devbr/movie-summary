@@ -31,7 +31,7 @@ export async function POST(req: NextRequest, context: { params: ParamsProps }) {
     }
 }
 
-// DELETE que romeve um item da watchlist
+// DELETE que remove um item da watchlist
 export async function DELETE(
     req: NextRequest,
     context: { params: ParamsProps },

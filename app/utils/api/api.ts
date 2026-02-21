@@ -4,9 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { AuthError } from "../authError";
 import { cookiesStore } from "./cookiesStore";
 
+const API_KEY = process.env.TMDB_API_KEY;
+const READ_TOKEN = process.env.TMDB_READ_TOKEN
+    ? `Bearer ${process.env.TMDB_READ_TOKEN}`
+    : undefined;
+
 // cria o obj da api usado na rota
 export function getApi(req?: NextRequest) {
-    const api = new MovieDb(process.env.TMDB_API_KEY as string); // cria o api passando a key
+    if (!API_KEY) throw new Error("TMDB_API_KEY not defined"); // se API_KEY nao existir da erro
+    const api = new MovieDb(API_KEY); // cria o api passando a key
 
     // se req existe poe o session id no api
     if (req) {
@@ -25,11 +31,13 @@ export function getApi(req?: NextRequest) {
 
 // função utilitaria que seta headers em requests que precisa d autorização
 export function setHeaders() {
+    if (!READ_TOKEN) throw new Error("TMDB_READ_TOKEN not defined"); // se READ_TOKEN nao existir da erro
+
     return {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: process.env.TMDB_READ_TOKEN as string,
+            Authorization: READ_TOKEN,
         },
     };
 }

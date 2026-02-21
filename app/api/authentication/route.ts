@@ -26,12 +26,18 @@ export async function POST(req: NextRequest) {
         // @ts-expect-error: a lib nao criou uma maneira manual de adicionar o token, podemos usar api.token de maneira manual
         api.token = { request_token }; // adiciona o request token no objeto da api
 
-        // Requisita o session id, e prepara o response
-        const rawData = await api.retrieveSession();
+        // Requisita o session id
+        const sessionId = await api.retrieveSession();
+
+        if (!sessionId) {
+            throw new Error("Failed to create session");
+        }
+
+        // prepara o response
         const response = NextResponse.json({ success: true }, { status: 200 });
 
         // poe o id nos cookies
-        response.cookies.set("tmdb_session", rawData, {
+        response.cookies.set("tmdb_session", sessionId, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",

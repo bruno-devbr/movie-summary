@@ -50,7 +50,7 @@ export async function POST(req: NextRequest, context: { params: ParamsProps }) {
     }
 }
 
-// DELETE que remove a avaliação de uma series
+// DELETE que remove a avaliação de uma série
 export async function DELETE(
     req: NextRequest,
     context: { params: ParamsProps },

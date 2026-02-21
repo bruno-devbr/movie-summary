@@ -7,6 +7,11 @@ export async function GET(req: NextRequest) {
         const api = getApi(req); // cria o api
 
         const rawData = await api.accountInfo(); // requisita os dados do usuario
+
+        if (!rawData?.id) {
+            throw new Error("Account ID not found");
+        }
+
         const response = NextResponse.json(rawData, { status: 200 }); // prepara o response
 
         // poe o accont id nos cookies

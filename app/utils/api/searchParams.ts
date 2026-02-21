@@ -13,11 +13,18 @@ export function searchParams(req: NextRequest): SearchParamsProps {
 
     const DEFAULTS = SortByMovies.POPULARITY_ASC;
 
+    const sortByValue = getString("sort_by");
+    const validSortBy =
+        Object.values(SortByMovies).includes(sortByValue as SortByMovies) ||
+        Object.values(SortByTv).includes(sortByValue as SortByTv)
+            ? (sortByValue as SortByMovies | SortByTv)
+            : DEFAULTS;
+
     return {
         page: Math.max(1, getNum("page") || 1),
         year: getNum("year") || undefined,
         genres: getString("genres") || "",
         min_rate: getNum("min_rate") || undefined,
-        sort_by: (getString("sort_by") as SortByMovies | SortByTv) || DEFAULTS, 
+        sort_by: validSortBy,
     };
 }

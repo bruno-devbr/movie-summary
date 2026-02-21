@@ -1,7 +1,6 @@
 import { getApi, getError } from "@/app/utils/api/api";
 import { cookiesStore } from "@/app/utils/api/cookiesStore";
 import { searchParams } from "@/app/utils/api/searchParams";
-import { AuthError } from "@/app/utils/authError";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET que pega os itens favoritos do usuario
@@ -11,8 +10,6 @@ export async function GET(req: NextRequest) {
 
         const { page } = searchParams(req); // pega o page dos searchParams
         const { id } = cookiesStore(req); // pega o id dos cookies
-
-        if (!id) throw new AuthError("id is not found");
 
         // requisita os favoritos do usuario passando os parametros
         const rawData = await api.accountFavoriteMovies({

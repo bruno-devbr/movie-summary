@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
         const rawData = await api.accountLists({
             id,
             page,
-            language: "pt-Br",
+            language: "pt-BR",
         });
 
         // retorna o rawData e status 200

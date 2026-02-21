@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest, context: { params: ParamsProps }) {
     try {
         const api = getApi(req); // cria o obj api
-        const { person_id } = await getParams(context); // pega movie_id dos params
+        const { person_id } = await getParams(context); // pega person_id dos params
 
         // faz fetch passando o id
         const rawData = await api.personInfo({
