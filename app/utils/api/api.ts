@@ -36,7 +36,7 @@ export function setHeaders() {
 
 // função global de erro de rota
 export function getError(error: unknown) {
-    // se o erro for do axios, retorna a msg do axios e retona status personalizado ou 400
+    // se o erro for do axios, retorna a msg do axios e retorna status personalizado ou 400
     if (error instanceof AxiosError) {
         return NextResponse.json(
             { message: error.message },
