@@ -1,0 +1,68 @@
+import { AxiosError } from "axios";
+import { MovieDb } from "moviedb-promise";
+import { NextRequest, NextResponse } from "next/server";
+import { AuthError } from "../authError";
+import { cookiesStore } from "./cookiesStore";
+
+const API_KEY = process.env.TMDB_API_KEY;
+const READ_TOKEN = process.env.TMDB_READ_TOKEN
+    ? `Bearer ${process.env.TMDB_READ_TOKEN}`
+    : undefined;
+
+// cria o obj da api usado na rota
+export function getApi(req?: NextRequest) {
+    if (!API_KEY) throw new Error("TMDB_API_KEY not defined"); // se API_KEY nao existir da erro
+    const api = new MovieDb(API_KEY); // cria o api passando a key
+
+    // se req existe poe o session id no api
+    if (req) {
+        const { sessionId } = cookiesStore(req);
+
+        // se session id nao existe retorna um erro
+        if (!sessionId) {
+            throw new AuthError("session id is not found");
+        }
+
+        api.sessionId = sessionId;
+    }
+
+    return api; // retorna o api
+}
+
+// função utilitaria que seta headers em requests que precisa d autorização
+export function setHeaders() {
+    if (!READ_TOKEN) throw new Error("TMDB_READ_TOKEN not defined"); // se READ_TOKEN nao existir da erro
+
+    return {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: READ_TOKEN,
+        },
+    };
+}
+
+// função global de erro de rota
+export function getError(error: unknown) {
+    // se o erro for do axios, retorna a msg do axios e retorna status personalizado ou 400
+    if (error instanceof AxiosError) {
+        return NextResponse.json(
+            { message: error.message },
+            { status: error.response?.status || 400 },
+        );
+    }
+
+    // se for um erro de login retorna a msg perosnalizada e status 401
+    if (error instanceof AuthError) {
+        return NextResponse.json(
+            { message: error.message },
+            { status: 401 }, // Não autorizado
+        );
+    }
+
+    // se nao for do axios retorna msg e status default
+    return NextResponse.json(
+        { message: "internal server error" },
+        { status: 500 },
+    );
+}
