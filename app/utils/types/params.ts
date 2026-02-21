@@ -3,5 +3,6 @@ export interface ParamsProps {
     media_id: number;
     movie_id: number;
     series_id: number;
+    person_id: number;
     query: string;
 }
