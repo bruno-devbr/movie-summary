@@ -1,6 +1,11 @@
+import { Header } from "./components/(header)/Header";
 import "./globals.css";
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
         <html lang="pt-BR">
             <head>
@@ -11,7 +16,10 @@ export default function RootLayout({ children }) {
                     type="image/x-icon"
                 />
             </head>
-            <body>{children}</body>
+            <body className="min-h-screen bg-gray-950 text-white">
+                <Header />
+                <main className="py-3">{children}</main>
+            </body>
         </html>
     );
 }
