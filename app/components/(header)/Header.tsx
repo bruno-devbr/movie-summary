@@ -1,3 +1,6 @@
+"use client";
+
+import { HeaderNav } from "./HeaderNav";
 import { Logo } from "./Logo";
 
 export function Header() {
@@ -6,6 +9,7 @@ export function Header() {
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
                     <Logo />
+                    <HeaderNav />
                 </div>
             </div>
         </header>
