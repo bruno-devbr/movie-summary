@@ -70,7 +70,7 @@ export async function DELETE() {
         response.cookies.set({
             name: "account_id",
             value: "",
-            path: "",
+            path: "/",
             maxAge: 0,
         });
 
