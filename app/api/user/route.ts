@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getApi, getError } from "@/app/utils/api";
+import { getApi, getError } from "@/app/utils/api/api";
 
 // GET que retorna as informações dos usuarios
 export async function GET(req: NextRequest) {

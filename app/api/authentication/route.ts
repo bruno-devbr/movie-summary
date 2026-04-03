@@ -1,4 +1,4 @@
-import { getApi, getError, setHeaders } from "@/app/utils/api";
+import { getApi, getError, setHeaders } from "@/app/utils/api/api";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import {
