@@ -2,15 +2,16 @@ import { MovieDb } from "moviedb-promise";
 import axios, { AxiosRequestConfig } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
+import { getCookies } from "./getCookies";
 
 // função que cria o obj api
 export function getApi(req?: NextRequest) {
     const api = new MovieDb(process.env.TMDB_API_KEY as string); // cria o obj api
-    const sessionId = req?.cookies.get("session_id")?.value; // pega o session_id dos cookies
 
-    // se o session id existir, coloca no obj api
-    if (sessionId) {
-        api.sessionId = sessionId;
+    // se o req existir coloca o session id no obj api
+    if (req) {
+        const { session_id } = getCookies(req);
+        api.sessionId = session_id;
     }
 
     return api; // retorna obj api
