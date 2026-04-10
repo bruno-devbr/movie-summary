@@ -12,10 +12,6 @@ export async function POST(req: NextRequest, context: ContextProps) {
         const { account_id } = getCookies(req); // pega o account_id dos cookies
         const { media_id } = await getParams(context); // pega o media_id dos params
 
-        // valida media_id e account_id
-        if (isNaN(media_id)) throw new Error("media_id is not valid");
-        if (!account_id) throw new Error("account id not found");
-
         // faz o fetch criando rawData
         const rawData = await api.accountFavoriteUpdate(
             {
