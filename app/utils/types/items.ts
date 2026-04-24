@@ -1,5 +1,5 @@
 import z from "zod";
 
-export const MovieRatingSchema = z.object({
+export const ItemRatingSchema = z.object({
     value: z.number(),
 });

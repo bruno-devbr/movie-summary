@@ -4,37 +4,37 @@ import { ItemRatingSchema } from "@/app/utils/types/items";
 import { ContextProps } from "@/app/utils/types/params";
 import { NextRequest, NextResponse } from "next/server";
 
-// GET que retorna todos os dados do usuario relacionado ao filme
+// GET das açoes do usuario sobre a serie
 export async function GET(req: NextRequest, context: ContextProps) {
     try {
         const api = getApi(req); // cria o obj api
-        const { movie_id } = await getParams(context); // pega o movie_id dos params
+        const { tv_id } = await getParams(context); // pega o tv_id dos params
 
         // faz o fetch criando o rawData
-        const rawData = await api.movieAccountStates({
+        const rawData = await api.tvAccountStates({
             language: "pt-BR",
-            id: movie_id,
+            id: tv_id,
         });
 
-        return NextResponse.json(rawData); // retorna rawData com status
+        return NextResponse.json(rawData); // retorna o rawData com status 200
     } catch (error) {
-        return getError(error); // função função de tratamento de erros
+        return getError(error); // função de tratamento de erros
     }
 }
 
-// POST que adiciona uma nota ao filme
+// POST que adiciona uma nota a serie
 export async function POST(req: NextRequest, context: ContextProps) {
     try {
-        const api = getApi(req); // cria o bj api
+        const api = getApi(req); // cria o obj api
 
-        const { movie_id } = await getParams(context); // pega o movie_id dos params
-        const { value } = ItemRatingSchema.parse(await req.json()); // pega value do body
+        const { tv_id } = await getParams(context); // pega o tv_id dos params
+        const { value } = ItemRatingSchema.parse(await req.json()); // pega o value do body
 
         // faz o fetch criando o rawData
-        const rawData = await api.movieRatingUpdate(
+        const rawData = await api.tvRatingUpdate(
             {
                 language: "pt-BR",
-                id: movie_id,
+                id: tv_id,
                 value,
             },
             setHeaders(),
@@ -42,27 +42,27 @@ export async function POST(req: NextRequest, context: ContextProps) {
 
         return NextResponse.json(rawData); // retorna rawData com status 200
     } catch (error) {
-        return getError(error); // função função de tratamento de erros
+        return getError(error); // função de tratamento de erros
     }
 }
 
-// DELETE que remove a nota do usuario do filme
+// DELETE que remove a nota da serie
 export async function DELETE(req: NextRequest, context: ContextProps) {
     try {
         const api = getApi(req); // cria o obj api
-        const { movie_id } = await getParams(context); // pega movie_id dos params
+        const { tv_id } = await getParams(context); // pega o tv_id dos params
 
         // faz o fetch criando o rawData
-        const rawData = await api.movieRatingDelete(
+        const rawData = await api.tvRatingDelete(
             {
-                id: movie_id,
                 language: "pt-BR",
+                id: tv_id,
             },
             setHeaders(),
         );
 
         return NextResponse.json(rawData); // retorna rawData com status 200
     } catch (error) {
-        return getError(error); // função função de tratamento de erros
+        return getError(error); // função de tratamento de erros
     }
 }

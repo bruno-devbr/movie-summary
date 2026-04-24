@@ -2,6 +2,8 @@ export interface ParamsProps {
     media_id: number;
     list_id: number;
     movie_id: number;
+    tv_id: number;
+    season_number: number;
 }
 
 export interface ContextProps {
