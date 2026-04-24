@@ -1,12 +1,15 @@
 import { NextRequest } from "next/server";
 import { SearchParamsProps } from "../types/searchParams";
-import { SORT_BY } from "../types/sort_by";
+import { SORT_BY_MOVIES, SORT_BY_TV } from "../types/sort_by";
 
 // função que retorna searchParams
-export function getSearchParams(req: NextRequest): SearchParamsProps {
+export function getSearchParams(
+    req: NextRequest,
+    isTV?: boolean,
+): SearchParamsProps {
     return {
         page: getPage(req),
-        sort_by: getSortBy(req),
+        sort_by: getSortBy(req, isTV),
         genres: getGenres(req),
         vote: getVote(req),
         year: getYear(req),
@@ -20,15 +23,23 @@ function getPage(req: NextRequest) {
 }
 
 // retorna a ordem, em caso de erros o padrao é popularidade decrecente
-function getSortBy(req: NextRequest) {
-    const value = getItem<SORT_BY>(
+function getSortBy(req: NextRequest, isTV?: boolean) {
+    const value = getItem<SORT_BY_MOVIES>(
         req,
         "sort_by",
-        SORT_BY.POPULARITY_DESC,
-    ) as SORT_BY;
+        SORT_BY_MOVIES.POPULARITY_DESC,
+    ) as SORT_BY_MOVIES;
 
-    if (!Object.values(SORT_BY).includes(value)) {
-        return SORT_BY.POPULARITY_DESC;
+    if (isTV) {
+        if (value === SORT_BY_MOVIES.POPULARITY_ASC) {
+            return SORT_BY_TV.YEAR_ASC;
+        } else if (value === SORT_BY_MOVIES.DATE_DESC) {
+            return SORT_BY_TV.YEAR_DESC;
+        }
+    }
+
+    if (!Object.values(SORT_BY_MOVIES).includes(value)) {
+        return SORT_BY_MOVIES.POPULARITY_DESC;
     }
 
     return value;
