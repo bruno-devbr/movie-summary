@@ -5,6 +5,7 @@ export interface ParamsProps {
     tv_id: number;
     season_number: number;
     person_id: number;
+    query: string;
 }
 
 export interface ContextProps {
