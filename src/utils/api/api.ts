@@ -75,3 +75,13 @@ export function getError(error: unknown) {
         { status: 500 },
     );
 }
+
+export function verifyAccountId(id: unknown) {
+    const parsed = Number(id);
+
+    if (!Number.isInteger(parsed) || parsed <= 0) {
+        throw new Error("Invalid account data");
+    }
+
+    return parsed;
+}
