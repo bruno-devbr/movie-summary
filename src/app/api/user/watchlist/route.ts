@@ -3,14 +3,14 @@ import { getCookie } from "@/utils/api/cookieStore";
 import { MediaIdSchema } from "@/utils/schemas/mediaSchemas";
 import { NextRequest, NextResponse } from "next/server";
 
-//  GET que retorna os itens favoritos do usuario
+//  GET que retorna os itens da watchlist do usuario
 export async function GET(req: NextRequest) {
     try {
         const api = getApi(req); // cria o obj api
         const id = verifyAccountId(getCookie(req).account_id); // pega e valida o account_id dos cookies
 
         //  faz o fetch preparando o rawData
-        const rawData = await api.accountFavoriteMovies({
+        const rawData = await api.accountMovieWatchlist({
             language: "pt-BR",
             id,
         });
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     }
 }
 
-// POST que adiciona um item aos favoritos
+// POST que adiciona um item a watchlist
 export async function POST(req: NextRequest) {
     try {
         const api = getApi(req); // cria o obj api
@@ -30,12 +30,12 @@ export async function POST(req: NextRequest) {
         const body = await req.json(); // pega o body do request
         const media_id = MediaIdSchema.parse(body).media_id; // pega o media_id validando pelo schema
 
-        // faz o fetch adicionando o item aos favoritos
-        const rawData = await api.accountFavoriteUpdate(
+        // faz o fetch adicionando o item a watchlist
+        const rawData = await api.accountWatchlistUpdate(
             {
                 media_type: "movie",
                 language: "pt-BR",
-                favorite: true,
+                watchlist: true,
                 media_id,
                 id,
             },
@@ -57,12 +57,12 @@ export async function DELETE(req: NextRequest) {
         const body = await req.json(); // pega o body do request
         const media_id = MediaIdSchema.parse(body).media_id; // pega o media_id validando pelo schema
 
-        // faz o fetch removendo o item dos favoritos
-        const rawData = await api.accountFavoriteUpdate(
+        // faz o fetch removendo o item a watchlist
+        const rawData = await api.accountWatchlistUpdate(
             {
                 media_type: "movie",
                 language: "pt-BR",
-                favorite: false,
+                watchlist: false,
                 media_id,
                 id,
             },
