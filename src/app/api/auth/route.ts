@@ -34,7 +34,17 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
 
         // Valida os dados recebidos usando o schema
-        const rawBody = CreateSessionSchema.parse(body);
+        const result = CreateSessionSchema.safeParse(body);
+
+        if (!result.success) {
+            throw new AppError(
+                "Corpo da requisição inválido.",
+                "INVALID_REQUEST_BODY",
+                400,
+            );
+        }
+
+        const rawBody = result.data;
 
         // Faz a requisição para criar a sessão na TMDB
         const { data, error } = await tmdb.POST(
@@ -74,7 +84,6 @@ export async function POST(req: NextRequest) {
             maxAge: 60 * 60 * 30,
         });
 
-        // Retorna a resposta com o cookie definido
         return response;
     } catch (error) {
         // Normaliza e retorna o erro
