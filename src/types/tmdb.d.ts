@@ -3045,8 +3045,9 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    media_type: string;
+                    media_id: number;
+                    favorite: boolean;
                 };
             };
         };
@@ -3084,8 +3085,9 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    media_type: string;
+                    media_id: number;
+                    watchlist: boolean;
                 };
             };
         };
@@ -3879,8 +3881,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    request_token: string;
                 };
             };
         };
@@ -3914,8 +3915,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    access_token: string;
                 };
             };
         };
@@ -3949,8 +3949,9 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    username: string;
+                    password: string;
+                    request_token: string;
                 };
             };
         };
@@ -3986,8 +3987,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    session_id: string;
                 };
             };
         };
@@ -6625,8 +6625,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY?: string;
+                    media_id: number;
                 };
             };
         };
@@ -6731,8 +6730,9 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    name: string;
+                    description: string;
+                    language: string;
                 };
             };
         };
@@ -6909,8 +6909,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    media_id: number;
                 };
             };
         };
@@ -11982,8 +11981,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    value: number;
                 };
             };
         };
@@ -18166,8 +18164,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    value: number;
                 };
             };
         };
@@ -21892,8 +21889,7 @@ export interface operations {
         requestBody?: {
             content: {
                 "application/json": {
-                    /** Format: json */
-                    RAW_BODY: string;
+                    value: number;
                 };
             };
         };
