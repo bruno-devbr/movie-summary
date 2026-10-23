@@ -1637,7 +1637,7 @@
                                 "type": "object",
                                 "required": ["RAW_BODY"],
                                 "properties": {
-                                    "RAW_BODY": {
+                                    "request_token": {
                                         "type": "string",
                                         "format": "json"
                                     }

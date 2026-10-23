@@ -1,12 +1,19 @@
 import createClient from "openapi-fetch";
 import type { paths } from "@/types/tmdb";
+import { AppError } from "@lib/api/errors";
 
-const token = process.env.TMDB_ACCESS_TOKEN;
+const token = process.env.TMDB_ACCESS_TOKEN; // define o token
 
+// verifica se o token existe, caso não passa um appError
 if (!token) {
-    throw new Error("TMDB_ACCESS_TOKEN não está definida");
+    throw new AppError(
+        "A configuração da API está incompleta.",
+        "INTERNAL_ERROR",
+        500,
+    );
 }
 
+// cria a constante global de api
 export const tmdb = createClient<paths>({
     baseUrl: "https://api.themoviedb.org",
     headers: {
