@@ -4,6 +4,26 @@
  */
 
 export interface paths {
+    "/3/account": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Details
+         * @description Get the account details for the current session.
+         */
+        get: operations["account-details-session"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/3/authentication": {
         parameters: {
             query?: never;
@@ -2923,6 +2943,43 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    "account-details-session": {
+        parameters: {
+            query: {
+                session_id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        avatar?: {
+                            gravatar?: {
+                                hash?: string;
+                            };
+                            tmdb?: {
+                                avatar_path?: string;
+                            };
+                        };
+                        id: number;
+                        iso_639_1?: string;
+                        iso_3166_1?: string;
+                        name?: string;
+                        include_adult: boolean;
+                        username?: string;
+                    };
+                };
+            };
+        };
+    };
     "authentication-validate-key": {
         parameters: {
             query?: never;

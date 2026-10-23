@@ -25,6 +25,80 @@
     }
   ],
   "paths": {
+    "/3/account": {
+      "get": {
+        "summary": "Details",
+        "description": "Get the account details for the current session.",
+        "operationId": "account-details-session",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "object",
+                      "properties": {
+                        "gravatar": {
+                          "type": "object",
+                          "properties": {
+                            "hash": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "tmdb": {
+                          "type": "object",
+                          "properties": {
+                            "avatar_path": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "iso_639_1": {
+                      "type": "string"
+                    },
+                    "iso_3166_1": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "include_adult": {
+                      "type": "boolean"
+                    },
+                    "username": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "include_adult"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/3/authentication": {
       "get": {
         "summary": "Validate Key",
