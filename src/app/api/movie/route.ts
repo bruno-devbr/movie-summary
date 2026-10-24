@@ -27,8 +27,8 @@ export async function GET(req: NextRequest) {
         // se der algum erro na API, cria um AppError
         if (error) {
             throw new AppError(
-                "Não foi possivel obter os filmes",
-                "MOVIES_FECTH_ERROR",
+                "Não foi possível obter os filmes.",
+                "MOVIES_FETCH_ERROR",
                 502,
             );
         }
