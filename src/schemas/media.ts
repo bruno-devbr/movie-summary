@@ -6,3 +6,9 @@ export const MediaListRequestSchema = z.object({
     favorite: z.boolean().optional(),
     watchlist: z.boolean().optional(),
 });
+
+export const MediaListSchema = z.object({
+    name: z.string(),
+    description: z.string(),
+    language: z.literal("pt-BR"),
+});
