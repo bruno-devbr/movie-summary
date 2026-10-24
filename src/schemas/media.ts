@@ -12,3 +12,7 @@ export const MediaListSchema = z.object({
     description: z.string(),
     language: z.literal("pt-BR"),
 });
+
+export const MediaListItemRequestSchema = z.object({
+    media_id: z.number(),
+});
