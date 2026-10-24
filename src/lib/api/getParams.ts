@@ -2,14 +2,14 @@ import { ApiRouteContext, ApiRouteParams } from "@/types/params";
 import { AppError } from "@/lib/api/errors";
 
 export async function getParams({ params }: ApiRouteContext): Promise<ApiRouteParams> {
-    const { list_id: listIdParam } = await params;
-    const list_id = Number(listIdParam);
+    const { item_id: itemIdParam } = await params;
+    const item_id = Number(itemIdParam);
 
-    if (!Number.isInteger(list_id) || list_id <= 0) {
-        throw new AppError("Id da lista invalido", "INVALID_LIST_ID", 400);
+    if (!Number.isInteger(item_id) || item_id <= 0) {
+        throw new AppError("Id do item inválido", "INVALID_ITEM_ID", 400);
     }
 
     return {
-        list_id,
+        item_id,
     };
 }

@@ -10,13 +10,13 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest, { params }: ApiRouteContext) {
     try {
         const { page } = getSearchParams(req.nextUrl.searchParams); // pega page dos searchParams
-        const { list_id } = await getParams({ params }); // pega o id da lista dos params da rota
+        const { item_id } = await getParams({ params }); // pega o id da lista dos params da rota
 
         // faz o fetch da lista usando a API do TMDB
         const { data, error } = await tmdb.GET("/3/list/{list_id}", {
             params: {
                 path: {
-                    list_id,
+                    list_id: item_id,
                 },
                 query: {
                     language: "pt-BR",
@@ -45,13 +45,13 @@ export async function GET(req: NextRequest, { params }: ApiRouteContext) {
 export async function DELETE(req: NextRequest, { params }: ApiRouteContext) {
     try {
         const { session_id } = getAccountCookies(req); // pega e valida os cookies da conta
-        const { list_id } = await getParams({ params }); // pega e valida o id da lista
+        const { item_id } = await getParams({ params }); // pega e valida o id da lista
 
         // envia a requisição para excluir a lista usando a API do TMDB
         const { data, error } = await tmdb.DELETE("/3/list/{list_id}", {
             params: {
                 path: {
-                    list_id,
+                    list_id: item_id,
                 },
                 query: {
                     session_id,

@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest, { params }: ApiRouteContext) {
     try {
         const { session_id } = getAccountCookies(req); // pega e valida os cookies da conta
-        const { list_id } = await getParams({ params }); // pega e valida o id da lista
+        const { item_id } = await getParams({ params }); // pega e valida o id da lista
 
         const result = await getBody(req, MediaListItemRequestSchema);
 
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
         const { data, error } = await tmdb.POST("/3/list/{list_id}/add_item", {
             params: {
                 path: {
-                    list_id,
+                    list_id: item_id,
                 },
                 query: {
                     session_id,
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
 export async function DELETE(req: NextRequest, { params }: ApiRouteContext) {
     try {
         const { session_id } = getAccountCookies(req); // pega e valida os cookies da conta
-        const { list_id } = await getParams({ params }); // pega e valida o id da lista
+        const { item_id } = await getParams({ params }); // pega e valida o id da lista
 
         const result = await getBody(req, MediaListItemRequestSchema);
 
@@ -64,7 +64,7 @@ export async function DELETE(req: NextRequest, { params }: ApiRouteContext) {
             {
                 params: {
                     path: {
-                        list_id,
+                        list_id: item_id,
                     },
                     query: {
                         session_id,

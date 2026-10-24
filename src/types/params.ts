@@ -1,7 +1,7 @@
 export interface ApiRouteContext {
-    params: Promise<{ list_id: string }>;
+    params: Promise<{ item_id: string }>;
 }
 
 export interface ApiRouteParams {
-    list_id: number;
+    item_id: number;
 }
