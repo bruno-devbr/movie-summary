@@ -1,5 +1,5 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
-import { getCookies } from "@/lib/api/getCookie";
+import { getAccountCookies } from "@/lib/api/getCookie";
 import { getSearchParams } from "@/lib/api/getSearchParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaListRequestSchema } from "@/schemas/media";
@@ -9,16 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
     try {
         const { page } = getSearchParams(req.nextUrl.searchParams); // pega page do searchParams
-        const { session_id, account_id } = getCookies(req); // pega o account_id e session_id dos cookies
-
-        // verifica se algum id do usuario é invalido
-        if (!session_id || !Number.isInteger(account_id) || account_id <= 0) {
-            throw new AppError(
-                "Sessão inválida ou ausente.",
-                "INVALID_SESSION",
-                401,
-            );
-        }
+        const { session_id, account_id } = getAccountCookies(req); // pega e valida os cookies da conta
 
         // faz o fetch usando a api global
         const { data, error } = await tmdb.GET(
@@ -56,16 +47,7 @@ export async function GET(req: NextRequest) {
 // POST que adiciona um item aos favoritos
 export async function POST(req: NextRequest) {
     try {
-        const { session_id, account_id } = getCookies(req); // pega o account_id e session_id dos cookies
-
-        // verifica se algum id do usuario é invalido
-        if (!session_id || !Number.isInteger(account_id) || account_id <= 0) {
-            throw new AppError(
-                "Sessão inválida ou ausente.",
-                "INVALID_SESSION",
-                401,
-            );
-        }
+        const { session_id, account_id } = getAccountCookies(req); // pega e valida os cookies da conta
 
         const body = await req.json(); // cria o obj body do request
         const result = MediaListRequestSchema.safeParse(body); // valida o body com o schema
@@ -125,16 +107,7 @@ export async function POST(req: NextRequest) {
 // DELETE que remove um item aos favoritos
 export async function DELETE(req: NextRequest) {
     try {
-        const { session_id, account_id } = getCookies(req); // pega o account_id e session_id dos cookies
-
-        // verifica se algum id do usuario é invalido
-        if (!session_id || !Number.isInteger(account_id) || account_id <= 0) {
-            throw new AppError(
-                "Sessão inválida ou ausente.",
-                "INVALID_SESSION",
-                401,
-            );
-        }
+        const { session_id, account_id } = getAccountCookies(req); // pega e valida os cookies da conta
 
         const body = await req.json(); // cria o obj body do request
         const result = MediaListRequestSchema.safeParse(body); // valida o body com o schema

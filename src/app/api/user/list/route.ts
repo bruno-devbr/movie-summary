@@ -1,5 +1,5 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
-import { getCookies } from "@/lib/api/getCookie";
+import { getAccountCookies, getCookies } from "@/lib/api/getCookie";
 import { getSearchParams } from "@/lib/api/getSearchParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaListSchema } from "@/schemas/media";
@@ -8,17 +8,8 @@ import { NextRequest, NextResponse } from "next/server";
 // GET que retorna as listas criadas pelo usuario
 export async function GET(req: NextRequest) {
     try {
-        const { account_id, session_id } = getCookies(req);
+        const { account_id, session_id } = getAccountCookies(req);
         const { page } = getSearchParams(req.nextUrl.searchParams);
-
-        // verifica se algum id do usuario é invalido
-        if (!session_id || !Number.isInteger(account_id) || account_id <= 0) {
-            throw new AppError(
-                "Sessão inválida ou ausente.",
-                "INVALID_SESSION",
-                401,
-            );
-        }
 
         const { data, error } = await tmdb.GET(
             "/3/account/{account_id}/lists",
