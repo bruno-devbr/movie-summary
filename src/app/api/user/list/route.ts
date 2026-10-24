@@ -1,5 +1,6 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getAccountCookies, getCookies } from "@/lib/api/getCookie";
+import { getBody } from "@/lib/api/getBody";
 import { getSearchParams } from "@/lib/api/getSearchParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaListSchema } from "@/schemas/media";
@@ -56,20 +57,10 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const body = await req.json(); // cria o obj body do request
-        const result = MediaListSchema.safeParse(body); // valida o body com o schema
-
-        // se body nao estiver validado corretamente cria um AppError
-        if (!result.success) {
-            throw new AppError(
-                "Corpo da requisição inválido.",
-                "INVALID_REQUEST_BODY",
-                400,
-            );
-        }
+        const result = await getBody(req, MediaListSchema);
 
         // pega os valores do body
-        const { description, language, name } = result.data;
+        const { description, language, name } = result;
 
         const { data, error } = await tmdb.POST("/3/list", {
             params: {

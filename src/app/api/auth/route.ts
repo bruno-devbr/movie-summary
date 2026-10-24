@@ -1,5 +1,6 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getCookies } from "@/lib/api/getCookie";
+import { getBody } from "@/lib/api/getBody";
 import { tmdb } from "@/lib/tmdb";
 import { CreateSessionSchema } from "@/schemas/auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -30,21 +31,7 @@ export async function GET() {
 // POST que define o session_id do usuário
 export async function POST(req: NextRequest) {
     try {
-        // Obtém o body da requisição
-        const body = await req.json();
-
-        // Valida os dados recebidos usando o schema
-        const result = CreateSessionSchema.safeParse(body);
-
-        if (!result.success) {
-            throw new AppError(
-                "Corpo da requisição inválido.",
-                "INVALID_REQUEST_BODY",
-                400,
-            );
-        }
-
-        const rawBody = result.data;
+        const rawBody = await getBody(req, CreateSessionSchema);
 
         // Faz a requisição para criar a sessão na TMDB
         const { data, error } = await tmdb.POST(

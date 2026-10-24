@@ -1,5 +1,6 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getAccountCookies } from "@/lib/api/getCookie";
+import { getBody } from "@/lib/api/getBody";
 import { getParams } from "@/lib/api/getParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaListItemRequestSchema } from "@/schemas/media";
@@ -12,19 +13,9 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
         const { session_id } = getAccountCookies(req); // pega e valida os cookies da conta
         const { list_id } = await getParams({ params }); // pega e valida o id da lista
 
-        const body = await req.json(); // cria o objeto body da requisição
-        const result = MediaListItemRequestSchema.safeParse(body); // valida o body com o schema
+        const result = await getBody(req, MediaListItemRequestSchema);
 
-        // se o body não for válido, cria um AppError
-        if (!result.success) {
-            throw new AppError(
-                "Corpo da requisição invalido",
-                "INVALID_REQUEST_BODY",
-                400,
-            );
-        }
-
-        const { media_id } = result.data; // pega o id da mídia validada
+        const { media_id } = result; // pega o id da mídia validada
 
         // envia a requisição para adicionar o item usando a API do TMDB
         const { data, error } = await tmdb.POST("/3/list/{list_id}/add_item", {
@@ -63,19 +54,9 @@ export async function DELETE(req: NextRequest, { params }: ApiRouteContext) {
         const { session_id } = getAccountCookies(req); // pega e valida os cookies da conta
         const { list_id } = await getParams({ params }); // pega e valida o id da lista
 
-        const body = await req.json(); // cria o objeto body da requisição
-        const result = MediaListItemRequestSchema.safeParse(body); // valida o body com o schema
+        const result = await getBody(req, MediaListItemRequestSchema);
 
-        // se o body não for válido, cria um AppError
-        if (!result.success) {
-            throw new AppError(
-                "Corpo da requisição invalido",
-                "INVALID_REQUEST_BODY",
-                400,
-            );
-        }
-
-        const { media_id } = result.data; // pega o id da mídia validada
+        const { media_id } = result; // pega o id da mídia validada
 
         // envia a requisição para remover o item usando a API do TMDB
         const { data, error } = await tmdb.POST(

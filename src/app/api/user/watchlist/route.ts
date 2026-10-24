@@ -1,5 +1,6 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getAccountCookies } from "@/lib/api/getCookie";
+import { getBody } from "@/lib/api/getBody";
 import { getSearchParams } from "@/lib/api/getSearchParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaListRequestSchema } from "@/schemas/media";
@@ -48,14 +49,12 @@ export async function POST(req: NextRequest) {
     try {
         const { session_id, account_id } = getAccountCookies(req); // pega e valida os cookies da conta
 
-        const body = await req.json(); // cria o obj body do request
-        const result = MediaListRequestSchema.safeParse(body); // valida o body com o schema
+        const result = await getBody(req, MediaListRequestSchema);
 
         // se body nao estiver validado corretamente cria um AppError
         if (
-            !result.success ||
-            result.data.watchlist !== true ||
-            result.data.favorite !== undefined
+            result.watchlist !== true ||
+            result.favorite !== undefined
         ) {
             throw new AppError(
                 "Corpo da requisição inválido.",
@@ -65,7 +64,7 @@ export async function POST(req: NextRequest) {
         }
 
         // pega os valores do body
-        const { media_type, media_id, watchlist } = result.data;
+        const { media_type, media_id, watchlist } = result;
 
         const { data, error } = await tmdb.POST(
             "/3/account/{account_id}/watchlist",
@@ -106,14 +105,12 @@ export async function DELETE(req: NextRequest) {
     try {
         const { account_id, session_id } = getAccountCookies(req); // pega e valida os cookies da conta
 
-        const body = await req.json(); // cria o obj body do request
-        const result = MediaListRequestSchema.safeParse(body); // valida o body com o schema
+        const result = await getBody(req, MediaListRequestSchema);
 
         // se body nao estiver validado corretamente cria um AppError
         if (
-            !result.success ||
-            result.data.watchlist !== false ||
-            result.data.favorite !== undefined
+            result.watchlist !== false ||
+            result.favorite !== undefined
         ) {
             throw new AppError(
                 "Corpo da requisição inválido.",
@@ -123,7 +120,7 @@ export async function DELETE(req: NextRequest) {
         }
 
         // pega os valores do body
-        const { media_type, media_id, watchlist } = result.data;
+        const { media_type, media_id, watchlist } = result;
 
         const { data, error } = await tmdb.POST(
             "/3/account/{account_id}/watchlist",
