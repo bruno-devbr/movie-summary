@@ -16,3 +16,7 @@ export const MediaListSchema = z.object({
 export const MediaListItemRequestSchema = z.object({
     media_id: z.number(),
 });
+
+export const MediaRateSchema = z.object({
+    value: z.number(),
+});
