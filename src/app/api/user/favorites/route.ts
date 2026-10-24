@@ -71,7 +71,11 @@ export async function POST(req: NextRequest) {
         const result = MediaListRequestSchema.safeParse(body); // valida o body com o schema
 
         // se body nao estiver validado corretamente cria um AppError
-        if (!result.success) {
+        if (
+            !result.success ||
+            result.data.favorite === undefined ||
+            result.data.watchlist
+        ) {
             throw new AppError(
                 "Corpo da requisição inválido.",
                 "INVALID_REQUEST_BODY",
@@ -79,7 +83,8 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const rawBody = result.data; // retorna o rawBody
+        // pega os valores do body
+        const { media_type, media_id, favorite } = result.data;
 
         // faz o fetch usando a api global
         const { data, error } = await tmdb.POST(
@@ -93,7 +98,11 @@ export async function POST(req: NextRequest) {
                         session_id,
                     },
                 },
-                body: rawBody,
+                body: {
+                    media_type,
+                    media_id,
+                    favorite,
+                },
             },
         );
 
@@ -131,7 +140,11 @@ export async function DELETE(req: NextRequest) {
         const result = MediaListRequestSchema.safeParse(body); // valida o body com o schema
 
         // se body nao estiver validado corretamente cria um AppError
-        if (!result.success) {
+        if (
+            !result.success ||
+            result.data.favorite === undefined ||
+            result.data.watchlist
+        ) {
             throw new AppError(
                 "Corpo da requisição inválido.",
                 "INVALID_REQUEST_BODY",
@@ -139,7 +152,8 @@ export async function DELETE(req: NextRequest) {
             );
         }
 
-        const rawBody = result.data; // retorna o rawBody
+        // pega os valores do body
+        const { media_type, media_id, favorite } = result.data;
 
         // faz o fetch usando a api global
         const { data, error } = await tmdb.POST(
@@ -153,7 +167,11 @@ export async function DELETE(req: NextRequest) {
                         session_id,
                     },
                 },
-                body: rawBody,
+                body: {
+                    media_type,
+                    media_id,
+                    favorite,
+                },
             },
         );
 
