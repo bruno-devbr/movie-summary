@@ -1,14 +1,27 @@
 import { SearchParamsInterface } from "@/types/searchParams";
-import { SortBy } from "@/types/sort_by";
+import { MovieSortBy, TvSortBy } from "@/types/sort_by";
+
+type SortByOptions = typeof MovieSortBy | typeof TvSortBy;
 
 export function getSearchParams(
     params: URLSearchParams,
-): SearchParamsInterface {
+): SearchParamsInterface<MovieSortBy>;
+
+export function getSearchParams(
+    params: URLSearchParams,
+    sortByOptions: typeof TvSortBy,
+): SearchParamsInterface<TvSortBy>;
+
+export function getSearchParams(
+    params: URLSearchParams,
+    sortByOptions: SortByOptions = MovieSortBy,
+): SearchParamsInterface<MovieSortBy | TvSortBy> {
     const year = getNumberParam(params, "year");
     const genres = getStringParam(params, "genres") ?? "";
     const requestedPage = getNumberParam(params, "page");
     const requestedVote = getNumberParam(params, "vote");
-    const sortBy = getSortByParam(params) ?? SortBy.POPULARITY_DESC;
+    const sortBy =
+        getSortByParam(params, sortByOptions) ?? sortByOptions.POPULARITY_DESC;
 
     const page =
         requestedPage !== undefined && requestedPage >= 1
@@ -51,7 +64,12 @@ function getStringParam(
     return value || undefined;
 }
 
-function getSortByParam(params: URLSearchParams) {
+function getSortByParam<TSortBy extends SortByOptions>(
+    params: URLSearchParams,
+    sortByOptions: TSortBy,
+): MovieSortBy | TvSortBy | undefined {
     const value = params.get("sort_by");
-    return Object.values(SortBy).find((sortBy) => sortBy === value);
+    return (Object.values(sortByOptions) as (MovieSortBy | TvSortBy)[]).find(
+        (sortBy) => sortBy === value,
+    );
 }

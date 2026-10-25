@@ -15,9 +15,9 @@ export async function GET(req: NextRequest) {
         const { data, error } = await tmdb.GET("/3/discover/movie", {
             params: {
                 query: {
-                    with_genres: genres,
-                    "vote_average.gte": vote,
                     primary_release_year: year,
+                    "vote_average.gte": vote,
+                    with_genres: genres,
                     sort_by,
                     page,
                 },

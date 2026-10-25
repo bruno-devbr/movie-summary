@@ -1,9 +1,11 @@
-import { SortBy } from "./sort_by";
+import { MovieSortBy, TvSortBy } from "./sort_by";
 
-export interface SearchParamsInterface {
+export type SortBy = MovieSortBy | TvSortBy;
+
+export interface SearchParamsInterface<TSortBy extends SortBy = MovieSortBy> {
     page: number;
     year?: number;
     vote: number;
     genres: string;
-    sort_by: SortBy;
+    sort_by: TSortBy;
 }
