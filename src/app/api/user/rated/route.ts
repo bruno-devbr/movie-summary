@@ -9,9 +9,8 @@ export async function GET(req: NextRequest) {
         const { account_id, session_id } = getAccountCookies(req);
         const { page } = getSearchParams(req.nextUrl.searchParams);
 
-        const { data, error } = await tmdb.GET(
-            "/3/account/{account_id}/rated/movies",
-            {
+        const [moviesResponse, tvResponse] = await Promise.all([
+            tmdb.GET("/3/account/{account_id}/rated/movies", {
                 params: {
                     path: {
                         account_id,
@@ -22,10 +21,22 @@ export async function GET(req: NextRequest) {
                         session_id,
                     },
                 },
-            },
-        );
+            }),
+            tmdb.GET("/3/account/{account_id}/rated/tv", {
+                params: {
+                    path: {
+                        account_id,
+                    },
+                    query: {
+                        language: "pt-BR",
+                        page,
+                        session_id,
+                    },
+                },
+            }),
+        ]);
 
-        if (error) {
+        if (moviesResponse.error || tvResponse.error) {
             throw new AppError(
                 "Não foi possível obter os itens avaliados",
                 "TMDB_RATED_ITEMS_FETCH_ERROR",
@@ -33,7 +44,20 @@ export async function GET(req: NextRequest) {
             );
         }
 
-        return NextResponse.json(data);
+        return NextResponse.json({
+            page,
+            results: [
+                ...(moviesResponse.data.results ?? []),
+                ...(tvResponse.data.results ?? []),
+            ],
+            total_pages: Math.max(
+                moviesResponse.data.total_pages,
+                tvResponse.data.total_pages,
+            ),
+            total_results:
+                moviesResponse.data.total_results +
+                tvResponse.data.total_results,
+        });
     } catch (error) {
         return handleApiError(error);
     }
