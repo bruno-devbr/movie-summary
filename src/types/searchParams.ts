@@ -8,4 +8,5 @@ export interface SearchParamsInterface<TSortBy extends SortBy = MovieSortBy> {
     vote: number;
     genres: string;
     sort_by: TSortBy;
+    query: string;
 }

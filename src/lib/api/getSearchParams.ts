@@ -20,6 +20,7 @@ export function getSearchParams(
     const genres = getStringParam(params, "genres") ?? "";
     const requestedPage = getNumberParam(params, "page");
     const requestedVote = getNumberParam(params, "vote");
+    const query = getStringParam(params, "query") ?? "";
     const sortBy =
         getSortByParam(params, sortByOptions) ?? sortByOptions.POPULARITY_DESC;
 
@@ -39,6 +40,7 @@ export function getSearchParams(
         vote,
         genres,
         sort_by: sortBy,
+        query,
     };
 }
 
