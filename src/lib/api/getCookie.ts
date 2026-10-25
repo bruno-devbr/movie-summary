@@ -26,3 +26,17 @@ export function getAccountCookies(req: NextRequest): CookiesInterface {
 
     return cookies;
 }
+
+export function getSessionCookies(req: NextRequest): CookiesInterface {
+    const cookies = getCookies(req);
+
+    if (!cookies.session_id) {
+        throw new AppError(
+            "Sessão inválida ou ausente.",
+            "INVALID_SESSION",
+            401,
+        );
+    }
+
+    return cookies;
+}

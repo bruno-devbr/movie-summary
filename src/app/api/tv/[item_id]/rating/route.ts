@@ -1,6 +1,6 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getBody } from "@/lib/api/getBody";
-import { getCookies } from "@/lib/api/getCookie";
+import { getSessionCookies } from "@/lib/api/getCookie";
 import { getParams } from "@/lib/api/getParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaRateSchema } from "@/schemas/media";
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
 
         // pega o ID da série dos parâmetros da rota e o ID da sessão dos cookies
         const { item_id } = await getParams({ params });
-        const { session_id } = getCookies(req);
+        const { session_id } = getSessionCookies(req);
 
         // envia a avaliação para a API do TMDB
         const { data, error } = await tmdb.POST("/3/tv/{series_id}/rating", {
@@ -48,5 +48,39 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
         return NextResponse.json(data);
     } catch (error) {
         return handleApiError(error); // trata e retorna os erros da API
+    }
+}
+
+// DELETE que remove a avaliação de uma série
+export async function DELETE(req: NextRequest, { params }: ApiRouteContext) {
+    try {
+        const { item_id } = await getParams({ params });
+        const { session_id } = getSessionCookies(req);
+
+        const { data, error } = await tmdb.DELETE(
+            "/3/tv/{series_id}/rating",
+            {
+                params: {
+                    path: {
+                        series_id: item_id,
+                    },
+                    query: {
+                        session_id,
+                    },
+                },
+            },
+        );
+
+        if (error) {
+            throw new AppError(
+                "Não foi possível remover a avaliação.",
+                "RATING_UPDATE_ERROR",
+                502,
+            );
+        }
+
+        return NextResponse.json(data);
+    } catch (error) {
+        return handleApiError(error);
     }
 }

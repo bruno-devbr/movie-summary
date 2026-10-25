@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
         }
 
         // retorna as séries com status 200
-        return NextResponse.json(data); 
+        return NextResponse.json(data);
     } catch (error) {
         return handleApiError(error); // trata e retorna os erros da API
     }

@@ -1,6 +1,6 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getBody } from "@/lib/api/getBody";
-import { getCookies } from "@/lib/api/getCookie";
+import { getSessionCookies } from "@/lib/api/getCookie";
 import { getParams } from "@/lib/api/getParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaRateSchema } from "@/schemas/media";
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
         const { value } = await getBody(req, MediaRateSchema);
 
         // pega o ID da sessão dos cookies e o ID do filme dos parâmetros da rota
-        const { session_id } = getCookies(req);
+        const { session_id } = getSessionCookies(req);
         const { item_id } = await getParams({ params });
 
         // envia a avaliação para a API do TMDB
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest, { params }: ApiRouteContext) {
 export async function DELETE(req: NextRequest, { params }: ApiRouteContext) {
     try {
         // pega o ID da sessão dos cookies e o ID do filme dos parâmetros da rota
-        const { session_id } = getCookies(req);
+        const { session_id } = getSessionCookies(req);
         const { item_id } = await getParams({ params });
 
         // remove a avaliação na API do TMDB
