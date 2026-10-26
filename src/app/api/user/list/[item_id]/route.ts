@@ -3,7 +3,7 @@ import { getAccountCookies } from "@/lib/api/getCookie";
 import { getParams } from "@/lib/api/getParams";
 import { getSearchParams } from "@/lib/api/getSearchParams";
 import { tmdb } from "@/lib/tmdb";
-import { ApiRouteContext } from "@/types/params";
+import { ApiRouteContext } from "@/types/api/params";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET que retorna os dados de uma lista específica

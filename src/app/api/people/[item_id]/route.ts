@@ -1,7 +1,7 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getParams } from "@/lib/api/getParams";
 import { tmdb } from "@/lib/tmdb";
-import { ApiRouteContext } from "@/types/params";
+import { ApiRouteContext } from "@/types/api/params";
 import { NextRequest, NextResponse } from "next/server";
 
 // POST que retorna dados de um artista

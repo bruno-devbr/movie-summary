@@ -1,4 +1,4 @@
-import { CookiesInterface } from "@/types/cookie";
+import { CookiesInterface } from "@/types/api/cookie";
 import { AppError } from "@/lib/api/errors";
 import { NextRequest } from "next/server";
 
@@ -9,7 +9,8 @@ export function getCookies(req: NextRequest): CookiesInterface {
 
     return {
         session_id: session_id ?? "",
-        account_id: Number.isInteger(account_id) && account_id > 0 ? account_id : 0,
+        account_id:
+            Number.isInteger(account_id) && account_id > 0 ? account_id : 0,
     };
 }
 
