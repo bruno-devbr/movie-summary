@@ -1,3 +1,5 @@
+"use client";
+
 import { HeaderWrapper } from "@components/layout/(header)/headerWrapper";
 
 export function Header() {
