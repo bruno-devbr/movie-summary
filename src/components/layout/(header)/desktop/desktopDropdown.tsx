@@ -1,16 +1,8 @@
 import { useDropdownStore } from "@/store/dropdownStore";
-import { DropdownItem } from "@/types/header/navbar";
+import { DropdownProps } from "@/types/header/dropdown";
 import Link from "next/link";
 
-interface DesktopDropdownProps {
-    dropdownItems: DropdownItem[];
-    navId: string;
-}
-
-export function DesktopDropdown({
-    dropdownItems,
-    navId,
-}: DesktopDropdownProps) {
+export function DesktopDropdown({ dropdownItems, navId }: DropdownProps) {
     const { dropdownId } = useDropdownStore();
     const isOpen = dropdownId === navId;
 

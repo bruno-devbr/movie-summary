@@ -10,6 +10,13 @@ export function NavDesktop() {
     useEffect(() => {
         const handleOutsideClick = (event: MouseEvent) => {
             if (
+                event.target instanceof Element &&
+                event.target.closest("[data-mobile-dropdown]")
+            ) {
+                return;
+            }
+
+            if (
                 navRef.current &&
                 !navRef.current.contains(event.target as Node)
             ) {

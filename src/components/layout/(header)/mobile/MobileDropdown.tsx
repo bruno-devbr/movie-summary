@@ -8,8 +8,8 @@ export function MobileDropdown() {
     if (isOpen)
         return (
             <div
+                data-mobile-dropdown
                 className="flex flex-col py-4 gap-2.5 border-t border-gray-700"
-                onMouseDown={(event) => event.stopPropagation()}
             >
                 <Search />
                 <NavMobile />
