@@ -35,7 +35,7 @@ export function NavDesktop() {
             {navItems.navItems.map((navItem) => (
                 <div className="relative" key={navItem.id}>
                     <button
-                        className="py-2 text-white text-xl transition-colors hover:text-blue-500"
+                        className="py-2 text-xl transition-colors hover:text-blue-500"
                         onClick={() =>
                             setDropdownId(
                                 dropdownId === navItem.id

@@ -2,7 +2,7 @@ import { SearchIcon } from "lucide-react";
 
 export function Search() {
     return (
-        <div className="relative text-white">
+        <div className="relative">
             <input
                 type="search"
                 placeholder="Buscar..."

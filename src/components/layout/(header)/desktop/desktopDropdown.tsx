@@ -20,7 +20,7 @@ export function DesktopDropdown({ dropdownItems, navId }: DropdownProps) {
                     href={dropdownItem.link}
                     key={dropdownItem.link}
                     tabIndex={isOpen ? 0 : -1}
-                    className="flex items-center py-2 px-4 text-white transition-colors hover:bg-gray-700"
+                    className="flex items-center py-2 px-4 transition-colors hover:bg-gray-700"
                 >
                     {dropdownItem.name}
                 </Link>
