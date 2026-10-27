@@ -1,5 +1,5 @@
 import createClient from "openapi-fetch";
-import type { paths } from "@/types/tmdb";
+import type { paths } from "@/types/api/tmdb";
 import { AppError } from "@lib/api/errors";
 
 const token = process.env.TMDB_ACCESS_TOKEN; // define o token

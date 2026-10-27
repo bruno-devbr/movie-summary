@@ -1,4 +1,4 @@
-import { ApiRouteContext, ApiRouteParams } from "@/types/params";
+import { ApiRouteContext, ApiRouteParams } from "@/types/api/params";
 import { AppError } from "@/lib/api/errors";
 
 export async function getParams({

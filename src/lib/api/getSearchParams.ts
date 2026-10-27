@@ -1,5 +1,5 @@
-import { SearchParamsInterface } from "@/types/searchParams";
-import { MovieSortBy, TvSortBy } from "@/types/sort_by";
+import { SearchParamsInterface } from "@/types/api/searchParams";
+import { MovieSortBy, TvSortBy } from "@/types/api/sort_by";
 
 type SortByOptions = typeof MovieSortBy | typeof TvSortBy;
 

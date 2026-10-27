@@ -22,7 +22,8 @@
             "@/*": ["./src/*"],
             "@lib/*": ["./src/lib/*"],
             "@schemas/*": ["./src/schemas/*"],
-            "@types/*": ["./src/types/*"]
+            "@types/*": ["./src/types/*"],
+            "@components/*": ["./src/components/*"]
         }
     },
     "include": [

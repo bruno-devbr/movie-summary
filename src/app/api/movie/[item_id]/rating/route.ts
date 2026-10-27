@@ -4,7 +4,7 @@ import { getSessionCookies } from "@/lib/api/getCookie";
 import { getParams } from "@/lib/api/getParams";
 import { tmdb } from "@/lib/tmdb";
 import { MediaRateSchema } from "@/schemas/media";
-import { ApiRouteContext } from "@/types/params";
+import { ApiRouteContext } from "@/types/api/params";
 import { NextRequest, NextResponse } from "next/server";
 
 // POST que adiciona ou atualiza a avaliação de um filme

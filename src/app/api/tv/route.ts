@@ -1,7 +1,7 @@
 import { AppError, handleApiError } from "@/lib/api/errors";
 import { getSearchParams } from "@/lib/api/getSearchParams";
 import { tmdb } from "@/lib/tmdb";
-import { TvSortBy } from "@/types/sort_by";
+import { TvSortBy } from "@/types/api/sort_by";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
