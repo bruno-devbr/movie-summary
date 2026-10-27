@@ -24,7 +24,7 @@ export function NavDesktop() {
     }, [setDropdownId]);
 
     return (
-        <div ref={navRef} className="inline-flex gap-6 items-center">
+        <div ref={navRef} className="hidden items-center gap-6 lg:inline-flex">
             {navItems.navItems.map((navItem) => (
                 <div className="relative" key={navItem.id}>
                     <button

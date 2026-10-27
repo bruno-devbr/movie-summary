@@ -3,7 +3,7 @@ import { ConnectBtn } from "../userBtns";
 
 export function SearchUser() {
     return (
-        <div className="flex items-center gap-4">
+        <div className="hidden items-center gap-4 lg:flex">
             <Search />
             <ConnectBtn />
         </div>
