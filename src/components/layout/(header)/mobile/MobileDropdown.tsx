@@ -1,10 +1,12 @@
 import { useMobileDropdownStore } from "@/store/dropdownStore";
+import { useUserStatus } from "@/store/status";
 import { Search } from "../search";
 import { NavMobile } from "./navMobile";
-import { ConnectBtn } from "../userBtns";
+import { ConnectBtn, ErrorBtn, LoadingBtn } from "../userBtns";
 
 export function MobileDropdown() {
     const { isOpen } = useMobileDropdownStore();
+    const { isUserLoading, isUserError } = useUserStatus();
 
     if (isOpen)
         return (
@@ -14,7 +16,13 @@ export function MobileDropdown() {
             >
                 <Search />
                 <NavMobile />
-                <ConnectBtn />
+                {isUserLoading ? (
+                    <LoadingBtn />
+                ) : isUserError ? (
+                    <ErrorBtn />
+                ) : (
+                    <ConnectBtn />
+                )}
             </div>
         );
 }
