@@ -1,20 +1,56 @@
+import { MediaListInterface } from "../media";
+
 export interface UserInterface {
     avatar?: string;
     id: number;
     username: string;
-    userFunctions?: UserFunctionsInterface;
+    favorites?: MediaListInterface;
+    watchlist?: MediaListInterface;
+    lists?: UserListsInteface;
+    userFunctions: UserFunctionsInterface;
+}
+
+export type UserMediaType = "movie" | "tv";
+
+export interface UserListsInteface {
+    page: number;
+    results?:
+        | {
+              id: number;
+              item_count: number;
+              name?: string | undefined;
+          }[]
+        | undefined;
+    total_pages: number;
+    total_results: number;
 }
 
 export interface UserFunctionsInterface {
-    addToWatchlist: (id: number) => void;
-    removeFromWatchlist: (id: number) => void;
-    addToFavorites: (id: number) => void;
-    removeFromFavorites: (id: number) => void;
-    addToList: (id: number, listId: number) => void;
-    removeFromList: (id: number, listId: number) => void;
-    addReview: (value: number) => void;
-    deleteReview: (value: number) => void;
-    logout: () => void;
+    addToWatchlist: (id: number, mediaType?: UserMediaType) => Promise<void>;
+    removeFromWatchlist: (
+        id: number,
+        mediaType?: UserMediaType,
+    ) => Promise<void>;
+    addToFavorites: (id: number, mediaType?: UserMediaType) => Promise<void>;
+    removeFromFavorites: (
+        id: number,
+        mediaType?: UserMediaType,
+    ) => Promise<void>;
+    createList: (
+        name: string,
+        description?: string,
+        language?: "pt-BR",
+    ) => Promise<void>;
+    deleteList: (listId: number) => Promise<void>;
+    addToList: (id: number, listId: number) => Promise<void>;
+    removeFromList: (id: number, listId: number) => Promise<void>;
+    addReview: (
+        id: number,
+        value: number,
+        mediaType?: UserMediaType,
+    ) => Promise<void>;
+    deleteReview: (id: number, mediaType?: UserMediaType) => Promise<void>;
+    logout: () => Promise<void>;
 }
 
 export interface GetUserDataInterface {

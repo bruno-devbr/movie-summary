@@ -6,11 +6,13 @@ import { GetUserDataInterface, UserInterface } from "@/types/login/user";
 import axios from "axios";
 import { ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useUserFunctions } from "@/hooks/useUserFunctions";
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const { updateUser } = useUserStore();
     const { updateIsError, updateIsLoading } = useStatus();
     const pathname = usePathname();
+    const functions = useUserFunctions();
 
     useEffect(() => {
         if (pathname === "/auth/callback") {
@@ -32,6 +34,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                     id: data.id,
                     username: data.username,
                     avatar: data.avatar?.tmdb?.avatar_path || undefined,
+                    userFunctions: functions,
                 };
 
                 updateUser(user);
@@ -51,7 +54,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         getUser();
-    }, [pathname, updateIsError, updateIsLoading, updateUser]);
+    }, [pathname, updateIsError, updateIsLoading, updateUser, functions]);
 
     return <>{children}</>;
 }
