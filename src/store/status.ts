@@ -13,3 +13,17 @@ export const useUserStatus = create<UserStatusinterface>((set) => ({
     updateIsUserError: (isUserError) => set({ isUserError }),
     updateIsUserLoading: (isUserLoading) => set({ isUserLoading }),
 }));
+
+export interface StatusInterface {
+    isLoading: boolean;
+    isError: boolean;
+    updateIsLoading: (isLoading: boolean) => void;
+    updateIsError: (isError: boolean) => void;
+}
+
+export const useStatus = create<StatusInterface>((set) => ({
+    isError: false,
+    isLoading: false,
+    updateIsError: (isError) => set({ isError }),
+    updateIsLoading: (isLoading) => set({ isLoading }),
+}));

@@ -22,8 +22,6 @@ async function fetchData(items: UserStatusinterface) {
 function redirectToTmdb(requestToken: string) {
     const redirectTo = `${process.env.NEXT_PUBLIC_LOCATION?.replace(/\/$/, "")}/auth/callback`;
 
-    console.log(redirectTo);
-
     window.location.assign(
         `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectTo}`,
     );
