@@ -4,9 +4,9 @@ export interface UserInterface {
     avatar?: string;
     id: number;
     username: string;
-    favorites?: MediaListInterface;
-    watchlist?: MediaListInterface;
-    lists?: UserListsInteface;
+    favorites: MediaListInterface;
+    watchlist: MediaListInterface;
+    lists: UserListsInteface;
     userFunctions: UserFunctionsInterface;
 }
 
@@ -25,6 +25,13 @@ export interface UserListsInteface {
     total_results: number;
 }
 
+export const UserListsBase = {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+};
+
 export interface UserFunctionsInterface {
     addToWatchlist: (id: number, mediaType?: UserMediaType) => Promise<void>;
     removeFromWatchlist: (
@@ -42,6 +49,9 @@ export interface UserFunctionsInterface {
         language?: "pt-BR",
     ) => Promise<void>;
     deleteList: (listId: number) => Promise<void>;
+    getFavorites: (page?: number) => Promise<MediaListInterface | undefined>;
+    getWatchlist: (page?: number) => Promise<MediaListInterface | undefined>;
+    getLists: (page?: number) => Promise<UserListsInteface | undefined>;
     addToList: (id: number, listId: number) => Promise<void>;
     removeFromList: (id: number, listId: number) => Promise<void>;
     addReview: (
