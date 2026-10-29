@@ -1,6 +1,6 @@
 "use client";
 
-import { useStatus } from "@/store/status";
+import { useUserStatus } from "@/store/status";
 import { useUserStore } from "@/store/user";
 import {
     GetUserDataInterface,
@@ -14,7 +14,7 @@ import { useUserFunctions } from "@/hooks/useUserData";
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const { updateUser } = useUserStore();
-    const { updateIsError, updateIsLoading } = useStatus();
+    const { updateIsUserError, updateIsUserLoading } = useUserStatus();
     const pathname = usePathname();
     const functions = useUserFunctions();
 
@@ -25,7 +25,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
         async function getUser() {
             try {
-                updateIsLoading(true);
+                updateIsUserLoading(true);
 
                 const { data } =
                     await axios.get<GetUserDataInterface>("/api/user");
@@ -53,17 +53,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
                     error.response?.status === 401
                 ) {
                     updateUser(null);
+                    updateIsUserError(false);
                     return;
                 }
 
-                updateIsError(true);
+                updateIsUserError(true);
             } finally {
-                updateIsLoading(false);
+                updateIsUserLoading(false);
             }
         }
 
         void getUser();
-    }, [pathname, updateIsError, updateIsLoading, updateUser, functions]);
+    }, [
+        pathname,
+        updateIsUserError,
+        updateIsUserLoading,
+        updateUser,
+        functions,
+    ]);
 
     return <>{children}</>;
 }

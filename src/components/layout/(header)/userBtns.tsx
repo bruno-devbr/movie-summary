@@ -19,6 +19,31 @@ async function fetchData(items: UserStatusinterface) {
     }
 }
 
+async function retryUserOrAuthenticate(items: UserStatusinterface) {
+    try {
+        await axios.get("/api/user");
+        window.location.reload();
+        return;
+    } catch (error) {
+        if (
+            !axios.isAxiosError(error) ||
+            error.response?.status !== 401
+        ) {
+            items.updateIsUserError(true);
+            return;
+        }
+    }
+
+    const data = await fetchData(items);
+
+    if (!data?.request_token) {
+        items.updateIsUserError(true);
+        return;
+    }
+
+    redirectToTmdb(data.request_token);
+}
+
 function redirectToTmdb(requestToken: string) {
     const redirectTo = `${process.env.NEXT_PUBLIC_LOCATION?.replace(/\/$/, "")}/auth/callback`;
 
@@ -76,14 +101,7 @@ export function ErrorBtn() {
     };
 
     const handleClick = async () => {
-        const data = await fetchData(items);
-
-        if (!data?.request_token) {
-            items.updateIsUserError(true);
-            return;
-        }
-
-        redirectToTmdb(data.request_token);
+        await retryUserOrAuthenticate(items);
     };
 
     const text = isHover ? "Tentar Novamente" : "Erro ao carregar dados";
