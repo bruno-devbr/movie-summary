@@ -1,4 +1,4 @@
-import { NavDesktop } from "./NavDesktop";
+import { NavDesktop } from "../nav";
 import { SearchUser } from "./searchUser";
 
 export function DesktopWrapper() {
